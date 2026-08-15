@@ -1,0 +1,109 @@
+name: CI
+
+# Runs on PRs and on pushes to the main and working branches. The six §15 build
+# gates each run as their own job so they surface as six independent checks.
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - "claude/**"
+
+permissions:
+  contents: read
+
+env:
+  APP_ENV: development
+
+jobs:
+  quality:
+    name: Lint, typecheck, test, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm test
+      - name: Build
+        run: npm run build
+
+  curriculum:
+    name: Curriculum coverage (§6.5)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: "§6.5 per-grade counts / duplicates / checksum"
+        run: node scripts/check-curriculum.mjs
+
+  # --- Six §15 build gates (skeleton; each is able to fail the build) ---------
+
+  gate-specificity:
+    name: "Gate: Specificity (§15.1)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/gates/specificity.mjs
+
+  gate-pii-privacy:
+    name: "Gate: PII Privacy (§15.2)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/gates/pii-privacy.mjs
+
+  gate-font-integrity:
+    name: "Gate: Font Integrity (§15.3)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/gates/font-integrity.mjs
+
+  gate-tenant-isolation:
+    name: "Gate: Tenant Isolation (§15.4)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/gates/tenant-isolation.mjs
+
+  gate-classifier-determinism:
+    name: "Gate: Classifier Determinism (§15.5)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/gates/classifier-determinism.mjs
+
+  gate-targeting-fidelity:
+    name: "Gate: Targeting Fidelity (§15.6)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/gates/targeting-fidelity.mjs

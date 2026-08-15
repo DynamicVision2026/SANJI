@@ -1,0 +1,15 @@
+{
+  "algorithm": "sha256",
+  "encoding": "utf8",
+  "basis": "frozen sorted unique character set (concatenated, no separators)",
+  "checksum": "4fd20a8ce6d85349e05b5b9ff2e438cab40f8edd1e2a301f8a74eeb7d4fa3ef1",
+  "total": 1026,
+  "per_grade_counts": {
+    "1": 80,
+    "2": 160,
+    "3": 200,
+    "4": 202,
+    "5": 193,
+    "6": 191
+  }
+}
