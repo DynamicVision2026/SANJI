@@ -7,16 +7,18 @@ level. Keep them separate in all reporting:
    radical) correct? **Yes, done in issue #1.** Cross-verified against the
    official 漢検 2020 degree list and two independent KANJIDIC-derived sources.
 2. **File-level provenance** (§6.1 two-source rule) — do we have the official
-   MEXT PDF's committed hash and per-row page numbers? **Not yet** — `PENDING` /
-   `BLOCKED`. This is a tooling/environment gap (the sandbox has no egress to
-   `mext.go.jp`), **not** a data-correctness problem.
+   MEXT PDF's committed hash and page numbers? **Yes, now CONFIRMED (issue #2)**
+   via a manual binary download + human visual page check. Real SHA-256 values
+   and printed page numbers are recorded below and in the authoritative
+   machine-readable manifest at the repo root: **`sources_provenance.json`** /
+   **`sources_provenance.yaml`**.
 
-> A fabricated hash or guessed page number is worse than an honest gap: it
-> creates a false provenance record. **Never** write a placeholder value into a
-> `sha256` or `source_page` field. Use the explicit `PENDING` / `BLOCKED`
-> markers below until real values exist. Text-extraction-order page *guesses*
-> are explicitly disallowed — use the official document's printed footer page
-> numbers, obtained via the fetch workflow.
+> A fabricated hash or guessed page number would be worse than an honest gap: it
+> creates a false provenance record. The hashes below were computed from the
+> **actual downloaded binary files** (not text/summary-derived), and the page
+> numbers are the document's **printed footer page numbers** confirmed by a
+> human. Earlier `PENDING`/`BLOCKED` markers have been replaced with these
+> confirmed values.
 
 ---
 
@@ -49,65 +51,75 @@ list differs by a fully explicit, arithmetic-checked 2017 revision:
 Arithmetic (matches §6.5 targets exactly): G4 200+20+5−21−2 = **202**;
 G5 185+21−4−9 = **193**; G6 181+2+9−1 = **191**.
 
+The revision character list was additionally confirmed against a **150 dpi PNG
+render of the official PDF's pages 44–47** (those pages have no extractable text
+layer — the kanji are vector glyphs — so a human verified them visually).
+
 **Note on the dataset checksum.** `kanji_teach_grade.checksum.json` holds a real
 SHA-256 — but it is a checksum **over our own frozen character set** (the §6.5
 substitution guard), *not* the official MEXT PDF's file hash. Do not confuse the
-two. The MEXT file hash is tracked as `PENDING` in §2 below.
+two. The MEXT file hashes are in §2 below.
 
 ---
 
-## 2. File-level provenance (§6.1 two-source rule) — PENDING / BLOCKED
+## 2. File-level provenance (§6.1 two-source rule) — CONFIRMED
 
-§6.1 requires the official MEXT PDFs as the frozen, legally authoritative source,
-cross-verification against official **page numbers**, a recorded **source page
-number** per row, and a **committed PDF file hash**. The sandbox has no network
-egress to `mext.go.jp`, so these file-level artifacts cannot be produced here.
+Obtained by a manual, external binary download + human verification (issue #2).
+Authoritative machine-readable record: `sources_provenance.json` /
+`sources_provenance.yaml` at the repo root. Summary:
 
-Remediation is automated: run `.github/workflows/fetch-mext-source-and-hash.yml`
-(a `workflow_dispatch` action) on GitHub's hosted runner, which has normal
-egress. It downloads the official PDF, computes the real SHA-256, and extracts a
-per-page text map. Backfill the records below from its artifacts. See
-`sources_provenance.yml` for the machine-readable manifest of these records.
+### `kanji_teach_grade`
 
-```yaml
-source_record:
-  dataset: kanji_teach_grade
-  official_document: 学年別漢字配当表 （平成29年3月告示、令和2年度改定）
-  official_url:               # confirmed MEXT URL — supplied to the fetch workflow at dispatch
-  content_verification:
-    method: cross_check_against_kankentest_2020_degree_list_and_two_independent_kanjidic_sources
-    status: content_confirmed_matching_internal_dataset   # done in #1
-    verified_at: 2026-08-15
-  file_hash:
-    sha256: PENDING
-    status: BLOCKED_sandbox_no_network_egress
-    remediation: see .github/workflows/fetch-mext-source-and-hash.yml
-  page_reference:
-    status: PENDING_pdf_page_mapping
-    note: >-
-      requires binary PDF download; text-extraction-order page guesses are
-      explicitly disallowed. Use the document's printed footer page numbers
-      (observed range ~1-51, with 附表1/附表2 appendices ~pages 50-51).
-```
+- **Official document:** 小学校学習指導要領（平成29年告示）別表　学年別漢字配当表
+- **Publication:** 平成29年3月31日, 文部科学省告示第六十三号
+- **Landing page:** https://www.mext.go.jp/a_menu/shotou/new-cs/1384661.htm
+- **PDF used:** https://www.mext.go.jp/content/20230120-mxt_kyoiku02-100002604_01.pdf
+- **File size:** 5,838,238 bytes
+- **SHA-256 (CONFIRMED, from the downloaded binary):**
+  `6af90f134b243e44f9767c37ee3079fac092883fd6359b836a5733dd25b43902`
+- **Printed page numbers (別表 学年別漢字配当表):**
 
-### Template for §19.2 sources (not urgent — empty scaffolds today)
+  | Grade | List | Printed page |
+  |---|---|---|
+  | — | 別表 heading / start | 44 |
+  | 1 | 80 chars | 44 |
+  | 2 | 160 chars | 44 |
+  | 3 | 200 chars | 45 |
+  | 4 | 202 chars (spans pages) | 45–46 |
+  | 5 | 193 chars | 46 |
+  | 6 | 191 chars (spans pages) | 46–47 |
 
-`kanji_reading_stage` and `lexical_reading_rule` are empty scaffolds pending
-founder-owned source extraction (§19.2). When that data lands, add a
-`source_record` per the same pattern. Their tables already carry a `source_page`
-column (§6.2) — every ingested row MUST record its printed page number; leave
-rows unwritten rather than guessing.
+- **Verification method:** binary downloaded via curl; pymupdf/pdfplumber used to
+  locate the 国語 section and the 告示 signature; pages 44–47 (the table body)
+  have a 0-character text layer (vector glyphs), so they were rendered to PNG at
+  150 dpi and **verified page-by-page by a human**.
 
-```yaml
-source_record:
-  dataset: kanji_reading_stage            # and: lexical_reading_rule
-  official_document: 音訓の小・中・高等学校段階別割り振り表 （平成29年3月）
-  official_url:
-  content_verification:
-    status: PENDING_founder_source_extraction   # §19.2
-  file_hash:
-    sha256: PENDING
-    status: BLOCKED_awaiting_source
-  page_reference:
-    status: PENDING_pdf_page_mapping
-```
+> The §6.2 `kanji_teach_grade` schema has no per-row `source_page` column, so the
+> page mapping is recorded at source-record granularity here and in the root
+> manifest — not per row.
+
+### `kanji_reading_stage` / `lexical_reading_rule` source (音訓割り振り表)
+
+The data itself is still an empty scaffold pending founder-owned extraction
+(§19.2), but the source document's file-level provenance is already CONFIRMED, so
+Week 2 ingestion can record per-row `source_page` values directly against it.
+
+- **Official document:** 音訓の小・中・高等学校段階別割り振り表（平成29年3月）
+- **Landing page:** https://www.mext.go.jp/a_menu/shotou/new-cs/1385768.htm
+- **PDF used:** https://www.mext.go.jp/a_menu/shotou/new-cs/__icsFiles/afieldfile/2017/05/15/1385768.pdf
+- **File size:** 984,020 bytes
+- **SHA-256 (CONFIRMED, from the downloaded binary):**
+  `0bc189982a50122f1e35dd6a751bfdff0ec5a0ad67e99eda916d012f859a5ae4`
+- **Printed page numbers:** 説明/備考 p.1; 音訓表 body p.2–50; 付表1 p.51;
+  付表2 (都道府県名) p.52. Full text layer (no OCR needed).
+
+---
+
+## On the `fetch-mext-source-and-hash.yml` workflow
+
+`.github/workflows/fetch-mext-source-and-hash.yml` (workflow_dispatch) was
+proposed in issue #2 to obtain this provenance from GitHub's hosted runner. Since
+the real hashes and page numbers have now been obtained and confirmed manually,
+that workflow is **optional / nice-to-have** — retained for re-verification and
+for future §6.1 sources, not required. It remains the recommended way to
+re-confirm a hash or refresh the page map if a source URL changes.

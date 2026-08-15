@@ -1,9 +1,15 @@
 name: fetch-mext-source-and-hash
 
-# Closes the §6.1 file-level provenance gap that the sandbox cannot: this runs on
-# GitHub's hosted runner (normal network egress), downloads an official source
-# PDF, computes its real SHA-256, and extracts a per-page text map for page-number
-# backfill. Trigger once per §6.1 source (see src/curriculum/data/sources_provenance.yml).
+# OPTIONAL / nice-to-have (as of issue #2). The §6.1 file-level provenance gap
+# has already been closed by a manual binary download + human page verification:
+# real SHA-256 hashes and printed page numbers now live in the repo-root
+# sources_provenance.json / sources_provenance.yaml and in
+# src/curriculum/data/SOURCES.md. This workflow is retained for re-verification
+# and for future §6.1 sources — it is no longer required.
+#
+# What it does: runs on GitHub's hosted runner (normal network egress),
+# downloads an official source PDF, computes its real SHA-256, and extracts a
+# per-page text map. Trigger once per §6.1 source (see sources_provenance.json).
 #
 # It does NOT edit the repo — it uploads artifacts. A maintainer backfills the
 # real sha256 and printed page numbers into sources_provenance.yml / SOURCES.md
