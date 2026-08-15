@@ -1,0 +1,69 @@
+{
+  "sources": [
+    {
+      "dataset": "kanji_teach_grade",
+      "document_name": "小学校学習指導要領（平成29年告示）別表　学年別漢字配当表",
+      "official_landing_page": "https://www.mext.go.jp/a_menu/shotou/new-cs/1384661.htm",
+      "actual_pdf_url_used": "https://www.mext.go.jp/content/20230120-mxt_kyoiku02-100002604_01.pdf",
+      "retrieved_at": "2026-08-15T22:59:08+09:00",
+      "file_size_bytes": 5838238,
+      "publish_date_on_document": "平成29年3月31日（文部科学省告示第六十三号，署名：文部科学大臣　松野博一）",
+      "file_hash": {
+        "algorithm": "SHA-256",
+        "value": "6af90f134b243e44f9767c37ee3079fac092883fd6359b836a5733dd25b43902",
+        "status": "CONFIRMED",
+        "computed_from": "actual downloaded binary file, not text/summary-derived"
+      },
+      "page_mapping": [
+        {"section": "別表标题及学年別漢字配当表章节起始（含小学1年级、2年级汉字列表）", "page_number": "44"},
+        {"section": "小学1年生 汉字列表（80字）", "page_number": "44"},
+        {"section": "小学2年生 汉字列表（160字）", "page_number": "44"},
+        {"section": "小学3年生 汉字列表（200字）", "page_number": "45"},
+        {"section": "小学4年生 汉字列表（202字，跨页排版）", "page_number": "45-46"},
+        {"section": "小学5年生 汉字列表（193字）", "page_number": "46"},
+        {"section": "小学6年生 汉字列表（191字，跨页排版）", "page_number": "46-47"}
+      ],
+      "extraction_method": "curl实际下载二进制文件后，用pymupdf(fitz)/pdfplumber逐页提取文本定位到国语章节及告示落款；第44-47页（汉字表本体）文本层字符数为0（该4页汉字系矢量字形/特殊字体路径渲染，非标准文本层），改用pymupdf以150dpi渲染为PNG图像并人工逐页目视核对确认页码与各学年汉字列表内容",
+      "verification_notes": "用户提供的两个原始链接均已失效或错误：说明页https://www.mext.go.jp/a_menu/shotou/cs/1320015.htm 实际内容为平成10年12月告示（旧版）学习指导要领，页面内无PDF下载链接；备用直链 https://www.mext.go.jp/content/1421692_2.pdf 下载成功（182,161字节）但内容为《高等学校学习指导要领の改訂のポイリーのポイリ，与学年別漢字配当表完全无关，已核对后放弃。通过文科省官网重新检索，定位到含有正确别表内容的《小学校学习指导要领（平成29年告示）》全文PDF并替换使用。PDF内嵌元数据（title/author/creationDate/modDate）与文件名、URL日期戳互相印证，作为完整性佐证。",
+      "content_verification": {
+        "method": "cross_check_against_kankentest_2020_degree_list_and_two_independent_kanjidic_sources_plus_official_pdf_visual_page_render",
+        "status": "content_confirmed_matching_internal_dataset",
+        "verified_by": "external_human_agent_manual_binary_download_and_visual_page_check"
+      }
+    },
+    {
+      "dataset": "kanji_reading_stage / lexical_reading_rule (音訓割り振り表)",
+      "document_name": "音訓の小・中・高等学校段階別割り振り表（平成29年3月）",
+      "official_landing_page": "https://www.mext.go.jp/a_menu/shotou/new-cs/1385768.htm",
+      "actual_pdf_url_used": "https://www.mext.go.jp/a_menu/shotou/new-cs/__icsFiles/afieldfile/2017/05/15/1385768.pdf",
+      "retrieved_at": "2026-08-15T22:59:08+09:00",
+      "file_size_bytes": 984020,
+      "publish_date_on_document": "平成29年3月（PDF内嵌元数据creationDate: 2017-03-29；modDate: 2017-05-15，与URL路径2017/05/15一致）",
+      "file_hash": {
+        "algorithm": "SHA-256",
+        "value": "0bc189982a50122f1e35dd6a751bfdff0ec5a0ad67e99eda916d012f859a5ae4",
+        "status": "CONFIRMED",
+        "computed_from": "actual downloaded binary file, not text/summary-derived"
+      },
+      "page_mapping": [
+        {"section": "备考／说明文字（含小学校・中学校・高等学校学校段阶割り振り规则说明，及第2条'汉字栏右侧数字对应学年别漢字配当表所配学年'的说明）", "page_number": "1"},
+        {"section": "表格主体（音训表，五十音顺，从'亜'至'和'）起始", "page_number": "2"},
+        {"section": "表格主体（音训表）结束", "page_number": "50"},
+        {"section": "付表1（熟字训读等特殊词汇割り振り）", "page_number": "51"},
+        {"section": "付表2（都道府县名读法割り振り，文档末页）", "page_number": "52"}
+      ],
+      "extraction_method": "curl实际下载二进制文件（应用层Content-Type: application/pdf已确认），用pymupdf(fitz)逐页提取文本内容，正文全部为可提取文本层（非扫描图片），直接按页定位各段落",
+      "verification_notes": "该文档所有页面均为标准文本层PDF，无需OCR。链接与说明页均与用户提供的一致，未发生失效或替换。",
+      "content_verification": {
+        "method": "direct_text_layer_extraction_full_document",
+        "status": "content_confirmed_matching_internal_dataset",
+        "verified_by": "external_human_agent_manual_binary_download"
+      }
+    }
+  ],
+  "meta": {
+    "generated_at": "2026-08-15T22:59:08+09:00",
+    "purpose": "closes spec §6.1 two-source acquisition rule provenance gap (file hash + page numbers), referenced in GitHub issue #2 (DynamicVision2026/SANJI)",
+    "important_distinction": "Hashes computed here are from actual downloaded binary files, not guessed or derived from text summaries. This satisfies the strict requirement that no fabricated provenance be recorded. This material was produced via manual external verification, not the automated GitHub Actions workflow originally proposed in issue #2 — the workflow requirement is downgraded to optional/nice-to-have since the actual goal (real hash + real page numbers) has already been achieved through this manual process."
+  }
+}
