@@ -1,0 +1,8546 @@
+[
+  {
+    "kanji": "一",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "丁",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "七",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "万",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "丈",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "三",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "上",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "下",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "不",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "与",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "且",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "世",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "丘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "丙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "両",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "並",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "中",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "串",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "丸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "丹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "主",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "丼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "久",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "乏",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "乗",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "乙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "九",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "乞",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "乱",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "乳",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "乾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "亀",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "了",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "予",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "争",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "事",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "二",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "互",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "五",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "井",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "亜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "亡",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "交",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "享",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "京",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "亭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "人",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "仁",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "今",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "介",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "仏",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "仕",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "他",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "付",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "仙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "代",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "令",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "以",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "仮",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "仰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "仲",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "件",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "任",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "企",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "伎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "伏",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "伐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "休",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "会",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "伝",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "伯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "伴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "伸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "伺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "似",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "但",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "位",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "低",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "住",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "佐",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "体",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "何",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "余",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "作",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "佳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "併",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "使",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "例",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "侍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "供",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "依",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "価",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "侮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "侯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "侵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "侶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "便",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "係",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "促",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "俊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "俗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "保",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "信",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "修",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "俳",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "俵",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "俸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "俺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "倉",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "個",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "倍",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "倒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "候",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "借",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "倣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "値",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "倫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "倹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "偉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "偏",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "停",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "健",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "側",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "偵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "偶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "偽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "傍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "傑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "傘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "備",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "催",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "傲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "債",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "傷",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "傾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "僅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "働",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "像",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "僕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "僚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "僧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "儀",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "億",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "儒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "償",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "優",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "元",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "兄",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "充",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "兆",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "先",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "光",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "克",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "免",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "児",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "党",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "入",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "全",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "八",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "公",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "六",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "共",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "兵",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "具",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "典",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "兼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "内",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "円",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "冊",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "再",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "冒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "冗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "写",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "冠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "冥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "冬",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "冶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "冷",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "凄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "准",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "凍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "凝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "凡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "処",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "凶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "凸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "凹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "出",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "刀",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "刃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "分",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "切",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "刈",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "刊",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "刑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "列",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "初",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "判",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "別",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "利",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "到",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "制",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "刷",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "券",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "刹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "刺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "刻",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "則",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "削",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "前",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "剖",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "剛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "剝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "剣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "剤",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "副",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "剰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "割",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "創",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "劇",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "力",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "功",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "加",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "劣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "助",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "努",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "励",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "労",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "効",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "劾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "勃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "勅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "勇",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "勉",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "動",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "勘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "務",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "勝",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "募",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "勢",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "勤",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "勧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "勲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "勾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "匂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "包",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "化",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "北",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "匠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "匹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "区",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "医",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "匿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "十",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "千",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "升",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "午",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "半",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "卑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "卒",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "卓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "協",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "南",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "単",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "博",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "占",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "印",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "危",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "即",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "却",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "卵",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "卸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "厄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "厘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "厚",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "原",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "厳",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "去",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "参",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "又",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "及",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "友",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "双",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "反",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "収",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "叔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "取",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "受",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "叙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "口",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "古",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "句",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "叫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "召",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "可",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "台",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "叱",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "史",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "右",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "号",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "司",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "各",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "合",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "吉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "同",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "名",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "后",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "吏",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "吐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "向",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "君",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "吟",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "否",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "含",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "吸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "吹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "呂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "呈",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "呉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "告",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "周",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "呪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "味",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "呼",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "命",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "和",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "咲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "咽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "哀",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "品",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "員",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "哲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "哺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "唄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "唆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "唇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "唐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "唯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "唱",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "唾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "商",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "問",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "啓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "善",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "喉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "喚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "喜",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "喝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "喩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "喪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "喫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "営",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "嗅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "嗣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "嘆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "嘱",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "嘲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "器",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "噴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "嚇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "囚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "四",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "回",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "因",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "団",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "困",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "囲",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "図",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "固",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "国",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "圏",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "園",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "土",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "圧",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "在",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "地",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "坂",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "均",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "坊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "坑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "坪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "垂",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "型",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "垣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "埋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "城",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "域",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "執",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "培",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "基",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "埼",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "堀",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "堂",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "堅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "堆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "堕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "堤",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "堪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "報",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "場",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "塀",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "塁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "塊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "塑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "塔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "塗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "塚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "塞",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "塡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "塩",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "塾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "境",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "墓",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "増",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "墜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "墨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "墳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "墾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "壁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "壇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "壊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "壌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "士",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "壮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "声",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "壱",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "売",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "変",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "夏",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "夕",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "外",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "多",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "夜",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "夢",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "大",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "天",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "太",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "夫",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "央",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "失",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "奇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "奈",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "奉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "奏",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "契",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "奔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "奥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "奨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "奪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "奮",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "女",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "奴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "好",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "如",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "妃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "妄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "妊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "妖",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "妙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "妥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "妨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "妬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "妹",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "妻",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "姉",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "始",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "姓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "委",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "姫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "姻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "姿",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "威",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "娘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "娠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "娯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "婆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "婚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "婦",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "婿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "媒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "媛",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "嫁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "嫉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "嫌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "嫡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "嬢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "子",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "孔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "字",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "存",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "孝",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "季",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "孤",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "学",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "孫",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "宅",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "宇",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "守",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "安",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "完",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "宗",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "官",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "宙",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "定",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "宛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "宜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "宝",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "実",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "客",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "宣",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "室",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "宮",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "宰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "害",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "宴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "宵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "家",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "容",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "宿",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "寂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "寄",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "密",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "富",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "寒",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "寛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "寝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "察",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "寡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "寧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "審",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "寮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "寸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "寺",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "対",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "寿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "封",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "専",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "射",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "将",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "尉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "尊",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "尋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "導",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "小",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "少",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "尚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "就",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "尺",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "尻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "尼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "尽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "尾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "尿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "局",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "居",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "屈",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "届",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "屋",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "展",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "属",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "層",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "履",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "屯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "山",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "岐",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "岡",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "岩",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "岬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "岳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "岸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "峠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "峡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "峰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "島",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "崇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "崎",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "崖",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "崩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "嵐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "川",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "州",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "巡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "巣",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "工",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "左",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "巧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "巨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "差",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "己",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "巻",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "巾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "市",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "布",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "帆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "希",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "帝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "帥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "師",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "席",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "帯",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "帰",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "帳",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "常",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "帽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "幅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "幕",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "幣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "干",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "平",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "年",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "幸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "幹",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "幻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "幼",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "幽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "幾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "庁",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "広",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "床",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "序",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "底",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "店",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "府",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "度",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "座",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "庫",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "庭",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "庶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "康",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "庸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "廃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "廉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "廊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "延",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "廷",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "建",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "弁",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "弄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "弊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "式",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "弐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "弓",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "弔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "引",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "弟",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "弥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "弦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "弧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "弱",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "張",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "強",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "弾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "当",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "彙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "形",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "彩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "彫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "彰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "影",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "役",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "彼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "往",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "征",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "径",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "待",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "律",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "後",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "徐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "徒",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "従",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "得",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "御",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "復",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "循",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "微",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "徳",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "徴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "徹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "心",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "必",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "忌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "忍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "志",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "忘",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "忙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "応",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "忠",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "快",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "念",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "怒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "怖",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "思",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "怠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "急",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "性",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "怨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "怪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "恋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "恐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "恒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "恣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "恥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "恨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "恩",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "恭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "息",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "恵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "悔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "悟",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "悠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "患",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "悦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "悩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "悪",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "悲",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "悼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "情",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "惑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "惜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "惧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "惨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "惰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "想",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "愁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "愉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "意",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "愚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "愛",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "感",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "慄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "慈",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "態",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "慌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "慎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "慕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "慢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "慣",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "慨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "慮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "慰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "慶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "憂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "憎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "憤",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "憧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "憩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "憬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "憲",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "憶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "憾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "懇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "懐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "懲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "懸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "成",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "我",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "戒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "戚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "戦",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "戯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "戴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "戸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "戻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "房",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "所",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "扇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "扉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "手",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "才",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "打",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "払",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "扱",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "扶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "批",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "承",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "技",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "抄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "把",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "抑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "投",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "抗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "折",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "抜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "択",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "披",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "抱",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "抵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "抹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "押",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "抽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "担",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "拉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "招",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "拝",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "拠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拡",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "括",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拷",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "拾",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "持",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "指",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "挑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "挙",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "挟",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "挨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "挫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "振",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "挿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "捉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "捕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "捗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "捜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "捨",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "据",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "捻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "掃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "授",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "掌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "排",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "掘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "掛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "採",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "探",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "接",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "控",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "推",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "措",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "掲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "描",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "提",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "揚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "換",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "握",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "揮",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "援",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "揺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "損",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "搬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "搭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "携",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "搾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "摂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "摘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "摩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "摯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "撃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "撤",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "撮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "撲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "擁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "操",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "擦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "擬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "支",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "改",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "攻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "放",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "政",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "故",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "敏",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "救",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "敗",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "教",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "敢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "散",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "敬",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "数",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "整",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "敵",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "敷",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "文",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "斉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "斎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "斑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "斗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "料",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "斜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "斤",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "斥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "斬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "断",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "新",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "方",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "施",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "旅",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "旋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "族",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "旗",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "既",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "日",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "旦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "旧",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "旨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "早",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "旬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "旺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "昆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "昇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "明",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "易",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "昔",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "星",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "映",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "春",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "昧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "昨",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "昭",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "是",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "昼",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "時",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "晩",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "普",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "景",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "晴",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "晶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "暁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "暇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "暑",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "暖",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "暗",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "暦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "暫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "暮",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "暴",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "曇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "曖",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "曜",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "曲",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "更",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "書",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "曹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "曽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "替",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "最",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "月",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "有",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "服",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "朕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "朗",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "望",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "朝",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "期",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "木",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "未",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "末",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "本",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "札",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "朱",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "朴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "机",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "朽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "杉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "材",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "村",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "束",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "条",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "来",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "杯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "東",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "松",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "板",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "析",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "枕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "林",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "枚",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "果",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "枝",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "枠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "枢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "枯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "架",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "柄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "某",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "染",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "柔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "柱",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "柳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "柵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "査",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "柿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "栃",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "栄",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "栓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "校",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "株",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "核",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "根",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "格",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "栽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "桁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "桃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "案",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "桑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "桜",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "桟",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "梅",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "梗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "梨",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "械",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "棄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "棋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "棒",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "棚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "棟",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "森",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "棺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "椅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "植",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "椎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "検",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "業",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "極",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "楷",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "楼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "楽",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "概",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "構",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "様",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "槽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "標",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "模",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "権",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "横",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "樹",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "橋",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "機",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "欄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "欠",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "次",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "欧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "欲",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "欺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "款",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "歌",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "歓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "止",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "正",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "武",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "歩",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "歯",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "歳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "歴",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "死",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "殉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "殊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "残",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "殖",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "殴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "段",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "殺",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "殻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "殿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "毀",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "母",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "毎",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "毒",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "比",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "毛",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "氏",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "民",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "気",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "水",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "氷",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "永",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "氾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "汁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "求",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "汎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "汗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "汚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "江",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "池",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "汰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "決",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "汽",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "沃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "沈",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "沖",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "沙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "没",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "沢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "河",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "沸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "油",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "治",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "沼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "沿",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "況",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "泉",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "泊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "泌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "法",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "泡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "波",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "泣",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "泥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "注",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "泰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "泳",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "洋",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "洗",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "洞",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "津",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "洪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "活",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "派",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "流",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "浄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "浅",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "浜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "浦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "浪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "浮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "浴",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "海",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "浸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "消",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "涙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "涯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "液",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "涼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "淑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "淡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "淫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "深",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "混",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "添",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "清",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "渇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "済",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "渉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "渋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "渓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "減",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "渡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "渦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "温",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "測",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "港",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "湖",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "湧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "湯",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "湾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "湿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "満",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "源",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "準",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "溝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "溶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "溺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "滅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "滋",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "滑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "滝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "滞",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "滴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "漁",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "漂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "漆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "漏",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "演",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "漠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "漢",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "漫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "漬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "漸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "潔",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "潜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "潟",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "潤",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "潮",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "潰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "澄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "激",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "濁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "濃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "濫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "濯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "瀬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "火",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "灯",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "灰",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "災",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "炉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "炊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "炎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "炭",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "点",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "為",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "烈",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "無",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "焦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "然",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "焼",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "煎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "煙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "照",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "煩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "煮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "熊",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "熟",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "熱",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "燃",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "燥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "爆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "爪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "爵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "父",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "爽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "片",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "版",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "牙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "牛",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "牧",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "物",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "牲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "特",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "犠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "犬",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "犯",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "状",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "狂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "狙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "狩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "独",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "狭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "猛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "猟",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "猫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "献",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "猶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "猿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "獄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "獣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "獲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "玄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "率",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "玉",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "王",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "玩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "珍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "珠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "班",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "現",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "球",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "理",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "琴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "瑠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "璃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "璧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "環",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "璽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "瓦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "瓶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "甘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "甚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "生",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "産",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "用",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "田",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "由",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "甲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "申",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "男",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "町",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "画",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "界",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "畏",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "畑",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "畔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "留",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "畜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "畝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "略",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "番",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "異",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "畳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "畿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "疎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "疑",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "疫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "疲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "疾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "病",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "症",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "痕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "痘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "痛",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "痢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "痩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "痴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "瘍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "療",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "癒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "癖",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "発",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "登",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "白",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "百",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "的",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "皆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "皇",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "皮",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "皿",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "盆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "益",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "盗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "盛",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "盟",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "監",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "盤",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "目",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "盲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "直",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "相",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "盾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "省",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "眉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "看",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "県",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "真",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "眠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "眺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "眼",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "着",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "睡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "督",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "睦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "瞬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "瞭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "瞳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "矛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "矢",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "知",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "短",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "矯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "石",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "砂",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "研",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "砕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "砲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "破",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "硝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "硫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "硬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "碁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "碑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "確",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "磁",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "磨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "礁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "礎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "示",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "礼",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "社",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "祈",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "祉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "祖",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "祝",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "神",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "祥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "票",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "祭",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "禁",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "禅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "禍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "福",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "秀",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "私",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "秋",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "科",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "秒",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "秘",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "租",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "秩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "称",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "移",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "程",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "税",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "稚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "種",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "稲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "稼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "稽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "稿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "穀",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "穂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "積",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "穏",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "穫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "穴",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "究",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "空",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "突",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "窃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "窒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "窓",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "窟",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "窮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "窯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "立",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "竜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "章",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "童",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "端",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "競",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "竹",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "笑",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "笛",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "符",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "第",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "筆",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "等",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "筋",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "筒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "答",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "策",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "箇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "箋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "算",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "管",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "箱",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "箸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "節",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "範",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "築",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "篤",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "簡",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "簿",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "籍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "籠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "米",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "粉",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "粋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "粒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "粗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "粘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "粛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "粧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "精",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "糖",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "糧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "糸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "系",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "糾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "紀",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "約",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "紅",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "紋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "納",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "純",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "紙",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "級",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "紛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "素",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "紡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "索",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "紫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "累",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "細",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "紳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "紹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "紺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "終",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "組",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "経",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "結",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "絞",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "絡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "給",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "統",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "絵",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "絶",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "絹",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "継",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "続",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "維",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "綱",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "網",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "綻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "綿",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "緊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "総",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "緑",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "緒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "線",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "締",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "編",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "緩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "緯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "練",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "緻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "縁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "縄",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "縛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "縦",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "縫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "縮",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "績",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "繁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "繊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "織",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "繕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "繭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "繰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "缶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "罪",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "置",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "罰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "署",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "罵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "罷",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "羅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "羊",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "美",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "羞",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "群",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "羨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "義",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "羽",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "翁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "翌",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "習",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "翻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "翼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "老",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "考",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "者",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "耐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "耕",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "耗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "耳",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "聖",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "聞",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "聴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "職",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "肉",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "肌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "肖",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "肘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "肝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "股",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "肢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "肥",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "肩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "肪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "肯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "育",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "肺",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "胃",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "胆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "背",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "胎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "胞",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "胴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "胸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "能",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "脂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "脅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "脇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "脈",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "脊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "脚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "脱",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "脳",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "腎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "腐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "腕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "腫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "腰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "腸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "腹",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "腺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "膚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "膜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "膝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "膨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "膳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "臆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "臓",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "臣",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "臨",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "自",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "臭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "至",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "致",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "臼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "興",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "舌",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "舎",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "舗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "舞",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "舟",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "航",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "般",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "舶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "舷",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "船",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "艇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "艦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "良",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "色",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "艶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "芋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "芝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "芯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "花",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "芳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "芸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "芽",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "苗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "苛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "若",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "苦",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "英",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "茂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "茎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "茨",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "茶",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "草",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "荒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "荘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "荷",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "菊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "菌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "菓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "菜",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "華",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "萎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "落",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "葉",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "著",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "葛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "葬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "蒸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "蓄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "蓋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "蔑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "蔵",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "蔽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "薄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "薦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "薪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "薫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "薬",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "藍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "藤",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "藩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "藻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "虎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "虐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "虚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "虜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "虞",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "虫",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "虹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "蚊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "蚕",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "蛇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "蛍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "蛮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "蜂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "蜜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "融",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "血",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "衆",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "行",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "術",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "街",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "衛",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "衝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "衡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "衣",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "表",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "衰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "衷",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "袋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "袖",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "被",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "裁",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "裂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "装",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "裏",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "裕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "補",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "裸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "製",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "裾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "複",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "褐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "褒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "襟",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "襲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "西",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "要",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "覆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "覇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "見",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "規",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "視",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "覚",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "覧",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "親",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "観",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "角",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "解",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "触",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "言",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "訂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "訃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "計",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "討",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "訓",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "託",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "記",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "訟",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "訪",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "設",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "許",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "訳",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "訴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "診",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "証",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "詐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "詔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "評",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "詞",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "詠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "詣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "試",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "詩",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "詮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "詰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "話",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "該",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "詳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "誇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "誉",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "誌",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "認",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "誓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "誕",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "誘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "語",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "誠",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "誤",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "説",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "読",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "誰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "課",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "調",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "談",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "請",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "論",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "諦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "諧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "諭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "諮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "諸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "諾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "謀",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "謁",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "謄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "謎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "謙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "講",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "謝",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "謡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "謹",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "識",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "譜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "警",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "議",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "譲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "護",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "谷",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "豆",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "豊",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "豚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "象",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "豪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "貌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "貝",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "貞",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "負",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "財",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "貢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "貧",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "貨",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "販",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "貪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "貫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "責",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "貯",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "貴",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "買",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "貸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "費",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "貼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "貿",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "賀",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "賂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "賃",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "賄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "資",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "賊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "賓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "賛",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "賜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "賞",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "賠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "賢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "賦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "質",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "賭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "購",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "贈",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "赤",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "赦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "走",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "赴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "起",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "超",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "越",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "趣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "足",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "距",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "跡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "路",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "跳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "践",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "踊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "踏",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "踪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "蹴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "躍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "身",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "車",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "軌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "軍",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "軒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "軟",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "転",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "軸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "軽",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "較",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "載",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "輝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "輩",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "輪",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "輸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "轄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "辛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "辞",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "辣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "辱",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "農",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "辺",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "込",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "迅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "迎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "近",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "返",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "迫",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "迭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "述",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "迷",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "追",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "退",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "送",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "逃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "逆",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "透",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "逐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "逓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "途",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "通",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "逝",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "速",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "造",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "連",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "逮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "週",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "進",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "逸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "遂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "遅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "遇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "遊",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "運",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "遍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "過",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "道",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "達",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "違",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "遜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "遠",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "遡",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "遣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "適",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "遭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "遮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "遵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "遷",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "選",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "遺",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "避",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "還",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "那",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "邦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "邪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "邸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "郊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "郎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "郡",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "部",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "郭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "郵",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "郷",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "都",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "酌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "配",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "酎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "酒",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "酔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "酢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "酪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "酬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "酵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "酷",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "酸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "醒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "醜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "醸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "采",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "釈",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "里",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "重",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "野",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "量",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "金",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "釜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "針",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "釣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鈍",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鈴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鉄",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "鉛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鉢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鉱",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "銀",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "銃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "銅",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "銘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "銭",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "鋭",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鋳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鋼",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "錠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "錦",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "錬",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "錮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "錯",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "録",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "鍋",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鍛",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鍵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鎌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鎖",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鎮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鏡",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "鐘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鑑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "長",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "門",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "閉",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "開",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "閑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "間",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "関",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "閣",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "閥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "閲",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "闇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "闘",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "阜",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "阪",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "防",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "阻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "附",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "降",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "限",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "陛",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "院",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "陣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "除",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "陥",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "陪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "陰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "陳",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "陵",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "陶",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "陸",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "険",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "陽",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "隅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "隆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "隊",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "階",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "随",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "隔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "隙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "際",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "障",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "隠",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "隣",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "隷",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "隻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "雄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "雅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "集",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "雇",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "雌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "雑",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "離",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "難",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "雨",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "雪",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "雰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "雲",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "零",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "雷",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "電",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "需",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "震",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "霊",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "霜",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "霧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "露",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "青",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "静",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "非",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "面",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "革",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "靴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "韓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "音",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "韻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "響",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "頂",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "頃",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "項",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "順",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "須",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "預",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "頑",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "頒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "頓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "領",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "頭",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "頰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "頻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "頼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "題",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "額",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "顎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "顔",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "顕",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "願",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "類",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "顧",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "風",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "飛",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "食",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "飢",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "飯",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "飲",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "飼",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "飽",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "飾",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "餅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "養",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "餌",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "餓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "館",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "首",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "香",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "馬",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "駄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "駅",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "駆",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "駐",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "駒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "騎",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "騒",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "験",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "騰",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "驚",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "骨",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "骸",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "髄",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "高",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "髪",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鬱",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鬼",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "魂",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "魅",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "魔",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "魚",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "鮮",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鯨",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鳥",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "鳴",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "鶏",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鶴",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鹿",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "麓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "麗",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "麦",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "麺",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "麻",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "黄",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "黒",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "黙",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鼓",
+    "in_kyoiku": false
+  },
+  {
+    "kanji": "鼻",
+    "in_kyoiku": true
+  },
+  {
+    "kanji": "齢",
+    "in_kyoiku": false
+  }
+]

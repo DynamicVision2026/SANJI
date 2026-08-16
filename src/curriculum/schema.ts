@@ -29,21 +29,55 @@ export interface KanjiTeachGrade {
 export type ReadingType = "on" | "kun";
 export type SchoolStage = "elementary" | "junior_high" | "high_school";
 
+/**
+ * Per-row extraction confidence (§19.2 ingestion). 'medium'/'low' rows must
+ * stay visibly flagged, not be silently promoted to the same status as
+ * everything else — see 叱 in kanji_reading_stage (Unicode glyph recovered by
+ * visual verification, confidence 'medium').
+ */
+export type Confidence = "high" | "medium" | "low";
+
+/**
+ * Level 1.5 — the full 2,136-character 常用漢字 (jōyō) set. Added in 0008:
+ * kanji_reading_stage.kanji FKs against this, NOT kanji_teach_grade, because
+ * the real 音訓割り振り表 source covers junior_high/high_school readings for
+ * ~1,110 characters that are jōyō but never taught in elementary school (so
+ * are never in kanji_teach_grade). kanji_teach_grade (the frozen, §6.5
+ * checksum-guarded 1,026-character kyōiku set) is a strict subset.
+ */
+export interface KanjiJouyou {
+  kanji: string;
+  in_kyoiku: boolean;
+}
+
 /** Level 2 — reading stage. §6.2 `kanji_reading_stage`. */
 export interface KanjiReadingStage {
   id: number;
+  /** FK → kanji_jouyou.kanji (0008), not kanji_teach_grade — see KanjiJouyou doc. */
   kanji: string;
   reading_kana: string;
   reading_type: ReadingType;
   school_stage: SchoolStage;
-  /** Only when school_stage = elementary. */
+  /**
+   * Character-level MEXT grade (mirrors kanji_teach_grade.teach_grade),
+   * populated on EVERY row for a kyōiku character regardless of this
+   * particular reading's own school_stage — e.g. 宮 carries elementary_grade
+   * 3 on both its elementary みや row and its junior_high グウ row (§6.3:
+   * character grade is not a proxy for reading grade). Null for jōyō-only
+   * (non-kyōiku) characters.
+   */
   elementary_grade: number | null;
   /** Source page in the official MEXT PDF (two-source rule, §6.1). */
   source_page: number;
   is_jukujikun: boolean;
+  confidence: Confidence;
+  extraction_notes: string | null;
 }
 
 export type LexicalRuleKind = "jukujikun" | "rendaku" | "proper_noun" | "furoku";
+
+/** Raw provenance category from the source spreadsheet's own `reading_type` column for appendix rows (0008). Distinct from ReadingType (on/kun) — application logic uses `rule_kind`, not this. */
+export type SourceReadingType = "special" | "proper_name";
 
 /** Level 3 — lexical exception. §6.2 `lexical_reading_rule` (v2.3: source_page NOT NULL — per-row provenance is mandatory, §6.1). */
 export interface LexicalReadingRule {
@@ -54,6 +88,10 @@ export interface LexicalReadingRule {
   min_stage: SchoolStage;
   min_elementary_grade: number | null;
   source_page: number;
+  confidence: Confidence;
+  extraction_notes: string | null;
+  /** Null for rows not sourced from the appendix ingestion (0008). */
+  source_reading_type: SourceReadingType | null;
 }
 
 export const GRADE_MIN = 1;

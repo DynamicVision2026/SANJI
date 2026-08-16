@@ -49,7 +49,7 @@ const JOIN_SCOPED = ["worksheet_items", "results", "error_profile", "diagnostics
 // Global by spec design: shared corpus (§5.2 items, §7.8), review queue
 // (§5.2 — request_payload is the §7.3 contract and carries no student PII),
 // curriculum reference data (§6, not tenant-scoped).
-const GLOBAL = ["items", "review_queue", "kanji_teach_grade", "kanji_reading_stage", "lexical_reading_rule"];
+const GLOBAL = ["items", "review_queue", "kanji_teach_grade", "kanji_jouyou", "kanji_reading_stage", "lexical_reading_rule"];
 
 const sqlFiles = walk(join(REPO_ROOT, "db", "migrations"))
   .filter((f) => f.endsWith(".sql"))
