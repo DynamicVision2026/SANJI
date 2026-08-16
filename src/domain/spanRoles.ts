@@ -1,5 +1,5 @@
 /**
- * Span roles and action policy (spec §7.5) — FROZEN at end of Week 1 (§18).
+ * Span roles and action policy (spec v2.3 §7.5) — FROZEN at end of Week 1 (§18).
  *
  * This module is the contract between the L3 classifier (§7.4) and every
  * consumer: the gate policy (§7.7), the RenderPlan derivation (§7.6), and the
@@ -12,6 +12,14 @@
  * simplify, or "optimise" the cells — the whole point of freezing it is that
  * the mapping is explicit and auditable.
  *
+ * READING THE TABLE (v2.3 §7.5, clarified before freeze): a ✓ cell denotes
+ * that the tier is ACCEPTABLE for that role. It does NOT denote that ruby is
+ * applied. Ruby application is decided solely by §9.6 from the persisted
+ * RenderPlan — never by this policy table. Accordingly there is no
+ * "accept with ruby" action here: ✓ maps to ACCEPT, full stop.
+ * Ruby NEVER renders on a `target` span at any tier — §7.6's
+ * `suppressed_spans` override is unconditional.
+ *
  * ---------------------------------------------------------------------------
  * OPEN QUESTIONS — spec §19.3 ("closes end of Week 1"). These are recorded as
  * genuinely unresolved. Do NOT resolve them unilaterally in code; they need a
@@ -19,7 +27,9 @@
  *   1. Should `diagnostic_probe` bypass L4 naturalness as well as the grade
  *      gate? Current spec (§7.5 / §7.9) says NO — naturalness still applies.
  *   2. Should the answer key carry ruby on the revealed answer to assist the
- *      instructor? Pilot feedback should decide.
+ *      instructor? Per v2.3 §19.3 this is a rendering question about the
+ *      answer-key document, not a change to §7.6's suppression rule for the
+ *      worksheet. Pilot feedback should decide.
  * ---------------------------------------------------------------------------
  */
 
@@ -41,10 +51,13 @@ export type SpanRole = (typeof SPAN_ROLES)[number];
 /**
  * The distinct actions that appear as cells in the §7.5 table. Each maps to one
  * cell value; the mapping to the wording in the spec is noted on each member.
+ *
+ * NOTE (v2.3): there is deliberately no "accept with ruby" action. A ✓ means
+ * the tier is acceptable for the role; whether ruby renders on a span is
+ * decided by §9.6 from the persisted RenderPlan, not by this table.
  */
 export const SPAN_ACTIONS = [
-  "ACCEPT", //            "✓" — usable as-is, no ruby applied to this span
-  "ACCEPT_WITH_RUBY", //  "✓ (ruby applied)" — usable; RenderPlan places ruby here
+  "ACCEPT", //            "✓" — the tier is acceptable for this role
   "REGENERATE", //        "regenerate" — request a new generation
   "REJECT", //            "reject" — the item cannot be valid for this role; drop it
   "QUEUE_REVIEW", //      "queue" — enqueue async review; live path never blocks (§7.7)
@@ -85,43 +98,56 @@ type PolicyRow = Readonly<Record<PolicyTier, SpanAction>>;
 
 /**
  * The §7.5 action policy, one row per role, one column per policy tier.
- * Transcribed verbatim from the spec table (EXEMPT tier is excluded from the
- * columns because an EXEMPT span never reaches policy — see tiers.ts).
+ * Transcribed verbatim from the v2.3 spec table (EXEMPT tier is excluded from
+ * the columns because an EXEMPT span never reaches policy — see tiers.ts).
+ *
+ * History: version 1.0.0 of this table contained three transcription defects
+ * against the spec (diagnostic_probe/REWRITE_RECOMMENDED and both
+ * report_body/REWRITE_RECOMMENDED + REVIEW_REQUIRED were coded as
+ * regenerate/queue where the spec table has ✓). Caught by external review;
+ * corrected in 1.1.0. The spec table itself did not change between v2.2 and
+ * v2.3 apart from removing the "(ruby applied)" annotation on the carrier row.
  */
 export const SPAN_ROLE_POLICY: Readonly<Record<SpanRole, PolicyRow>> = {
-  // The span being tested. Cannot carry ruby — ruby would reveal the answer,
-  // so RUBY_REQUIRED is a hard reject (not "apply ruby").
+  // §7.5: | `target` | ✓ | ✓ | **reject** | reject | queue |
+  // The span being tested. Ruby never renders here (suppressed_spans is
+  // unconditional, §7.6); the ✓ under RUBY_RECOMMENDED means such an item may
+  // ship, not that the answer may be annotated. RUBY_REQUIRED is rejected
+  // because the span would be unreadable and cannot be annotated.
   target: {
     PASS: "ACCEPT",
-    RUBY_RECOMMENDED: "ACCEPT", // accepted bare; ruby is NOT placed on a target
+    RUBY_RECOMMENDED: "ACCEPT",
     RUBY_REQUIRED: "REJECT",
     REWRITE_RECOMMENDED: "REJECT",
     REVIEW_REQUIRED: "QUEUE_REVIEW",
   },
-  // Generated text surrounding the target. Ruby may be applied here.
+  // §7.5: | `carrier` | ✓ | ✓ | ✓ | regenerate | queue |
+  // Generated text surrounding the target. Whether ruby renders on an
+  // above-stage carrier span is a RenderPlan/§9.6 decision, not a policy cell.
   carrier: {
     PASS: "ACCEPT",
-    RUBY_RECOMMENDED: "ACCEPT_WITH_RUBY",
-    RUBY_REQUIRED: "ACCEPT_WITH_RUBY",
+    RUBY_RECOMMENDED: "ACCEPT",
+    RUBY_REQUIRED: "ACCEPT",
     REWRITE_RECOMMENDED: "REGENERATE",
     REVIEW_REQUIRED: "QUEUE_REVIEW",
   },
-  // Diagnostic items deliberately probing above assumed grade. The grade gate
-  // is inverted (grade-appropriateness does not gate this role), so above-grade
-  // content is accepted with ruby rather than rejected.
+  // §7.5: | `diagnostic_probe` | ✓ | ✓ | ✓ | ✓ | queue |
+  // Deliberately inverts the grade gate: the diagnostic exists to locate a
+  // student's ceiling, so above-stage content — including spans the classifier
+  // would prefer rewritten — is ACCEPTED, not regenerated. Safety (§7.9 L5)
+  // and naturalness (§7.9 L4) still apply in full.
   //
-  // TODO(spec §19.3, closes end of Week 1): naturalness (§7.9 L4) currently
-  // STILL applies to diagnostic_probe (see §7.9 — "Applies to all roles
-  // including diagnostic_probe"). Open question is whether a probe using rare
-  // vocabulary should be allowed to bypass L4 naturalness too. Do not change
-  // this behaviour without a coordinator decision.
+  // TODO(spec §19.3, closes end of Week 1): open question — should
+  // diagnostic_probe bypass L4 naturalness as well as the grade gate? Current
+  // spec (§7.9) says no. Do not change without a coordinator decision.
   diagnostic_probe: {
     PASS: "ACCEPT",
-    RUBY_RECOMMENDED: "ACCEPT_WITH_RUBY",
-    RUBY_REQUIRED: "ACCEPT_WITH_RUBY",
-    REWRITE_RECOMMENDED: "REGENERATE",
+    RUBY_RECOMMENDED: "ACCEPT",
+    RUBY_REQUIRED: "ACCEPT",
+    REWRITE_RECOMMENDED: "ACCEPT",
     REVIEW_REQUIRED: "QUEUE_REVIEW",
   },
+  // §7.5: | `static_chrome` | build-time only ×3 | reject | reject |
   // Fixed instructions / section labels / field names printed on the worksheet.
   // Validated once at build time against Grade 1. REWRITE_RECOMMENDED or worse
   // fails the build rather than queueing (§7.5).
@@ -132,10 +158,10 @@ export const SPAN_ROLE_POLICY: Readonly<Record<SpanRole, PolicyRow>> = {
     REWRITE_RECOMMENDED: "BUILD_FAIL",
     REVIEW_REQUIRED: "BUILD_FAIL",
   },
-  // User-supplied names (branch, student, instructor comment names). EXEMPT —
-  // MUST bypass the classifier entirely; these cells should never be reached
-  // because a proper_noun span is not classified. Encoded as EXEMPT so a
-  // lookup that wrongly happens is still unambiguous.
+  // §7.5: | `proper_noun` | **EXEMPT** | — | — | — | — |
+  // User-supplied names. EXEMPT — MUST bypass the classifier entirely; these
+  // cells should never be reached because a proper_noun span is not classified.
+  // Encoded as EXEMPT so a lookup that wrongly happens is still unambiguous.
   proper_noun: {
     PASS: "EXEMPT",
     RUBY_RECOMMENDED: "EXEMPT",
@@ -143,18 +169,20 @@ export const SPAN_ROLE_POLICY: Readonly<Record<SpanRole, PolicyRow>> = {
     REWRITE_RECOMMENDED: "EXEMPT",
     REVIEW_REQUIRED: "EXEMPT",
   },
-  // Parent report prose. Adult reader — every tier is usable.
+  // §7.5: | `report_body` | ✓ | ✓ | ✓ | ✓ | ✓ |
+  // Parent report prose. Adult reader — every tier is acceptable, including
+  // REWRITE_RECOMMENDED and REVIEW_REQUIRED. No regeneration, no queueing.
   //
   // TODO(spec §19.3, closes end of Week 1): whether the answer key shows ruby
-  // on revealed answers is a separate open question for pilot feedback; it is
-  // an answer-key rendering decision, not a report_body policy change. Tracked
-  // here so the RenderPlan work (§7.6) does not silently pick a default.
+  // on revealed answers is an open rendering question about the answer-key
+  // document (not a §7.6 suppression change and not a policy cell here).
+  // Tracked so the §9.6 rendering work does not silently pick a default.
   report_body: {
     PASS: "ACCEPT",
-    RUBY_RECOMMENDED: "ACCEPT_WITH_RUBY",
-    RUBY_REQUIRED: "ACCEPT_WITH_RUBY",
-    REWRITE_RECOMMENDED: "REGENERATE",
-    REVIEW_REQUIRED: "QUEUE_REVIEW",
+    RUBY_RECOMMENDED: "ACCEPT",
+    RUBY_REQUIRED: "ACCEPT",
+    REWRITE_RECOMMENDED: "ACCEPT",
+    REVIEW_REQUIRED: "ACCEPT",
   },
 };
 
@@ -169,10 +197,16 @@ export function policyAction(role: SpanRole, tier: PolicyTier): SpanAction {
 
 /**
  * A frozen, versioned identifier for the policy contract. Bump this only when
- * the §7.5 table itself changes (which is a breaking change for the classifier
- * and every consumer). Consumers may assert against it to detect drift.
+ * the encoded table changes (which is a breaking change for the classifier and
+ * every consumer). Consumers may assert against it to detect drift.
+ *
+ * 1.0.0 — Week 1 freeze; contained three transcription defects vs §7.5.
+ * 1.1.0 — corrected to match the spec table verbatim (diagnostic_probe and
+ *         report_body cells); dropped the ACCEPT_WITH_RUBY action per the
+ *         v2.3 §7.5 clarification that ✓ = tier acceptability, with ruby
+ *         application decided solely by §9.6.
  */
-export const SPAN_ROLE_POLICY_VERSION = "1.0.0-week1-frozen";
+export const SPAN_ROLE_POLICY_VERSION = "1.1.0-week1-frozen";
 
 /** All policy tiers, re-exported for consumers building exhaustive checks. */
 export { POLICY_TIERS };
