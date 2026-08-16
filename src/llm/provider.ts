@@ -85,7 +85,7 @@ export interface LlmProvider {
 
 /**
  * Recursively assert that an outbound payload contains no PII-typed keys. This
- * is the assertion half of the §15.2 choke point. It throws (fail loud) rather
+ * is the structural half of the §15.2 assertion. It throws (fail loud) rather
  * than scrubbing silently — a silent scrub would let a leak-shaped bug survive.
  */
 export function assertNoPiiKeys(payload: unknown, path = "$"): void {
@@ -105,17 +105,108 @@ export function assertNoPiiKeys(payload: unknown, path = "$"): void {
 }
 
 /**
- * The single outbound choke point. Every model call goes through here so the
- * PII assertion runs exactly once per call, in one auditable place.
+ * The complete outbound payload as it would be transmitted to a provider —
+ * the structured request AND the free-text prompt. §15.2 (v2.3) requires the
+ * assertion to run over this serialised form, not over intermediate objects:
+ * a key-only check on `request` would let a caller smuggle a student name
+ * directly into the prompt string.
+ */
+export interface OutboundPayload {
+  prompt: string;
+  request: GenerationRequest;
+}
+
+/**
+ * Serialise the outbound payload exactly as it would be transmitted. This is
+ * the artefact the §15.2 assertions (runtime and gate) inspect. Any future
+ * transport change (extra fields, different wire shape) MUST go through this
+ * function so the assertion and the transmission can never diverge.
+ */
+export function serializeOutboundPayload(request: GenerationRequest, prompt: string): string {
+  const payload: OutboundPayload = { prompt, request };
+  return JSON.stringify(payload);
+}
+
+/**
+ * Values sourced from tenant rows (`students`, `users`, `branches`,
+ * `organizations`) that must never appear in an outbound payload — names,
+ * display names, emails, addresses, identifiers. The generation pipeline
+ * (Week 3, §7) is responsible for populating this from the rows in the
+ * session's scope before calling the provider.
+ */
+export interface PiiContext {
+  forbiddenValues: readonly string[];
+}
+
+/**
+ * Minimum trimmed length for a forbidden value to participate in the
+ * substring scan. Rationale: a single-character value (e.g. a one-kanji
+ * display_name) matched as a substring would flag essentially every Japanese
+ * sentence, making generation unusable rather than safe.
  *
- * Week 1: no concrete provider exists yet. Callers passing a provider get the
- * PII assertion enforced; there is deliberately no default vendor wired up.
+ * ⚠ Scoped decision, raised per §0.1 rather than silently chosen: §15.2 says
+ * "no value traceable to students/users/branches/organizations appears" and
+ * does not carve out short values. This constant is the practical floor and is
+ * flagged in the PR for coordinator confirmation. Callers may pass a stricter
+ * minLength (1) via assertNoForbiddenValues if that is decided.
+ */
+export const MIN_FORBIDDEN_VALUE_LENGTH = 2;
+
+/**
+ * Assert that none of the forbidden tenant-derived values appears anywhere in
+ * the serialised outbound payload — prompt text included. Throws on the first
+ * hit (fail loud; §15.2).
+ */
+export function assertNoForbiddenValues(
+  serialized: string,
+  forbiddenValues: readonly string[],
+  minLength: number = MIN_FORBIDDEN_VALUE_LENGTH,
+): void {
+  for (const raw of forbiddenValues) {
+    const value = raw?.trim();
+    if (!value || value.length < minLength) continue;
+    if (serialized.includes(value)) {
+      throw new Error(
+        `PII boundary violation (§15.2/§16.2): a tenant-derived value appears in the serialised outbound payload (length ${value.length}). ` +
+          `Student PII is never sent to an LLM provider. The value is not echoed here to avoid propagating it into logs.`,
+      );
+    }
+  }
+}
+
+/**
+ * Run the full §15.2 assertion set over the payload exactly as it would be
+ * transmitted: structural key scan over request AND prompt container, then a
+ * value scan over the serialised form. Returns the serialised payload so the
+ * transmitted bytes are, by construction, the inspected bytes.
+ */
+export function assertOutboundPayloadClean(
+  request: GenerationRequest,
+  prompt: string,
+  pii?: PiiContext,
+): string {
+  const serialized = serializeOutboundPayload(request, prompt);
+  assertNoPiiKeys({ prompt, request } satisfies OutboundPayload);
+  assertNoForbiddenValues(serialized, pii?.forbiddenValues ?? []);
+  return serialized;
+}
+
+/**
+ * The single outbound choke point (§8.1). Every model call goes through here
+ * so the §15.2 assertions run exactly once per call, in one auditable place,
+ * over the serialised payload as transmitted — prompt included.
+ *
+ * `pii.forbiddenValues` MUST be supplied by any caller operating in a tenant
+ * context (the Week 3 pipeline populates it from the session's tenant rows).
+ * Week 1: no concrete provider exists yet; there is deliberately no default
+ * vendor wired up.
  */
 export async function callProvider(
   provider: LlmProvider,
   request: GenerationRequest,
   prompt: string,
+  pii?: PiiContext,
 ): Promise<ProviderResponse> {
-  assertNoPiiKeys(request);
+  assertOutboundPayloadClean(request, prompt, pii);
   return provider.generate(prompt);
 }

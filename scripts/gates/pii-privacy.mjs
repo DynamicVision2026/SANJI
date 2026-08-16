@@ -1,24 +1,63 @@
 #!/usr/bin/env node
 /**
- * §15.2 PII Privacy Gate — partial real check.
+ * §15.2 PII Privacy Gate.
  *
- * Full check (§15.2): build fails if any field originating from students, users,
- * branches, or organizations is reachable from the LLM client; all model calls
- * pass through a single choke point with an outbound scrubber + assertion.
+ * v2.3 §15.2: "The gate MUST inspect the actual outbound payload at the §8.1
+ * choke point — serialising the request as it would be transmitted and
+ * asserting no student-derived value appears in it. A gate that only inspects
+ * type signatures, call sites, or intermediate objects does not satisfy this
+ * requirement."
  *
- * Implemented now (cheap, high-value): no source file may import a vendor LLM
- * SDK directly — all calls MUST go through the provider abstraction
- * (src/llm/provider.ts, §8.1). A direct vendor import is exactly the code path
- * that bypasses the §15.2 choke point, so we fail the build on one.
+ * Two layers, both of which must pass:
+ *
+ *   1. PAYLOAD INSPECTION (the §15.2 requirement): scripts/gates/
+ *      pii-payload-probe.ts runs against the REAL choke point
+ *      (src/llm/provider.ts), serialises outbound payloads exactly as they
+ *      would be transmitted — free-text prompt included — and asserts fixture
+ *      tenant values (students/users/branches/organizations) are rejected and
+ *      absent from the serialised bytes. Requires node_modules (tsx).
+ *
+ *   2. VENDOR-SDK IMPORT SCAN (defence in depth, §8.1): no source file may
+ *      import a vendor LLM SDK outside src/llm/adapters/ — a direct import is
+ *      the code path that bypasses the choke point entirely.
+ *
+ * Remaining scope, stated so status is not overstated: the probe exercises the
+ * choke point with fixtures. Wiring live tenant rows into PiiContext at
+ * generation time is part of the Week 3 pipeline (§7, §18.1) — until then no
+ * production code path calls a provider at all.
  *
  * Rationale (§15.2): sales material states 生徒の個人情報は生成AIに送信しません.
  * It must be literally true.
  */
-import { REPO_ROOT, failGate, passGate, readFileSync, walk } from "./_common.mjs";
+import { spawnSync } from "node:child_process";
+import { existsSync } from "node:fs";
 import { join } from "node:path";
 
-// Vendor SDK import specifiers that must never appear outside an approved
-// adapter. Adapters live under src/llm/adapters/ (none exist yet in Week 1).
+import { REPO_ROOT, failGate, passGate, readFileSync, walk } from "./_common.mjs";
+
+// ---------------------------------------------------------------------------
+// Layer 1 — payload inspection at the real choke point.
+// ---------------------------------------------------------------------------
+if (!existsSync(join(REPO_ROOT, "node_modules"))) {
+  failGate("PII Privacy Gate", "§15.2", [
+    "node_modules missing — the payload probe runs against the real choke point via tsx and requires dependencies. Run `npm ci` before this gate.",
+  ]);
+}
+
+const probe = spawnSync(
+  process.execPath,
+  ["--import", "tsx", join(REPO_ROOT, "scripts", "gates", "pii-payload-probe.ts")],
+  { cwd: REPO_ROOT, stdio: "inherit" },
+);
+if (probe.status !== 0) {
+  failGate("PII Privacy Gate", "§15.2", [
+    "payload probe failed — the §8.1 choke point did not reject (or leaked) tenant-derived values in the serialised outbound payload",
+  ]);
+}
+
+// ---------------------------------------------------------------------------
+// Layer 2 — vendor-SDK import scan (defence in depth).
+// ---------------------------------------------------------------------------
 const VENDOR_SDKS = [
   "openai",
   "@anthropic-ai/sdk",
@@ -48,8 +87,9 @@ for (const file of files) {
 if (violations.length > 0) {
   failGate("PII Privacy Gate", "§15.2", violations);
 }
+
 passGate(
   "PII Privacy Gate",
   "§15.2",
-  `no direct vendor SDK imports; all model calls route through the provider choke point (${files.length} files scanned). Full outbound-scrubber assertion follows the generation pipeline (§7, Week 3).`,
+  `serialised-payload probe holds at the §8.1 choke point (prompt text included) and no direct vendor SDK imports (${files.length} files scanned). Live tenant-row wiring into PiiContext lands with the Week 3 pipeline.`,
 );

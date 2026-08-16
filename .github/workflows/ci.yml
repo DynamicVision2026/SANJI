@@ -66,6 +66,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+      # The payload probe runs against the real §8.1 choke point via tsx, so
+      # this gate needs dependencies (unlike the pure-static gates).
+      - run: npm ci
       - run: node scripts/gates/pii-privacy.mjs
 
   gate-font-integrity:
