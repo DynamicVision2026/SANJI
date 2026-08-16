@@ -10,7 +10,7 @@ SENJI generates personalized kanji worksheets from each student's error profile,
 
 ## Specification
 
-The single source of truth for this project is `docs/spec-v2.2.md` — the V1 Engineering Specification. It defines the data model, generation and validation pipeline, rendering requirements, build gates, and milestones.
+The single source of truth for this project is `docs/spec-v2.3.md` — the V1 Engineering Specification. It defines the data model, generation and validation pipeline, rendering requirements, build gates, and milestones.
 
 Start with §0 (how to read the document) and §1 (why this exists) before diving into implementation sections.
 
@@ -39,7 +39,7 @@ npm run curriculum:check   # §6.5 curriculum coverage gate
 
 | Path | What |
 |---|---|
-| `docs/spec-v2.2.md` | Single source of truth (§0 first). |
+| `docs/spec-v2.3.md` | Single source of truth (§0 first). |
 | `src/app/` | Next.js app-router skeleton (UI is out of scope until Weeks 5+, §18). |
 | `src/config/runtime.ts` | Runtime configuration (§7.10) — thresholds are config, not constants. |
 | `src/domain/spanRoles.ts` | **Frozen** span-role policy table (§7.5) + `tiers.ts` (§7.4). |
