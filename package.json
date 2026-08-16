@@ -1,0 +1,40 @@
+{
+  "name": "sanji",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SANJI (千字) — kanji diagnostic and parent-reporting layer for private tutoring schools in Japan. See docs/spec-v2.2.md.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test src/domain/spanRoles.test.ts src/curriculum/ingest.test.ts src/llm/provider.test.ts src/config/runtime.test.ts src/rendering/ruby.test.ts src/rendering/fontCanary.test.ts",
+    "curriculum:check": "node scripts/check-curriculum.mjs",
+    "gate:specificity": "node scripts/gates/specificity.mjs",
+    "gate:pii-privacy": "node scripts/gates/pii-privacy.mjs",
+    "gate:font-integrity": "node scripts/gates/font-integrity.mjs",
+    "gate:tenant-isolation": "node scripts/gates/tenant-isolation.mjs",
+    "gate:classifier-determinism": "node scripts/gates/classifier-determinism.mjs",
+    "gate:targeting-fidelity": "node scripts/gates/targeting-fidelity.mjs"
+  },
+  "dependencies": {
+    "next": "15.5.23",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.7",
+    "@types/react": "19.0.7",
+    "@types/react-dom": "19.0.3",
+    "eslint": "9.18.0",
+    "eslint-config-next": "15.5.23",
+    "pg": "^8.13.1",
+    "tsx": "4.19.2",
+    "typescript": "5.7.3"
+  }
+}

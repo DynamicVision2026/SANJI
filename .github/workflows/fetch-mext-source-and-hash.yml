@@ -1,0 +1,153 @@
+name: fetch-mext-source-and-hash
+
+# Two jobs with different standing (spec v2.3):
+#
+# 1. verify-committed-hashes — REQUIRED by v2.3 §6.5 ("PDF hash verification
+#    workflow — MUST be automated"): on any change to curriculum data (and on
+#    demand), re-download each CONFIRMED source PDF from its recorded URL,
+#    recompute SHA-256, and fail on mismatch with the committed hash. Detects
+#    republication or substitution of the source document (§6.1.1 — this check
+#    was explicitly NOT waived).
+#
+# 2. fetch (workflow_dispatch) — provenance-acquisition utility for NEW §6.1
+#    sources: downloads an official PDF, computes its SHA-256, and extracts a
+#    per-page text map as artifacts for a maintainer to backfill. The original
+#    §6.1 provenance for kanji_teach_grade was closed manually (issue #2,
+#    recorded waiver §6.1.1), so this job is a utility, not a requirement.
+#
+# Both run on GitHub's hosted runners (normal network egress to mext.go.jp).
+#
+# It does NOT edit the repo — it uploads artifacts. A maintainer backfills the
+# real sha256 and printed page numbers into sources_provenance.yml / SOURCES.md
+# from the artifacts. This keeps the "never fabricate provenance" rule intact:
+# no value is written until it is genuinely produced from the official file.
+
+on:
+  workflow_dispatch:
+    inputs:
+      pdf_url:
+        description: "Confirmed official URL of the source PDF (e.g. the MEXT 学年別漢字配当表). Do NOT guess — supply a verified URL."
+        required: true
+        type: string
+      source_id:
+        description: "Which sources_provenance.json entry this run is for."
+        required: true
+        default: kanji_teach_grade
+        type: string
+  # v2.3 §6.5: hash verification MUST be automated and MUST also trigger on any
+  # change to curriculum data, not just on manual dispatch.
+  push:
+    branches:
+      - main
+      - "claude/**"
+    paths:
+      - "src/curriculum/data/**"
+      - "sources_provenance.json"
+      - "sources_provenance.yaml"
+  pull_request:
+    paths:
+      - "src/curriculum/data/**"
+      - "sources_provenance.json"
+      - "sources_provenance.yaml"
+
+permissions:
+  contents: read
+
+jobs:
+  # v2.3 §6.5 automated verification: re-download each CONFIRMED source PDF
+  # from its recorded URL, recompute SHA-256, fail on mismatch with the
+  # committed hash. Detects source republication or file substitution (§6.1.1
+  # — this is the check that was explicitly NOT waived).
+  verify-committed-hashes:
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Verify committed source-PDF hashes against live downloads
+        run: node scripts/verify-source-hashes.mjs
+
+  fetch:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    # Inputs are passed through env (never interpolated directly into run: blocks)
+    # to avoid shell/script injection via ${{ inputs.* }}.
+    env:
+      PDF_URL: ${{ inputs.pdf_url }}
+      SOURCE_ID: ${{ inputs.source_id }}
+    steps:
+      - name: Validate input
+        run: |
+          if [ -z "${PDF_URL// }" ]; then
+            echo "::error::pdf_url is empty. Supply the confirmed official PDF URL — guessing is disallowed (§6.1)."
+            exit 1
+          fi
+          case "$PDF_URL" in
+            http://*|https://*) : ;;
+            *) echo "::error::pdf_url must be an http(s) URL."; exit 1 ;;
+          esac
+
+      - name: Download official PDF
+        run: |
+          # -f: fail on HTTP >= 400 (do not hash a 404/error page). -L: follow redirects.
+          curl -fSL --retry 3 --retry-delay 2 \
+            -A "SANJI-provenance-fetch/1.0" \
+            -o source.pdf "$PDF_URL"
+
+      - name: Verify it is actually a PDF
+        run: |
+          # Fail loud if the server returned HTML (error/login page) instead of a PDF.
+          if [ "$(head -c 5 source.pdf)" != "%PDF-" ]; then
+            echo "::error::Downloaded file is not a PDF (magic bytes missing). Got:"
+            head -c 200 source.pdf | tr -d '\0' || true
+            exit 1
+          fi
+          ls -l source.pdf
+
+      - name: Compute SHA-256
+        run: |
+          sha256sum source.pdf | tee hash.txt
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Extract page-level text for page mapping
+        run: |
+          pip install "pdfplumber==0.11.4"
+          python - <<'PY'
+          import pdfplumber, json
+          pages = []
+          with pdfplumber.open("source.pdf") as pdf:
+              for i, page in enumerate(pdf.pages, start=1):
+                  pages.append({"pdf_page_index": i, "text": page.extract_text() or ""})
+          json.dump(pages, open("page_map.json", "w"), ensure_ascii=False, indent=2)
+          print(f"extracted {len(pages)} pages")
+          PY
+
+      - name: Write provenance summary
+        run: |
+          {
+            echo "source_id: ${SOURCE_ID}"
+            echo "official_url: ${PDF_URL}"
+            echo "retrieved_at: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo -n "sha256: "; awk '{print $1}' hash.txt
+            echo -n "pdf_page_count: "; python -c "import json;print(len(json.load(open('page_map.json'))))"
+          } | tee provenance_summary.txt
+          echo ""
+          echo "NEXT STEP (maintainer): copy the sha256 above into the matching"
+          echo "sources_provenance.yml entry (replace PENDING), and use page_map.json"
+          echo "with the document's PRINTED footer page numbers to set source_page."
+
+      - name: Upload provenance artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mext-source-provenance-${{ inputs.source_id }}
+          path: |
+            source.pdf
+            hash.txt
+            page_map.json
+            provenance_summary.txt
