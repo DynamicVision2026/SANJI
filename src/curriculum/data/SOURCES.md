@@ -100,16 +100,20 @@ Authoritative machine-readable record: `sources_provenance.json` /
 
 ### `kanji_reading_stage` / `lexical_reading_rule` source (音訓割り振り表)
 
-§19.2 closed — data delivered and ingested. `kanji_reading_stage.json` holds
-4,388 rows (all 2,136 常用 characters, on/kun readings across
-elementary/junior_high/high_school). `lexical_reading_rule.json` holds 135
-rows: 123 from 付表1 (jukujikun whole-word exceptions) + 12 from 付表2
-(都道府県名 proper-noun readings). Every row carries a per-row `source_page`
-(printed page number, per §6.1's per-row granularity for this source), an
-extraction `confidence` (`high`/`medium`), and `extraction_notes` where
-applicable — see `qa_flags` in the delivered extraction for the one
-`medium`-confidence case (叱, page 19: the glyph has no Unicode text mapping
-and was recovered by visual verification).
+**§19.2 remains open** — this delivery covers the MEXT 音訓割り振り表's own
+appendix scope (jukujikun + proper-noun exceptions) only. Curated 連濁
+(rendaku) rules are a separate, still-undelivered data source (§6.1); closing
+§19.2 is a coordinator decision, not the implementing role's call (§0.1).
+`kanji_reading_stage.json` holds 4,388 rows (all 2,136 常用 characters,
+on/kun readings across elementary/junior_high/high_school).
+`lexical_reading_rule.json` holds 135 rows: 123 from 付表1 (jukujikun
+whole-word exceptions) + 12 from 付表2 (都道府県名 proper-noun readings).
+Every row carries a per-row `source_page` (printed page number, per §6.1's
+per-row granularity for this source), an extraction `confidence`
+(`high`/`medium`), and `extraction_notes` where applicable — see `qa_flags`
+in the delivered extraction for the one `medium`-confidence case (叱, page
+19: the glyph has no Unicode text mapping and was recovered by visual
+verification).
 
 Ingestion required one schema addition beyond the original §6.2 design: a new
 `kanji_jouyou` table (the full 2,136-character 常用 superset) that

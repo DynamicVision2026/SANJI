@@ -15,7 +15,7 @@ import {
   validateReadingStage,
   validateTeachGrade,
 } from "./ingest";
-import { EXPECTED_GRADE_COUNTS, EXPECTED_TOTAL } from "./schema";
+import { EXPECTED_GRADE_COUNTS, EXPECTED_TOTAL, type LexicalReadingRule } from "./schema";
 
 const rows = loadTeachGrade();
 const manifest = loadChecksumManifest();
@@ -78,10 +78,35 @@ test("kanji_jouyou is internally consistent with kanji_teach_grade (0008)", () =
 });
 
 test("kanji_reading_stage passes structural + FK-integrity checks (§19.2)", () => {
-  const result = validateReadingStage(readingStage, jouyou);
+  const result = validateReadingStage(readingStage, jouyou, rows);
   assert.deepEqual(result.errors, []);
   assert.equal(result.ok, true);
   assert.equal(readingStage.length, 4388);
+});
+
+test("§6.3 equality rule is enforced, not just range-checked (Codex PR #7 finding 2)", () => {
+  // A row claiming a kyōiku character's elementary_grade that DIVERGES from
+  // kanji_teach_grade.teach_grade must fail — a plain 1..6 range check would
+  // let this through silently.
+  const miya = readingStage.find((r) => r.kanji === "宮" && r.reading_kana === "みや");
+  assert.ok(miya, "宮/みや fixture row must exist");
+  const wrongGrade = readingStage.map((r) => (r === miya ? { ...r, elementary_grade: 5 } : r));
+  const badGrade = validateReadingStage(wrongGrade, jouyou, rows);
+  assert.equal(badGrade.ok, false);
+  assert.ok(badGrade.errors.some((e) => e.includes("equality rule")));
+
+  // A jōyō-only (non-kyōiku) character carrying a non-null elementary_grade
+  // must also fail.
+  const nonKyoiku = jouyou.find((r) => !r.in_kyoiku);
+  assert.ok(nonKyoiku);
+  const spuriousRow = readingStage.find((r) => r.kanji === nonKyoiku.kanji);
+  assert.ok(spuriousRow);
+  const withSpuriousGrade = readingStage.map((r) =>
+    r === spuriousRow ? { ...r, elementary_grade: 3 } : r,
+  );
+  const badNonKyoiku = validateReadingStage(withSpuriousGrade, jouyou, rows);
+  assert.equal(badNonKyoiku.ok, false);
+  assert.ok(badNonKyoiku.errors.some((e) => e.includes("not in kanji_teach_grade")));
 });
 
 test("lexical_reading_rule passes structural checks (§19.2)", () => {
@@ -91,11 +116,49 @@ test("lexical_reading_rule passes structural checks (§19.2)", () => {
   assert.equal(lexicalRules.length, 135);
 });
 
-test("§15.5 classifier regression set is fully resolvable from ingested data", () => {
+test("§15.5 classifier regression set: non-rendaku members are fully resolvable from ingested data", () => {
   const result = validateClassifierRegressionSet(readingStage, lexicalRules);
   assert.deepEqual(result.errors, []);
   assert.equal(result.ok, true);
   assert.equal(result.total, CLASSIFIER_REGRESSION_SET.length);
+});
+
+test("§15.5 regression set: 手紙 rendaku is honestly reported as PENDING, not falsely covered (Codex PR #7 finding 1)", () => {
+  // Checking that 手 and 紙 each individually exist in kanji_reading_stage
+  // (the old check) is a false-green proxy: it does not establish that the
+  // voiced compound reading 手紙 -> てがみ resolves. No curated rendaku
+  // source has been delivered (§19.2 remains open), so this MUST show up as
+  // pending, not as covered/passing.
+  const result = validateClassifierRegressionSet(readingStage, lexicalRules);
+  assert.equal(result.ok, true, "the gap is recorded as pending, not a hard failure");
+  assert.equal(
+    result.pending.some((p) => p.includes("手紙") && p.includes("てがみ")),
+    true,
+    "手紙 -> てがみ rendaku gap must be visibly reported as pending",
+  );
+});
+
+test("§15.5 regression set: pending_rendaku flips to covered (not pending) once a real rule is delivered", () => {
+  // Forward-compatibility check: if a future ingestion adds the curated
+  // rendaku rule, this function must start reporting it as resolved without
+  // any code change here.
+  const withRendakuDelivered: LexicalReadingRule[] = [
+    ...lexicalRules,
+    {
+      id: -1,
+      surface: "手紙",
+      reading_kana: "てがみ",
+      rule_kind: "rendaku",
+      min_stage: "elementary",
+      min_elementary_grade: null,
+      source_page: 1,
+      confidence: "high",
+      extraction_notes: null,
+      source_reading_type: null,
+    },
+  ];
+  const result = validateClassifierRegressionSet(readingStage, withRendakuDelivered);
+  assert.equal(result.pending.some((p) => p.includes("手紙")), false);
 });
 
 test("§6.3 central example: 宮 character grade is NOT a proxy for reading grade", () => {

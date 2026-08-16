@@ -207,8 +207,8 @@ Global reference data, not tenant-scoped. Maintained as a versioned asset in the
 | Level | Source | Status |
 |---|---|---|
 | Character grade | MEXT 学年別漢字配当表 (2017) | Complete, validated |
-| Reading stage | MEXT 音訓の小・中・高等学校段階別割り振り表 (March 2017) | Complete — 4,388 rows ingested (§19.2 closed) |
-| Lexical exceptions | 常用漢字表 付表1/付表2 (jukujikun + proper-noun) ingested; curated 連濁 rules not yet delivered by this source | Complete for 付表 scope — 135 rows (§19.2 closed) |
+| Reading stage | MEXT 音訓の小・中・高等学校段階別割り振り表 (March 2017) | 4,388 rows ingested and verified. §19.2 remains open — see below |
+| Lexical exceptions | 常用漢字表 付表1/付表2 (jukujikun + proper-noun) ingested; curated 連濁 rules NOT yet delivered | 135 付表 rows ingested and verified; curated rendaku rules still undelivered. §19.2 remains open (§0.1: not the implementing role's call to close) |
 **Two-source acquisition rule (MUST).** The official MEXT PDFs are the frozen, legally authoritative source of record. Third-party HTML transcriptions may be used to accelerate extraction but MUST be cross-verified against official PDF page numbers before ingestion.
 **Provenance granularity (MUST).** Granularity matches the source document's own organisation:
 - **Block-level** where the source lists entries in grade blocks — 学年別漢字配当表. Page attribution is recorded per grade range in a committed, machine-readable provenance manifest (JSON or YAML in the repository, not prose). `kanji_teach_grade` carries no per-row `source_page` column, by design.
@@ -729,8 +729,10 @@ Reclassified in 2.3: §15.3 is font-agnostic, so Sprints 3–6 proceed against a
 - How is a "server" counted under container autoscaling?
 - `fsType` embedding permission bits on the delivered file
 - **Does the weight include complete `vert`/`vrt2` tables and vertical metrics?** Terms deferred to V1.1 (§9.9), but a negative answer should be known before signing a multi-year license
-### 19.2 Reading-stage and lexical tables — CLOSED
-Extraction from the MEXT 音訓割り振り表 (March 2017) delivered and ingested: 4,388 `kanji_reading_stage` rows (all 2,136 常用 characters) and 135 `lexical_reading_rule` rows (付表1 jukujikun + 付表2 proper-noun). Per-row `source_page`, extraction `confidence`, and `extraction_notes` are preserved (§6.1, §6.5). Curated 連濁 (rendaku) rules beyond what the 音訓割り振り表 source itself supplies are not part of this delivery and remain a separate, not-yet-scheduled curation task — the §15.5 regression set's 手紙/紙 pair is covered via `kanji_reading_stage` character readings, not a `lexical_reading_rule` rendaku entry.
+### 19.2 Reading-stage and lexical tables — PARTIALLY DELIVERED, REMAINS OPEN
+Extraction from the MEXT 音訓割り振り表 (March 2017) delivered and ingested: 4,388 `kanji_reading_stage` rows (all 2,136 常用 characters) and 135 `lexical_reading_rule` rows (付表1 jukujikun + 付表2 proper-noun). Per-row `source_page`, extraction `confidence`, and `extraction_notes` are preserved (§6.1, §6.5).
+
+**§19.2 is NOT closed.** Curated 連濁 (rendaku) rules — the third component named in §6.1's "curated 熟字訓 / 連濁 / proper-noun rules" — are a separate data source that has not been delivered. This is a recorded coordinator decision, not the implementing role's call (§0.1): the appendix-only subset (jukujikun + proper-noun exceptions from the delivered MEXT source) is ingested and verified; curated rendaku rules remain undelivered; §19.2 stays open until that delivery lands. The §15.5 regression set's 手紙/紙 pair is NOT fully covered by this delivery — `kanji_reading_stage` has 紙's base かみ reading, but the voiced compound reading 手紙 → てがみ has no resolving entry in either table. `validateClassifierRegressionSet` (`src/curriculum/ingest.ts`) and the mirrored check in `scripts/check-curriculum.mjs` report this explicitly as a pending gap, not as covered.
 **Schema note:** ingestion revealed that `kanji_reading_stage.kanji` cannot be a subset of `kanji_teach_grade` (1,026 kyōiku characters) — the real source covers all 2,136 常用 (jōyō) characters, ~1,110 of which are taught only from junior high onward. A new `kanji_jouyou` reference table (the full 2,136-character superset) was added and `kanji_reading_stage.kanji` now FKs against it; `kanji_teach_grade` itself is unchanged (still frozen, still §6.5 checksum-guarded). See migration `0008_reading_stage_lexical_ingestion.sql`.
 ### 19.3 Span-role table completeness — closes end of Week 1
 §7.5 specifies six roles; the `target`-row ruby ambiguity is resolved in 2.3. Genuinely unresolved:

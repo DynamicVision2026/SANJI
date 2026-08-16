@@ -218,16 +218,21 @@ export interface DatasetValidationResult {
  * §6.5-style structural + FK-integrity checks for `kanji_reading_stage`
  * (§19.2 ingestion, 0008 schema). `jouyouRows` is the full 2,136-character
  * jōyō set kanji_reading_stage.kanji must be drawn from (NOT
- * kanji_teach_grade — see the 0008 migration comment for why).
+ * kanji_teach_grade — see the 0008 migration comment for why). `teachGradeRows`
+ * is `kanji_teach_grade` itself, needed to enforce §6.3's equality rule (Codex
+ * PR #7 review, finding 2): elementary_grade is not just range-checked, it
+ * MUST equal kanji_teach_grade.teach_grade for a kyōiku character and MUST be
+ * null for a non-kyōiku (jōyō-only) character. A range check alone would
+ * silently accept a future row carrying the wrong character's grade.
  */
 export function validateReadingStage(
   rows: readonly KanjiReadingStage[],
   jouyouRows: readonly KanjiJouyou[],
+  teachGradeRows: readonly KanjiTeachGrade[],
 ): DatasetValidationResult {
   const errors: string[] = [];
   const jouyouSet = new Set(jouyouRows.map((r) => r.kanji));
-  const kyoikuGrade = new Map<string, number | undefined>();
-  for (const r of jouyouRows) if (r.in_kyoiku) kyoikuGrade.set(r.kanji, undefined);
+  const teachGradeByKanji = new Map(teachGradeRows.map((r) => [r.kanji, r.teach_grade]));
 
   const seen = new Set<string>();
   for (const [i, r] of rows.entries()) {
@@ -249,13 +254,29 @@ export function validateReadingStage(
     ) {
       errors.push(`${where}: elementary_grade ${r.elementary_grade} out of range 1..6`);
     }
+    // §6.3 equality rule (Codex PR #7 review, finding 2): elementary_grade
+    // must equal kanji_teach_grade.teach_grade for a kyōiku character, and
+    // must be null for a non-kyōiku (jōyō-only) character. A range check
+    // alone would silently accept a row carrying the wrong character's grade.
+    const expectedGrade = teachGradeByKanji.get(r.kanji);
+    if (expectedGrade !== undefined) {
+      if (r.elementary_grade !== expectedGrade) {
+        errors.push(
+          `${where}: elementary_grade is ${r.elementary_grade}, but kanji_teach_grade.teach_grade for ${r.kanji} is ${expectedGrade} (§6.3 equality rule)`,
+        );
+      }
+    } else if (r.elementary_grade !== null) {
+      errors.push(
+        `${where}: elementary_grade is ${r.elementary_grade}, but ${r.kanji} is not in kanji_teach_grade (jōyō-only characters must have a null elementary_grade, §6.3)`,
+      );
+    }
     if (!Number.isInteger(r.source_page) || r.source_page < 1) {
       errors.push(`${where}: source_page must be a positive integer (§6.1 per-row provenance), got ${r.source_page}`);
     }
     if (!CONFIDENCE_VALUES.has(r.confidence)) {
       errors.push(`${where}: invalid confidence ${JSON.stringify(r.confidence)}`);
     }
-    const dupeKey = `${r.kanji} ${r.reading_kana} ${r.reading_type} ${r.school_stage}`;
+    const dupeKey = `${r.kanji} ${r.reading_kana} ${r.reading_type} ${r.school_stage}`;
     if (seen.has(dupeKey)) errors.push(`${where}: duplicate (kanji, reading_kana, reading_type, school_stage)`);
     seen.add(dupeKey);
   }
@@ -301,7 +322,7 @@ export function validateLexicalRules(rows: readonly LexicalReadingRule[]): Datas
     if (r.rule_kind === "proper_noun" && r.source_reading_type !== null && r.source_reading_type !== "proper_name") {
       errors.push(`${where}: rule_kind proper_noun but source_reading_type is ${r.source_reading_type}, expected proper_name`);
     }
-    const dupeKey = `${r.surface} ${r.reading_kana} ${r.rule_kind}`;
+    const dupeKey = `${r.surface} ${r.reading_kana} ${r.rule_kind}`;
     if (seen.has(dupeKey)) errors.push(`${where}: duplicate (surface, reading_kana, rule_kind)`);
     seen.add(dupeKey);
   }
@@ -314,13 +335,29 @@ export function validateLexicalRules(rows: readonly LexicalReadingRule[]): Datas
  * scope here): every member must be resolvable from the ingested tables, or
  * ingestion has silently lost a case the classifier work will need.
  *
- * Each entry's `expect` says where the member must be found: 'lexical' means
- * it must appear as a lexical_reading_rule.surface (whole-word exception);
- * 'reading_stage' means its characters' readings must be individually
- * resolvable from kanji_reading_stage (a plain compositional on/kun
- * reading — not every regression-set word is a lexical exception).
+ * Each entry's `expect` says where the member must be found:
+ *   - 'lexical': must appear as a lexical_reading_rule.surface (whole-word
+ *     exception)
+ *   - 'reading_stage': its characters' readings must be individually
+ *     resolvable from kanji_reading_stage (a plain compositional on/kun
+ *     reading — not every regression-set word is a lexical exception)
+ *   - 'pending_rendaku': the entry's OWN voiced reading (`reading`) must
+ *     resolve from a lexical_reading_rule row with that exact surface and
+ *     reading_kana. Checking that 手 and 紙 individually exist in
+ *     kanji_reading_stage does NOT establish that 手紙 → てがみ resolves —
+ *     that was a false-green proxy (Codex PR #7 review, finding 1). No
+ *     curated rendaku source has been delivered (§6.1, §19.2 remains open),
+ *     so this is currently expected to be UNRESOLVED and is reported via
+ *     `pending`, not `errors` — but the check is real: if a future ingestion
+ *     adds the 手紙/てがみ rendaku rule, this starts resolving automatically
+ *     without needing to touch this function again.
  */
-export const CLASSIFIER_REGRESSION_SET: ReadonlyArray<{ surface: string; expect: "lexical" | "reading_stage" }> = [
+export type RegressionSetEntry =
+  | { surface: string; expect: "lexical" }
+  | { surface: string; expect: "reading_stage" }
+  | { surface: string; expect: "pending_rendaku"; reading: string };
+
+export const CLASSIFIER_REGRESSION_SET: readonly RegressionSetEntry[] = [
   { surface: "今日", expect: "lexical" },
   { surface: "明日", expect: "lexical" },
   { surface: "大人", expect: "lexical" },
@@ -332,41 +369,59 @@ export const CLASSIFIER_REGRESSION_SET: ReadonlyArray<{ surface: string; expect:
   { surface: "河原", expect: "lexical" },
   { surface: "眼鏡", expect: "lexical" },
   { surface: "生", expect: "reading_stage" },
-  { surface: "手紙", expect: "reading_stage" },
+  { surface: "手紙", expect: "pending_rendaku", reading: "てがみ" },
   { surface: "紙", expect: "reading_stage" },
 ];
 
+export interface RegressionSetResult extends DatasetValidationResult {
+  /**
+   * Recorded, expected gaps (currently: 手紙 rendaku) — NOT failures, but
+   * must be surfaced, not silently treated as covered. §19.2 stays open
+   * while this list is non-empty for a rendaku member (§0.1).
+   */
+  pending: string[];
+}
+
 /**
  * Verify §15.5's regression set is resolvable from the ingested data (§19.2).
- * The 手紙/紙 rendaku pair has no lexical_reading_rule entry by design — this
- * source (MEXT 音訓割り振り表 + 付表) supplies jukujikun and proper-noun
- * exceptions only; curated rendaku rules are a separate, not-yet-delivered
- * source per §6.1's "curated 熟字訓 / 連濁 / proper-noun rules" line — so 紙's
- * かみ kun-reading being present in kanji_reading_stage is the correct and
- * complete data-layer expectation for that pair.
  */
 export function validateClassifierRegressionSet(
   readingStage: readonly KanjiReadingStage[],
   lexicalRules: readonly LexicalReadingRule[],
-): DatasetValidationResult {
+): RegressionSetResult {
   const errors: string[] = [];
+  const pending: string[] = [];
   const lexicalSurfaces = new Set(lexicalRules.map((r) => r.surface));
   const readingKanji = new Set(readingStage.map((r) => r.kanji));
 
-  for (const { surface, expect } of CLASSIFIER_REGRESSION_SET) {
-    if (expect === "lexical") {
-      if (!lexicalSurfaces.has(surface)) {
-        errors.push(`§15.5 regression set: "${surface}" missing from lexical_reading_rule`);
+  for (const entry of CLASSIFIER_REGRESSION_SET) {
+    if (entry.expect === "lexical") {
+      if (!lexicalSurfaces.has(entry.surface)) {
+        errors.push(`§15.5 regression set: "${entry.surface}" missing from lexical_reading_rule`);
       }
-    } else {
-      const missingChars = [...surface].filter((c) => !readingKanji.has(c));
+    } else if (entry.expect === "reading_stage") {
+      const missingChars = [...entry.surface].filter((c) => !readingKanji.has(c));
       if (missingChars.length > 0) {
         errors.push(
-          `§15.5 regression set: "${surface}" has character(s) ${missingChars.join("")} missing from kanji_reading_stage`,
+          `§15.5 regression set: "${entry.surface}" has character(s) ${missingChars.join("")} missing from kanji_reading_stage`,
+        );
+      }
+    } else {
+      // pending_rendaku: only an exact (surface, reading_kana) lexical rule
+      // row counts as resolving the voiced reading — character co-occurrence
+      // in kanji_reading_stage is NOT sufficient (that was the false-green
+      // bug this replaces). Destructure before the closure — TS narrowing
+      // of `entry` does not persist inside a nested function.
+      const { surface, reading } = entry;
+      const resolved = lexicalRules.some((r) => r.surface === surface && r.reading_kana === reading);
+      if (!resolved) {
+        pending.push(
+          `§15.5 regression set: "${surface}" → ${reading} (rendaku) has NO lexical_reading_rule entry — ` +
+            `known gap, §19.2 remains open pending curated rendaku data delivery (§0.1/§6.1); NOT covered`,
         );
       }
     }
   }
 
-  return { ok: errors.length === 0, errors, total: CLASSIFIER_REGRESSION_SET.length };
+  return { ok: errors.length === 0, errors, pending, total: CLASSIFIER_REGRESSION_SET.length };
 }

@@ -113,9 +113,14 @@ const LEXICAL_RULE_KINDS = new Set(["jukujikun", "rendaku", "proper_noun", "furo
   if (jouyou.length !== 2136) fail(`kanji_jouyou: total is ${jouyou.length}, expected 2136 (常用漢字)`);
 }
 
-// kanji_reading_stage: structural + FK integrity against kanji_jouyou.
+// kanji_reading_stage: structural + FK integrity against kanji_jouyou, plus
+// the §6.3 equality rule (Codex PR #7 review, finding 2): elementary_grade
+// must equal kanji_teach_grade.teach_grade for a kyōiku character and must be
+// null for a non-kyōiku (jōyō-only) character — a range check alone would
+// silently accept a row carrying the wrong character's grade.
 {
   const jouyouSet = new Set(jouyou.map((r) => r.kanji));
+  const teachGradeByKanji = new Map(rows.map((r) => [r.kanji, r.teach_grade]));
   const seen = new Set();
   for (const [i, r] of readingStage.entries()) {
     const where = `kanji_reading_stage[${i}] (${r.kanji}/${r.reading_kana})`;
@@ -126,6 +131,14 @@ const LEXICAL_RULE_KINDS = new Set(["jukujikun", "rendaku", "proper_noun", "furo
     if (!SCHOOL_STAGES.has(r.school_stage)) fail(`${where}: invalid school_stage ${JSON.stringify(r.school_stage)}`);
     if (r.elementary_grade !== null && (!Number.isInteger(r.elementary_grade) || r.elementary_grade < 1 || r.elementary_grade > 6)) {
       fail(`${where}: elementary_grade ${r.elementary_grade} out of range 1..6`);
+    }
+    if (teachGradeByKanji.has(r.kanji)) {
+      const expected = teachGradeByKanji.get(r.kanji);
+      if (r.elementary_grade !== expected) {
+        fail(`${where}: elementary_grade is ${r.elementary_grade}, but kanji_teach_grade.teach_grade for ${r.kanji} is ${expected} (§6.3 equality rule)`);
+      }
+    } else if (r.elementary_grade !== null) {
+      fail(`${where}: elementary_grade is ${r.elementary_grade}, but ${r.kanji} is not in kanji_teach_grade (jōyō-only characters must have a null elementary_grade, §6.3)`);
     }
     if (!Number.isInteger(r.source_page) || r.source_page < 1) fail(`${where}: source_page must be a positive integer, got ${r.source_page}`);
     if (!CONFIDENCE_VALUES.has(r.confidence)) fail(`${where}: invalid confidence ${JSON.stringify(r.confidence)}`);
@@ -165,6 +178,14 @@ const LEXICAL_RULE_KINDS = new Set(["jukujikun", "rendaku", "proper_noun", "furo
 
 // §15.5 classifier regression-set coverage — data layer only (the classifier
 // itself is Sprint 3, out of scope here).
+//
+// 'pending_rendaku' (手紙 -> てがみ) is checked separately from
+// 'lexical'/'reading_stage': character co-occurrence in kanji_reading_stage
+// (手 exists, 紙 exists) does NOT establish that the voiced compound
+// reading resolves — that was a false-green proxy (Codex PR #7 review,
+// finding 1). No curated rendaku source has been delivered (§19.2 remains
+// open), so this is EXPECTED to be unresolved right now; it is reported as
+// a distinct "pending" line, never silently counted as PASS.
 {
   const REGRESSION_SET = [
     { surface: "今日", expect: "lexical" },
@@ -178,18 +199,29 @@ const LEXICAL_RULE_KINDS = new Set(["jukujikun", "rendaku", "proper_noun", "furo
     { surface: "河原", expect: "lexical" },
     { surface: "眼鏡", expect: "lexical" },
     { surface: "生", expect: "reading_stage" },
-    { surface: "手紙", expect: "reading_stage" },
+    { surface: "手紙", expect: "pending_rendaku", reading: "てがみ" },
     { surface: "紙", expect: "reading_stage" },
   ];
   const lexicalSurfaces = new Set(lexicalRules.map((r) => r.surface));
   const readingKanji = new Set(readingStage.map((r) => r.kanji));
-  for (const { surface, expect } of REGRESSION_SET) {
-    if (expect === "lexical") {
-      if (!lexicalSurfaces.has(surface)) fail(`§15.5 regression set: "${surface}" missing from lexical_reading_rule`);
-    } else {
-      const missing = [...surface].filter((c) => !readingKanji.has(c));
-      if (missing.length > 0) fail(`§15.5 regression set: "${surface}" has character(s) ${missing.join("")} missing from kanji_reading_stage`);
+  const pendingLines = [];
+  for (const entry of REGRESSION_SET) {
+    if (entry.expect === "lexical") {
+      if (!lexicalSurfaces.has(entry.surface)) fail(`§15.5 regression set: "${entry.surface}" missing from lexical_reading_rule`);
+    } else if (entry.expect === "reading_stage") {
+      const missing = [...entry.surface].filter((c) => !readingKanji.has(c));
+      if (missing.length > 0) fail(`§15.5 regression set: "${entry.surface}" has character(s) ${missing.join("")} missing from kanji_reading_stage`);
+    } else if (entry.expect === "pending_rendaku") {
+      const resolved = lexicalRules.some((r) => r.surface === entry.surface && r.reading_kana === entry.reading);
+      if (!resolved) {
+        pendingLines.push(
+          `${entry.surface} -> ${entry.reading} (rendaku) — known gap, §19.2 remains open pending curated rendaku data delivery`,
+        );
+      }
     }
+  }
+  for (const line of pendingLines) {
+    console.log(`● PENDING (§15.5 regression set / §19.2): ${line} — NOT covered, this is not a failure`);
   }
 }
 
