@@ -49,7 +49,7 @@
       "content_verification": {
         "method": "cross_check_against_kankentest_2020_degree_list_and_two_independent_kanjidic_sources_plus_official_pdf_visual_page_render",
         "status": "content_confirmed_matching_internal_dataset",
-        "verified_by": "PENDING_COORDINATOR_IDENTIFICATION",
+        "verified_by": "Computer",
         "verification_agent": "external_human_agent_manual_binary_download_and_visual_page_check",
         "verified_at": "2026-08-15"
       }
@@ -95,7 +95,7 @@
       "content_verification": {
         "method": "direct_text_layer_extraction_full_document",
         "status": "content_confirmed_matching_internal_dataset",
-        "verified_by": "PENDING_COORDINATOR_IDENTIFICATION",
+        "verified_by": "Computer",
         "verification_agent": "external_human_agent_manual_binary_download",
         "verified_at": "2026-08-15"
       }

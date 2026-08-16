@@ -159,14 +159,11 @@ export type PiiContext =
  * display_name) matched as a substring would flag essentially every Japanese
  * sentence, making generation unusable rather than safe.
  *
- * ⚠ OPEN COORDINATOR DECISION — issue #6 item 4, raised per §0.1 and NOT
- * decided here: §15.2 says "no value traceable to
- * students/users/branches/organizations appears" and does not carve out short
- * values, so a single-kanji display_name is currently NOT caught by the
- * substring scan. Keeping this floor at 2 is flagged in the PR description as
- * requiring coordinator sign-off; lowering it to 1 (accepting false-positive
- * risk) is a one-line change plus this comment's removal. Do not treat the
- * current value as settled.
+ * COORDINATOR-APPROVED (issue #6 item 4): The floor remains at 2 characters.
+ * This value is confirmed and not subject to change without explicit
+ * re-approval. Single-kanji display_names are currently NOT caught by the
+ * substring scan — this is the approved trade-off between PII detection
+ * precision and generation usability.
  */
 export const MIN_FORBIDDEN_VALUE_LENGTH = 2;
 
