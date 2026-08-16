@@ -4,11 +4,11 @@ Read this file in full before starting any work in this repository. It applies t
 
 ## What this project is
 
-SANJI (working name; product name 千字) is a B2B SaaS product for private tutoring schools (juku) in Japan. Full context, data model, and requirements are in **`docs/spec-v2.2.md`** at the repository root. That file is long (~21 sections) — read the relevant sections for whatever issue you're working on, and re-read `§0` (How to read this document) if you're unsure which sections are binding.
+SANJI (working name; product name 千字) is a B2B SaaS product for private tutoring schools (juku) in Japan. Full context, data model, and requirements are in **`docs/spec-v2.3.md`** at the repository root. That file is long (~21 sections) — read the relevant sections for whatever issue you're working on, and re-read `§0` (How to read this document) if you're unsure which sections are binding.
 
 ## Source of truth and authority order
 
-1. **`docs/spec-v2.2.md` is the single source of truth for product and engineering requirements.** It supersedes all prior spec versions.
+1. **`docs/spec-v2.3.md` is the single source of truth for product and engineering requirements.** It supersedes all prior spec versions.
 2. **The GitHub Issue you are assigned is the source of truth for what to work on right now and in what scope.** It will reference specific spec sections (§ numbers) — go read those sections before implementing.
 3. If an issue's instructions appear to conflict with the spec, **the spec wins.** Do not silently pick an interpretation — note the conflict explicitly in your PR description and proceed with the spec's version.
 4. Requirement keywords from the spec are binding: **MUST** = blocking for this phase, **SHOULD** = build if it doesn't delay the milestone, **WON'T** = explicitly out of scope — do not build it even if it seems useful.
