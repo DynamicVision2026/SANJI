@@ -60,6 +60,49 @@ function overlaps(a: { start: number; end: number }, b: { start: number; end: nu
 }
 
 /**
+ * Validate a persisted RenderPlan before resolution (issue #6 item 6).
+ *
+ * render_plan is persisted data (items.render_plan, §7.6) — if it is
+ * malformed the item is corrupt, and this project prefers loud failure over
+ * silent degradation (CLAUDE.md, §9): a span with a garbage `reason` must not
+ * quietly behave like `recommended`, and bad offsets must not quietly
+ * mis-place or drop ruby. Throws with the span's index and defect.
+ */
+export function validateRenderPlan(plan: RenderPlan): void {
+  const validOffsets = (s: { start: number; end: number }): string | null => {
+    if (!Number.isInteger(s.start) || !Number.isInteger(s.end)) return "non-integer offsets";
+    if (s.start < 0) return "negative start offset";
+    if (s.end <= s.start) return "empty or inverted span (end <= start)";
+    return null;
+  };
+  if (!plan || !Array.isArray(plan.ruby_spans) || !Array.isArray(plan.suppressed_spans)) {
+    throw new Error("Malformed RenderPlan: ruby_spans/suppressed_spans must be arrays (§7.6).");
+  }
+  plan.ruby_spans.forEach((span, i) => {
+    const offsetDefect = validOffsets(span);
+    if (offsetDefect) {
+      throw new Error(`Malformed RenderPlan: ruby_spans[${i}] has ${offsetDefect} (§7.6).`);
+    }
+    if (span.reason !== "required" && span.reason !== "recommended") {
+      throw new Error(
+        `Malformed RenderPlan: ruby_spans[${i}] has invalid reason ${JSON.stringify(
+          (span as { reason?: unknown }).reason,
+        )} — must be "required" or "recommended" verbatim (§7.6). Refusing to guess.`,
+      );
+    }
+    if (typeof span.reading_kana !== "string" || span.reading_kana.length === 0) {
+      throw new Error(`Malformed RenderPlan: ruby_spans[${i}] has empty or missing reading_kana (§7.6).`);
+    }
+  });
+  plan.suppressed_spans.forEach((span, i) => {
+    const offsetDefect = validOffsets(span);
+    if (offsetDefect) {
+      throw new Error(`Malformed RenderPlan: suppressed_spans[${i}] has ${offsetDefect} (§7.6).`);
+    }
+  });
+}
+
+/**
  * Resolve which ruby spans actually render for an item under the org's policy.
  *
  * A renderer that ignores `reason` is a defect (§7.6); this function is where
@@ -82,6 +125,10 @@ export function resolveRubySpans(
   if (!Number.isInteger(gradeBoundary) || gradeBoundary < 1 || gradeBoundary > 6) {
     throw new Error(`ruby grade boundary must be an integer 1..6, got ${gradeBoundary} (§7.10/§9.6).`);
   }
+  // Persisted data is validated before any resolution decision — a malformed
+  // span throws instead of silently behaving like `recommended` (issue #6
+  // item 6; loud failure per CLAUDE.md/§9).
+  validateRenderPlan(plan);
 
   return plan.ruby_spans.filter((span) => {
     // 1. Suppression overrides everything, unconditionally — including

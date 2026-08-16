@@ -105,3 +105,60 @@ test("invalid inputs fail loudly", () => {
     /Unknown ruby_policy/,
   );
 });
+
+// ---------------------------------------------------------------------------
+// Issue #6 item 6 — malformed PERSISTED plans must throw, never silently
+// degrade. Before this fix, a span with reason "Required"/undefined/garbage
+// fell through the required-check and behaved as `recommended`.
+// ---------------------------------------------------------------------------
+
+test("malformed reason throws instead of silently behaving as recommended (issue #6 item 6)", () => {
+  for (const badReason of ["Required", "REQUIRED", "sometimes", "", undefined, null, 3]) {
+    const p = plan({
+      ruby_spans: [{ start: 0, end: 2, reading_kana: "きゅう", reason: badReason as never }],
+    });
+    assert.throws(
+      () => resolveRubySpans(p, 1, "always", 3),
+      /invalid reason/,
+      `reason=${JSON.stringify(badReason)} must throw`,
+    );
+  }
+});
+
+test("malformed offsets throw: non-integer, negative, empty, inverted (issue #6 item 6)", () => {
+  const shapes: Array<[number, number, RegExp]> = [
+    [0.5, 2, /non-integer/],
+    [-1, 2, /negative start/],
+    [2, 2, /end <= start/],
+    [3, 1, /end <= start/],
+  ];
+  for (const [start, end, expected] of shapes) {
+    const p = plan({
+      ruby_spans: [{ start, end, reading_kana: "き", reason: "required" }],
+    });
+    assert.throws(() => resolveRubySpans(p, 1, "always", 3), expected);
+  }
+  // Suppressed spans get the same offset validation.
+  const badSuppressed = plan({ suppressed_spans: [{ start: 5, end: 5 }] });
+  assert.throws(() => resolveRubySpans(badSuppressed, 1, "always", 3), /suppressed_spans\[0\]/);
+});
+
+test("empty/missing reading_kana on a ruby span throws (issue #6 item 6)", () => {
+  const p = plan({
+    ruby_spans: [{ start: 0, end: 2, reading_kana: "", reason: "required" }],
+  });
+  assert.throws(() => resolveRubySpans(p, 1, "always", 3), /reading_kana/);
+});
+
+test("non-array plan members throw", () => {
+  assert.throws(
+    () =>
+      resolveRubySpans(
+        { ruby_spans: undefined, suppressed_spans: [] } as unknown as RenderPlan,
+        1,
+        "always",
+        3,
+      ),
+    /must be arrays/,
+  );
+});

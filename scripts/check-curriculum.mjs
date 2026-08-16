@@ -109,8 +109,36 @@ if (provenance) {
         fail(`provenance page_mapping does not cover the grade-${grade} block (§6.1 block-level granularity)`);
       }
     }
-    if (!source.content_verification?.verified_by) {
-      fail("provenance manifest lacks a named verifier for the page map (§6.1.1 recorded waiver requires one)");
+    // §6.1.1 requires a NAMED human verifier and a verification date — not a
+    // truthy placeholder (issue #6 item 5: "x" must not pass).
+    const verifiedAt = source.content_verification?.verified_at ?? "";
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(verifiedAt)) {
+      fail(
+        `provenance manifest verified_at ${JSON.stringify(verifiedAt)} is not an ISO date (YYYY-MM-DD) — §6.1.1 requires a verification date`,
+      );
+    }
+    const verifiedBy = (source.content_verification?.verified_by ?? "").trim();
+    const PENDING_SENTINEL = "PENDING_COORDINATOR_IDENTIFICATION";
+    if (verifiedBy === PENDING_SENTINEL) {
+      // Explicit recorded gap (issue #6 item 5): the coordinator must supply
+      // the actual verifier identity. Loud, but not a build failure — the
+      // sentinel is exact-matched and cannot be hit by accident, unlike a
+      // truthy placeholder.
+      console.log(
+        "● OPEN ITEM (§6.1.1 / issue #6 item 5): verified_by is PENDING_COORDINATOR_IDENTIFICATION — " +
+          "coordinator must record the actual human verifier's identity; do not leave this in place at launch",
+      );
+    } else if (
+      verifiedBy.length < 3 ||
+      /^(x+|tbd|todo|pending|none|n\/a|-|\?)$/i.test(verifiedBy) ||
+      /_/.test(verifiedBy)
+    ) {
+      // Too short, a known placeholder, or a process-descriptor-style string
+      // (underscored) — none of these is a person's name.
+      fail(
+        `provenance manifest verified_by ${JSON.stringify(verifiedBy)} does not look like a named human verifier (§6.1.1; issue #6 item 5). ` +
+          `Record the individual's name, or the exact sentinel PENDING_COORDINATOR_IDENTIFICATION while it is being obtained.`,
+      );
     }
   }
 }
@@ -123,5 +151,5 @@ if (process.exitCode === 1) {
 console.log(
   `✓ §6.5 curriculum coverage gate: PASS — ${rows.length} characters, ` +
     `grades ${[1, 2, 3, 4, 5, 6].map((g) => counts[g]).join("/")}, checksum ok, ` +
-    `provenance manifest asserted (hash CONFIRMED, grade blocks 1-6 mapped, named verifier present)`,
+    `provenance manifest asserted (hash CONFIRMED, grade blocks 1-6 mapped, verifier field validated — see any OPEN ITEM line above for pending identity)`,
 );

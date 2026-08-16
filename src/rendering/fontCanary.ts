@@ -31,8 +31,21 @@ function kanaRange(first: number, last: number): string {
   return out;
 }
 
-/** Full hiragana (ぁ..ゖ) and katakana (ァ..ヺ) ranges. */
-export const FULL_KANA = kanaRange(0x3041, 0x3096) + kanaRange(0x30a1, 0x30fa);
+/**
+ * The complete kana repertoire the canary must cover (issue #6 item 7 —
+ * defined explicitly so "full kana" is a checkable claim, not a vibe):
+ *   - hiragana letters ぁ..ゖ (U+3041–U+3096)
+ *   - hiragana iteration marks ゝ ゞ (U+309D–U+309E)
+ *   - katakana letters ァ..ヺ (U+30A1–U+30FA)
+ *   - katakana iteration marks ヽ ヾ (U+30FD–U+30FE)
+ * The long-vowel mark ー (U+30FC) is carried in PERMITTED_PUNCTUATION (§7.2
+ * lists it alongside 々), not here.
+ */
+export const FULL_KANA =
+  kanaRange(0x3041, 0x3096) + // hiragana
+  "ゝゞ" + //                    hiragana iteration marks (U+309D, U+309E)
+  kanaRange(0x30a1, 0x30fa) + // katakana
+  "ヽヾ"; //                     katakana iteration marks (U+30FD, U+30FE)
 
 export interface CanaryPolicyRendering {
   policy: RubyPolicy;

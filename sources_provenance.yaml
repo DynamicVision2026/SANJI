@@ -34,7 +34,9 @@ sources:
   content_verification:
     method: cross_check_against_kankentest_2020_degree_list_and_two_independent_kanjidic_sources_plus_official_pdf_visual_page_render
     status: content_confirmed_matching_internal_dataset
-    verified_by: external_human_agent_manual_binary_download_and_visual_page_check
+    verified_by: PENDING_COORDINATOR_IDENTIFICATION
+    verification_agent: external_human_agent_manual_binary_download_and_visual_page_check
+    verified_at: '2026-08-15'
 - dataset: kanji_reading_stage / lexical_reading_rule (音訓割り振り表)
   document_name: 音訓の小・中・高等学校段階別割り振り表（平成29年3月）
   official_landing_page: https://www.mext.go.jp/a_menu/shotou/new-cs/1385768.htm
@@ -63,8 +65,11 @@ sources:
   content_verification:
     method: direct_text_layer_extraction_full_document
     status: content_confirmed_matching_internal_dataset
-    verified_by: external_human_agent_manual_binary_download
+    verified_by: PENDING_COORDINATOR_IDENTIFICATION
+    verification_agent: external_human_agent_manual_binary_download
+    verified_at: '2026-08-15'
 meta:
   generated_at: '2026-08-15T22:59:08+09:00'
   purpose: 'closes spec §6.1 two-source acquisition rule provenance gap (file hash + page numbers), referenced in GitHub issue #2 (DynamicVision2026/SANJI)'
   important_distinction: 'Hashes computed here are from actual downloaded binary files, not guessed or derived from text summaries. This satisfies the strict requirement that no fabricated provenance be recorded. This material was produced via manual external verification, not the automated GitHub Actions workflow originally proposed in issue #2 — the workflow requirement is downgraded to optional/nice-to-have since the actual goal (real hash + real page numbers) has already been achieved through this manual process.'
+  verifier_note: 'verified_by requires the actual human verifier identity per spec v2.3 §6.1.1 (named human verifier + verification date). The verification itself was performed 2026-08-15 by the external human agent described in verification_agent; the individual identity is not known to the implementing session and must be filled in by the coordinator — recorded as PENDING rather than fabricated (issue #6 item 5).'

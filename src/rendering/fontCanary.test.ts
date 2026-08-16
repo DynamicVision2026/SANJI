@@ -27,6 +27,20 @@ test("canary contains kana, punctuation, digits, and the proper-noun fixtures (�
   for (const c of PROPER_NOUN_FIXTURES) assert.ok(canary.text.includes(c), `missing 異体字 ${c}`);
 });
 
+test("kana repertoire includes the iteration marks ゝ ゞ ヽ ヾ (issue #6 item 7)", () => {
+  // Round-1 FULL_KANA stopped at U+3096/U+30FA and omitted the iteration
+  // marks entirely — a glyph the subset must cover or §9.3's no-fallback rule
+  // silently loses it.
+  const canary = buildFontCanary();
+  for (const mark of ["ゝ", "ゞ", "ヽ", "ヾ"]) {
+    assert.ok(FULL_KANA.includes(mark), `FULL_KANA missing iteration mark ${mark}`);
+    assert.ok(canary.text.includes(mark), `canary text missing iteration mark ${mark}`);
+  }
+  // The long-vowel mark is carried via PERMITTED_PUNCTUATION — assert it is
+  // covered somewhere so the repertoire claim stays complete.
+  assert.ok(canary.text.includes("ー"), "canary text missing long-vowel mark ー");
+});
+
 test("canary includes the configured allowed_with_ruby extension set (§15.3)", () => {
   const canary = buildFontCanary(["簞", "繡"]);
   assert.ok(canary.text.includes("簞"));
