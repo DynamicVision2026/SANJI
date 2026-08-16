@@ -85,12 +85,31 @@ jobs:
   gate-tenant-isolation:
     name: "Gate: Tenant Isolation (§15.4)"
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: node scripts/gates/tenant-isolation.mjs
+          cache: npm
+      - run: npm ci
+      - name: Static analysis (classification, org_id/RLS/policy, composite FKs)
+        run: node scripts/gates/tenant-isolation.mjs
+      - name: Live write-isolation regression (issue #6 blocking issue 2)
+        env:
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
+        run: node scripts/test-tenant-write-isolation.mjs
 
   gate-classifier-determinism:
     name: "Gate: Classifier Determinism (§15.5)"

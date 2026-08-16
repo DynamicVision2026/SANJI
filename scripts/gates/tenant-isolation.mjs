@@ -81,14 +81,63 @@ const rlsRe = /alter\s+table\s+([a-z_][a-z0-9_]*)\s+enable\s+row\s+level\s+secur
 while ((m = rlsRe.exec(sql)) !== null) {
   table(m[1].toLowerCase()).rls = true;
 }
-const policyRe = /create\s+policy\s+[a-z0-9_]+\s+on\s+([a-z_][a-z0-9_]*)/gi;
+// Policies: capture the USING clause body so vacuous policies can be flagged
+// (issue #6 item 3) — bare existence of a CREATE POLICY is not protection.
+const policyRe = /create\s+policy\s+[a-z0-9_]+\s+on\s+([a-z_][a-z0-9_]*)([\s\S]*?);/gi;
+const weakPolicies = [];
 while ((m = policyRe.exec(sql)) !== null) {
-  table(m[1].toLowerCase()).policies += 1;
+  const name = m[1].toLowerCase();
+  table(name).policies += 1;
+  const body = m[2];
+  const usingMatch = body.match(/using\s*\(([\s\S]*)\)/i);
+  const usingClause = usingMatch ? usingMatch[1].trim() : "";
+  // A tenant policy must actually consult the session tenant. `using (true)`,
+  // an empty clause, or any clause that never references current_org_id() is
+  // suspiciously permissive — flag it as a failure rather than counting it.
+  if (!/current_org_id\s*\(\s*\)/i.test(usingClause)) {
+    weakPolicies.push(
+      `policy on '${name}' has a suspiciously permissive USING clause (${JSON.stringify(usingClause.slice(0, 60) || "<none>")}) — it never consults current_org_id() (§16.1; issue #6 item 3)`,
+    );
+  }
+}
+// Composite org-integrity FKs (issue #6 blocking issue 2): capture every
+// `foreign key (x, org_id) references t (id, org_id)` inside each ALTER TABLE
+// statement (one statement may add several constraints).
+const compositeFks = new Map(); // table -> Set("col->ref")
+const alterStmtRe = /alter\s+table\s+([a-z_][a-z0-9_]*)([\s\S]*?);/gi;
+while ((m = alterStmtRe.exec(sql)) !== null) {
+  const name = m[1].toLowerCase();
+  const body = m[2];
+  const fkRe = /foreign\s+key\s*\(\s*([a-z_][a-z0-9_]*)\s*,\s*org_id\s*\)\s*references\s+([a-z_][a-z0-9_]*)\s*\(\s*id\s*,\s*org_id\s*\)/gi;
+  let fk;
+  while ((fk = fkRe.exec(body)) !== null) {
+    if (!compositeFks.has(name)) compositeFks.set(name, new Set());
+    compositeFks.get(name).add(`${fk[1].toLowerCase()}->${fk[2].toLowerCase()}`);
+  }
 }
 
 // --- Assertions ------------------------------------------------------------
-const errors = [];
+const errors = [...weakPolicies];
 const classified = new Set([...ORG_KEYED, ...JOIN_SCOPED, ...GLOBAL]);
+
+// Required composite org-integrity FKs (issue #6 blocking issue 2): each
+// assignment-table reference must be tied to (id, org_id) on its target so a
+// row's org_id provably matches every referenced entity's org_id.
+const REQUIRED_COMPOSITE_FKS = {
+  user_branch_assignments: ["user_id->users", "branch_id->branches"],
+  student_instructor_assignments: ["student_id->students", "user_id->users"],
+};
+for (const [name, required] of Object.entries(REQUIRED_COMPOSITE_FKS)) {
+  const present = compositeFks.get(name) ?? new Set();
+  for (const fk of required) {
+    if (!present.has(fk)) {
+      errors.push(
+        `table '${name}' lacks composite FK (${fk.replace("->", ", org_id) -> ")}(id, org_id)) — ` +
+          `without it a row's org_id can point at another tenant's entities (issue #6 blocking issue 2; §15.4/§16.1)`,
+      );
+    }
+  }
+}
 
 for (const name of tables.keys()) {
   if (!classified.has(name)) {
@@ -133,5 +182,8 @@ if (errors.length > 0) {
 passGate(
   "Tenant Isolation Gate",
   "§15.4",
-  `${ORG_KEYED.length} org-keyed + ${JOIN_SCOPED.length} join-scoped tables verified (org_id/RLS/policy), ${GLOBAL.length} global tables confirmed unscoped by spec design; every discovered table classified. Live cross-tenant read tests land with auth hardening (Week 9, §18.1).`,
+  `${ORG_KEYED.length} org-keyed + ${JOIN_SCOPED.length} join-scoped tables verified (org_id/RLS/non-vacuous policy), ` +
+    `${GLOBAL.length} global tables confirmed unscoped by spec design; composite org-integrity FKs present on both assignment tables. ` +
+    `Live WRITE isolation is regression-tested in CI against real Postgres (scripts/test-tenant-write-isolation.mjs). ` +
+    `Live cross-tenant READ tests land with auth hardening (Week 9, §18.1).`,
 );
