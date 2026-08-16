@@ -128,15 +128,30 @@ export function serializeOutboundPayload(request: GenerationRequest, prompt: str
 }
 
 /**
- * Values sourced from tenant rows (`students`, `users`, `branches`,
- * `organizations`) that must never appear in an outbound payload — names,
- * display names, emails, addresses, identifiers. The generation pipeline
- * (Week 3, §7) is responsible for populating this from the rows in the
- * session's scope before calling the provider.
+ * PII context for an outbound call — REQUIRED on every call (§15.2; issue #6
+ * blocking issue 1). This is a discriminated union so the unsafe state is
+ * unrepresentable, not merely unlikely:
+ *
+ *  - `tenant_scoped`: the call happens in a tenant context. `forbiddenValues`
+ *    carries the values sourced from the session's `students` / `users` /
+ *    `branches` / `organizations` rows (names, display names, emails,
+ *    addresses, identifiers). An EMPTY list here throws at runtime — a
+ *    tenant-scoped call always has at least a display_name in scope, so an
+ *    empty list means the caller failed to load tenant data, not that there
+ *    is none.
+ *  - `tenantless`: the caller explicitly attests there is no tenant data in
+ *    scope (e.g. build-time static_chrome validation). The attestation is a
+ *    fixed literal so it cannot be produced by passing along some empty
+ *    variable — writing it is a deliberate act, visible in review.
+ *
+ * There is deliberately NO default and NO optional form: omitting the context
+ * is a compile-time error, enforced by an @ts-expect-error test in
+ * provider.test.ts that breaks the typecheck if this parameter ever becomes
+ * optional again.
  */
-export interface PiiContext {
-  forbiddenValues: readonly string[];
-}
+export type PiiContext =
+  | { kind: "tenant_scoped"; forbiddenValues: readonly string[] }
+  | { kind: "tenantless"; attestation: "caller-attests-no-tenant-data-in-scope" };
 
 /**
  * Minimum trimmed length for a forbidden value to participate in the
@@ -144,11 +159,14 @@ export interface PiiContext {
  * display_name) matched as a substring would flag essentially every Japanese
  * sentence, making generation unusable rather than safe.
  *
- * ⚠ Scoped decision, raised per §0.1 rather than silently chosen: §15.2 says
- * "no value traceable to students/users/branches/organizations appears" and
- * does not carve out short values. This constant is the practical floor and is
- * flagged in the PR for coordinator confirmation. Callers may pass a stricter
- * minLength (1) via assertNoForbiddenValues if that is decided.
+ * ⚠ OPEN COORDINATOR DECISION — issue #6 item 4, raised per §0.1 and NOT
+ * decided here: §15.2 says "no value traceable to
+ * students/users/branches/organizations appears" and does not carve out short
+ * values, so a single-kanji display_name is currently NOT caught by the
+ * substring scan. Keeping this floor at 2 is flagged in the PR description as
+ * requiring coordinator sign-off; lowering it to 1 (accepting false-positive
+ * risk) is a one-line change plus this comment's removal. Do not treat the
+ * current value as settled.
  */
 export const MIN_FORBIDDEN_VALUE_LENGTH = 2;
 
@@ -179,15 +197,31 @@ export function assertNoForbiddenValues(
  * transmitted: structural key scan over request AND prompt container, then a
  * value scan over the serialised form. Returns the serialised payload so the
  * transmitted bytes are, by construction, the inspected bytes.
+ *
+ * `pii` is REQUIRED (issue #6 blocking issue 1): there is no call shape in
+ * which the prompt reaches a provider unscanned. A `tenant_scoped` context
+ * with an empty value list throws — that is a caller that failed to load its
+ * tenant data, not a tenantless call (which must attest explicitly).
  */
 export function assertOutboundPayloadClean(
   request: GenerationRequest,
   prompt: string,
-  pii?: PiiContext,
+  pii: PiiContext,
 ): string {
   const serialized = serializeOutboundPayload(request, prompt);
   assertNoPiiKeys({ prompt, request } satisfies OutboundPayload);
-  assertNoForbiddenValues(serialized, pii?.forbiddenValues ?? []);
+  if (pii.kind === "tenant_scoped") {
+    if (pii.forbiddenValues.length === 0) {
+      throw new Error(
+        "PII boundary misuse (§15.2): tenant_scoped context with an empty forbiddenValues list. " +
+          "A tenant-scoped call always has at least the student display_name in scope; an empty list means tenant data was not loaded. " +
+          "If this call genuinely has no tenant data, use { kind: 'tenantless', attestation: 'caller-attests-no-tenant-data-in-scope' } explicitly.",
+      );
+    }
+    assertNoForbiddenValues(serialized, pii.forbiddenValues);
+  }
+  // kind === "tenantless": the caller has explicitly attested no tenant data
+  // exists in scope. The structural key scan above still applies in full.
   return serialized;
 }
 
@@ -196,16 +230,17 @@ export function assertOutboundPayloadClean(
  * so the §15.2 assertions run exactly once per call, in one auditable place,
  * over the serialised payload as transmitted — prompt included.
  *
- * `pii.forbiddenValues` MUST be supplied by any caller operating in a tenant
- * context (the Week 3 pipeline populates it from the session's tenant rows).
- * Week 1: no concrete provider exists yet; there is deliberately no default
- * vendor wired up.
+ * `pii` is REQUIRED with no default (issue #6 blocking issue 1) — omitting it
+ * is a compile-time error, so no code path can reach `provider.generate()`
+ * without the prompt having been scanned. The Week 3 pipeline populates
+ * `tenant_scoped` contexts from the session's tenant rows; genuinely
+ * tenantless calls must attest that explicitly.
  */
 export async function callProvider(
   provider: LlmProvider,
   request: GenerationRequest,
   prompt: string,
-  pii?: PiiContext,
+  pii: PiiContext,
 ): Promise<ProviderResponse> {
   assertOutboundPayloadClean(request, prompt, pii);
   return provider.generate(prompt);

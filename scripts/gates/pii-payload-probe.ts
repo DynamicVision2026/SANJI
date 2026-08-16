@@ -36,6 +36,7 @@ const FIXTURE_BRANCH_NAME = "駅前第二教室";
 const FIXTURE_ORG_NAME = "髙木ゼミナール";
 
 const piiContext: PiiContext = {
+  kind: "tenant_scoped",
   forbiddenValues: [
     FIXTURE_STUDENT_NAME,
     FIXTURE_USER_EMAIL,
@@ -146,6 +147,25 @@ await mustReject("nested PII-named key is rejected", async () => {
 await mustReject("organization name in prompt is rejected", async () => {
   const prompt = `${FIXTURE_ORG_NAME}の生徒向けの短文を作成してください。`;
   await callProvider(fakeProvider, cleanRequest(), prompt, piiContext);
+});
+
+// 7. Issue #6 blocking issue 1: a tenant_scoped context with an EMPTY value
+//    list must throw — "forgot to load tenant data" is not a tenantless call.
+await mustReject("tenant_scoped context with empty forbiddenValues is rejected", async () => {
+  await callProvider(fakeProvider, cleanRequest(), CLEAN_PROMPT, {
+    kind: "tenant_scoped",
+    forbiddenValues: [],
+  });
+});
+
+// 8. Tenantless calls require the explicit attestation and still get the
+//    structural key scan.
+await mustReject("tenantless call still rejects PII-named keys", async () => {
+  const request = { ...cleanRequest(), display_name: FIXTURE_STUDENT_NAME } as GenerationRequest;
+  await callProvider(fakeProvider, request, CLEAN_PROMPT, {
+    kind: "tenantless",
+    attestation: "caller-attests-no-tenant-data-in-scope",
+  });
 });
 
 if (failures > 0) {
