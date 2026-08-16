@@ -45,7 +45,7 @@ export interface KanjiReadingStage {
 
 export type LexicalRuleKind = "jukujikun" | "rendaku" | "proper_noun" | "furoku";
 
-/** Level 3 — lexical exception. §6.2 `lexical_reading_rule`. */
+/** Level 3 — lexical exception. §6.2 `lexical_reading_rule` (v2.3: source_page NOT NULL — per-row provenance is mandatory, §6.1). */
 export interface LexicalReadingRule {
   id: number;
   surface: string;
@@ -53,7 +53,7 @@ export interface LexicalReadingRule {
   rule_kind: LexicalRuleKind;
   min_stage: SchoolStage;
   min_elementary_grade: number | null;
-  source_page: number | null;
+  source_page: number;
 }
 
 export const GRADE_MIN = 1;

@@ -13,7 +13,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "test": "node --import tsx --test src/domain/spanRoles.test.ts src/curriculum/ingest.test.ts src/llm/provider.test.ts",
+    "test": "node --import tsx --test src/domain/spanRoles.test.ts src/curriculum/ingest.test.ts src/llm/provider.test.ts src/config/runtime.test.ts",
     "curriculum:check": "node scripts/check-curriculum.mjs",
     "gate:specificity": "node scripts/gates/specificity.mjs",
     "gate:pii-privacy": "node scripts/gates/pii-privacy.mjs",

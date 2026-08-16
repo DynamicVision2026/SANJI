@@ -1,15 +1,21 @@
 name: fetch-mext-source-and-hash
 
-# OPTIONAL / nice-to-have (as of issue #2). The §6.1 file-level provenance gap
-# has already been closed by a manual binary download + human page verification:
-# real SHA-256 hashes and printed page numbers now live in the repo-root
-# sources_provenance.json / sources_provenance.yaml and in
-# src/curriculum/data/SOURCES.md. This workflow is retained for re-verification
-# and for future §6.1 sources — it is no longer required.
+# Two jobs with different standing (spec v2.3):
 #
-# What it does: runs on GitHub's hosted runner (normal network egress),
-# downloads an official source PDF, computes its real SHA-256, and extracts a
-# per-page text map. Trigger once per §6.1 source (see sources_provenance.json).
+# 1. verify-committed-hashes — REQUIRED by v2.3 §6.5 ("PDF hash verification
+#    workflow — MUST be automated"): on any change to curriculum data (and on
+#    demand), re-download each CONFIRMED source PDF from its recorded URL,
+#    recompute SHA-256, and fail on mismatch with the committed hash. Detects
+#    republication or substitution of the source document (§6.1.1 — this check
+#    was explicitly NOT waived).
+#
+# 2. fetch (workflow_dispatch) — provenance-acquisition utility for NEW §6.1
+#    sources: downloads an official PDF, computes its SHA-256, and extracts a
+#    per-page text map as artifacts for a maintainer to backfill. The original
+#    §6.1 provenance for kanji_teach_grade was closed manually (issue #2,
+#    recorded waiver §6.1.1), so this job is a utility, not a requirement.
+#
+# Both run on GitHub's hosted runners (normal network egress to mext.go.jp).
 #
 # It does NOT edit the repo — it uploads artifacts. A maintainer backfills the
 # real sha256 and printed page numbers into sources_provenance.yml / SOURCES.md
@@ -24,16 +30,47 @@ on:
         required: true
         type: string
       source_id:
-        description: "Which sources_provenance.yml entry this run is for."
+        description: "Which sources_provenance.json entry this run is for."
         required: true
         default: kanji_teach_grade
         type: string
+  # v2.3 §6.5: hash verification MUST be automated and MUST also trigger on any
+  # change to curriculum data, not just on manual dispatch.
+  push:
+    branches:
+      - main
+      - "claude/**"
+    paths:
+      - "src/curriculum/data/**"
+      - "sources_provenance.json"
+      - "sources_provenance.yaml"
+  pull_request:
+    paths:
+      - "src/curriculum/data/**"
+      - "sources_provenance.json"
+      - "sources_provenance.yaml"
 
 permissions:
   contents: read
 
 jobs:
+  # v2.3 §6.5 automated verification: re-download each CONFIRMED source PDF
+  # from its recorded URL, recompute SHA-256, fail on mismatch with the
+  # committed hash. Detects source republication or file substitution (§6.1.1
+  # — this is the check that was explicitly NOT waived).
+  verify-committed-hashes:
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Verify committed source-PDF hashes against live downloads
+        run: node scripts/verify-source-hashes.mjs
+
   fetch:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     # Inputs are passed through env (never interpolated directly into run: blocks)
     # to avoid shell/script injection via ${{ inputs.* }}.

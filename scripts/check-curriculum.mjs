@@ -73,6 +73,48 @@ if (checksum !== manifest.checksum) {
   );
 }
 
+// ---------------------------------------------------------------------------
+// Provenance-manifest assertion (v2.3 §6.5): the manifest must be present,
+// well-formed, cover every grade block, and reference the committed PDF hash.
+// The authoritative manifest is repo-root sources_provenance.json (the YAML
+// mirror is regenerated from it; JSON is what is asserted here).
+// ---------------------------------------------------------------------------
+const MANIFEST_PATH = join(HERE, "..", "sources_provenance.json");
+let provenance = null;
+try {
+  provenance = JSON.parse(readFileSync(MANIFEST_PATH, "utf8"));
+} catch (error) {
+  fail(`provenance manifest missing or malformed at sources_provenance.json: ${error.message}`);
+}
+
+if (provenance) {
+  const source = (provenance.sources ?? []).find((s) => s.dataset === "kanji_teach_grade");
+  if (!source) {
+    fail("provenance manifest has no source_record for dataset 'kanji_teach_grade' (§6.1)");
+  } else {
+    const sha = source.file_hash?.value;
+    if (!/^[0-9a-f]{64}$/.test(sha ?? "")) {
+      fail("provenance manifest does not reference a well-formed committed PDF SHA-256 (§6.1/§6.5)");
+    }
+    if (source.file_hash?.status !== "CONFIRMED") {
+      fail(
+        `provenance manifest file_hash.status is '${source.file_hash?.status}', expected CONFIRMED — ` +
+          `a PENDING/placeholder hash must not pass the gate (§6.1.1: hash verification is not waived)`,
+      );
+    }
+    // Block-level page coverage (§6.1): every grade block 1..6 must be mapped.
+    const mappingText = JSON.stringify(source.page_mapping ?? []);
+    for (const grade of [1, 2, 3, 4, 5, 6]) {
+      if (!mappingText.includes(`${grade}年生`)) {
+        fail(`provenance page_mapping does not cover the grade-${grade} block (§6.1 block-level granularity)`);
+      }
+    }
+    if (!source.content_verification?.verified_by) {
+      fail("provenance manifest lacks a named verifier for the page map (§6.1.1 recorded waiver requires one)");
+    }
+  }
+}
+
 if (process.exitCode === 1) {
   console.error("\n§6.5 curriculum coverage gate: FAILED");
   process.exit(1);
@@ -80,5 +122,6 @@ if (process.exitCode === 1) {
 
 console.log(
   `✓ §6.5 curriculum coverage gate: PASS — ${rows.length} characters, ` +
-    `grades ${[1, 2, 3, 4, 5, 6].map((g) => counts[g]).join("/")}, checksum ok`,
+    `grades ${[1, 2, 3, 4, 5, 6].map((g) => counts[g]).join("/")}, checksum ok, ` +
+    `provenance manifest asserted (hash CONFIRMED, grade blocks 1-6 mapped, named verifier present)`,
 );

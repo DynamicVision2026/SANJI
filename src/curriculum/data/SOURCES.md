@@ -117,9 +117,19 @@ Week 2 ingestion can record per-row `source_page` values directly against it.
 
 ## On the `fetch-mext-source-and-hash.yml` workflow
 
-`.github/workflows/fetch-mext-source-and-hash.yml` (workflow_dispatch) was
-proposed in issue #2 to obtain this provenance from GitHub's hosted runner. Since
-the real hashes and page numbers have now been obtained and confirmed manually,
-that workflow is **optional / nice-to-have** — retained for re-verification and
-for future §6.1 sources, not required. It remains the recommended way to
-re-confirm a hash or refresh the page map if a source URL changes.
+Status updated for spec v2.3 (§6.5, §6.1.1). The workflow has two jobs with
+different standing:
+
+- **`verify-committed-hashes` — REQUIRED (v2.3 §6.5 MUST).** Runs automatically
+  on any change to curriculum data (and on PRs touching it): re-downloads each
+  CONFIRMED source PDF from its recorded URL, recomputes SHA-256, and fails on
+  mismatch with the committed hash. This is the check §6.1.1 explicitly did
+  **not** waive — it detects republication or substitution of the source
+  document. CI also asserts this manifest's shape (present, well-formed,
+  grade blocks 1–6 covered, named verifier) in `scripts/check-curriculum.mjs`.
+- **`fetch` (workflow_dispatch) — acquisition utility.** For future §6.1
+  sources: downloads an official PDF and produces hash + page-map artifacts for
+  maintainer backfill. The original acquisition for `kanji_teach_grade` was
+  performed manually (issue #2) under the recorded waiver in v2.3 §6.1.1 —
+  the page map is a committed artifact with a named verifier, and only the
+  *automated page-map extraction* was waived, not hash verification.
