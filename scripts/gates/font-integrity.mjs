@@ -34,6 +34,8 @@ if (fonts.length > 0) {
 }
 passGate(
   "Font Integrity Gate",
-  "§15.3/§19.1",
-  "no font binaries committed; font-dependent rendering (§9) correctly deferred pending the Morisawa license (§19.1). Single-embedded-font PDF assertion follows the rendering container (Weeks 5–6).",
+  "§15.3/§9.2",
+  "no font binaries committed (placeholder font is config-marked, never committed; licensed font blocked on §19.1 which gates LAUNCH, not the build). " +
+    "Canary CONTENT exists and is unit-tested (src/rendering/fontCanary.ts: all 1,026 kanji + kana + punctuation + 異体字 fixtures + ruby resolved under each ruby_policy). " +
+    "The render half — PDF font-resource-dictionary assertion of exactly one embedded font — is NOT yet implemented; it lands with the rendering container (Weeks 5–6, §18.1).",
 );

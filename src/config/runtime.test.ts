@@ -110,6 +110,33 @@ test("zero-count worksheet throws (minimum 1)", () => {
   );
 });
 
+test("ruby_policy default + grade boundary are configuration, validated (v2.3 §7.10/§9.6)", () => {
+  const defaults = getRuntimeConfig(BASE);
+  assert.equal(defaults.rubyPolicyDefault, "conservative");
+  assert.equal(defaults.rubyGradeBoundary, 3);
+
+  const custom = getRuntimeConfig({
+    ...BASE,
+    SANJI_RUBY_POLICY_DEFAULT: "minimal",
+    SANJI_RUBY_GRADE_BOUNDARY: "4",
+  });
+  assert.equal(custom.rubyPolicyDefault, "minimal");
+  assert.equal(custom.rubyGradeBoundary, 4);
+
+  assert.throws(
+    () => getRuntimeConfig({ ...BASE, SANJI_RUBY_POLICY_DEFAULT: "sometimes" }),
+    /not a ruby_policy/,
+  );
+  assert.throws(
+    () => getRuntimeConfig({ ...BASE, SANJI_RUBY_GRADE_BOUNDARY: "7" }),
+    /within grades 1\.\.6/,
+  );
+  assert.throws(
+    () => getRuntimeConfig({ ...BASE, SANJI_RUBY_GRADE_BOUNDARY: "2.5" }),
+    /must be an integer/,
+  );
+});
+
 test("allowed_with_ruby extensions parse as characters; duplicates throw (§7.10)", () => {
   const config = getRuntimeConfig({
     ...BASE,

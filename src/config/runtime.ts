@@ -88,6 +88,20 @@ export interface RuntimeConfig {
    * extension characters.
    */
   readonly allowedWithRubyExtensions: readonly string[];
+
+  /**
+   * v2.3 §9.6 default `ruby_policy` for new organizations. The per-org value
+   * lives on organizations.ruby_policy (§5.1); this is the system default,
+   * runtime-configurable per §7.10.
+   */
+  readonly rubyPolicyDefault: "conservative" | "always" | "minimal";
+
+  /**
+   * v2.3 §9.6 grade boundary for the `conservative` policy: recommended ruby
+   * renders when items.grade ≤ boundary. Default 3, pending pilot validation
+   * (§19.5). Runtime configuration per §7.10 — not a constant.
+   */
+  readonly rubyGradeBoundary: number;
 }
 
 type Env = Readonly<Record<string, string | undefined>>;
@@ -171,6 +185,24 @@ function readCharSet(env: Env, name: string): readonly string[] {
   return chars;
 }
 
+const RUBY_POLICIES = ["conservative", "always", "minimal"] as const;
+
+/** v2.3 §9.6 ruby_policy enum value from `env`; unknown values throw. */
+function readRubyPolicy(
+  env: Env,
+  name: string,
+  fallback: (typeof RUBY_POLICIES)[number],
+): (typeof RUBY_POLICIES)[number] {
+  const raw = rawValue(env, name);
+  if (raw === undefined) return fallback;
+  if (!(RUBY_POLICIES as readonly string[]).includes(raw)) {
+    throw new Error(
+      `Config ${name}=${JSON.stringify(raw)} is not a ruby_policy. Expected one of ${RUBY_POLICIES.join(", ")} (§9.6).`,
+    );
+  }
+  return raw as (typeof RUBY_POLICIES)[number];
+}
+
 /**
  * Resolve the runtime configuration from the supplied environment. Defaults
  * are the spec's stated defaults; every value can be overridden per
@@ -201,5 +233,13 @@ export function getRuntimeConfig(env: Env = process.env): RuntimeConfig {
     relaxationRateCeiling: readFraction(env, "SANJI_RELAXATION_RATE_CEILING", 0.15),
     minimumItemFraction: readFraction(env, "SANJI_MINIMUM_ITEM_FRACTION", 0.8),
     allowedWithRubyExtensions: readCharSet(env, "SANJI_ALLOWED_WITH_RUBY_EXTENSIONS"),
+    rubyPolicyDefault: readRubyPolicy(env, "SANJI_RUBY_POLICY_DEFAULT", "conservative"),
+    rubyGradeBoundary: (() => {
+      const boundary = readInt(env, "SANJI_RUBY_GRADE_BOUNDARY", 3, 1);
+      if (boundary > 6) {
+        throw new Error(`Config SANJI_RUBY_GRADE_BOUNDARY=${boundary} must be within grades 1..6 (§9.6).`);
+      }
+      return boundary;
+    })(),
   };
 }
