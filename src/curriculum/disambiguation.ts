@@ -1,4 +1,5 @@
 import akuAkeruData from "./data/aku_akeru_disambiguation.json";
+import agaruAgeruData from "./data/agaru_ageru_disambiguation.json";
 import hakaruData from "./data/hakaru_disambiguation.json";
 import toruData from "./data/toru_disambiguation.json";
 import tsukuruData from "./data/tsukuru_disambiguation.json";
@@ -136,6 +137,40 @@ export function disambiguateAkuAkeru(
   if (readingKana !== "あく" && readingKana !== "あける") throw new Error(`Unsupported reading: ${readingKana}`);
   const eligible = akuAkeruData.rules.filter((rule) => rule.reading_kana.includes(readingKana));
   const match = lookup(context, eligible as LookupRule<"明" | "空" | "開">[]);
+  return match
+    ? {
+        reading_kana: readingKana,
+        target_kanji: match.rule.target_kanji,
+        certainty: "CONFIDENT",
+        source_rule_id: match.rule.id,
+        matched_context: match.term,
+      }
+    : {
+        reading_kana: readingKana,
+        target_kanji: null,
+        certainty: "REVIEW_REQUIRED",
+        source_rule_id: null,
+        matched_context: null,
+      };
+}
+
+export type AgaruAgeruReading = "あがる" | "あげる";
+
+export interface AgaruAgeruDisambiguationResult {
+  reading_kana: AgaruAgeruReading;
+  target_kanji: "上" | "揚" | "挙" | null;
+  certainty: DisambiguationCertainty;
+  source_rule_id: string | null;
+  matched_context: string | null;
+}
+
+export function disambiguateAgaruAgeru(
+  context: string,
+  readingKana: AgaruAgeruReading,
+): AgaruAgeruDisambiguationResult {
+  if (readingKana !== "あがる" && readingKana !== "あげる") throw new Error(`Unsupported reading: ${readingKana}`);
+  const eligible = agaruAgeruData.rules.filter((rule) => rule.reading_kana.includes(readingKana));
+  const match = lookup(context, eligible as LookupRule<"上" | "揚" | "挙">[]);
   return match
     ? {
         reading_kana: readingKana,

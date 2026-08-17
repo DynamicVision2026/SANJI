@@ -16,3 +16,7 @@ The array is limited to readings that share the same underlying semantic rule
 across verb forms. It must not combine semantically distinct readings merely
 for convenience. Single-reading families remain unchanged and require no
 re-review.
+
+The same approved structure is used for `["あがる", "あげる"]`. The official
+report says 花火 may use 揚 or 上 depending on viewpoint, so that context is
+deliberately not assigned to either rule and returns `REVIEW_REQUIRED`.

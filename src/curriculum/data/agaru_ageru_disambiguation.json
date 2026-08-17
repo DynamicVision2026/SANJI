@@ -1,0 +1,34 @@
+{
+  "family": "あがる / あげる",
+  "source_document": "「異字同訓」の漢字の使い分け例（報告）",
+  "source_sha256": "57ad033db96d0d035992c5cc0ffd2703db16ef2e84ccdbdff92d6851c7c0d3fb",
+  "verification_status": "PENDING_HUMAN_REVIEW",
+  "verified_by": null,
+  "verified_at": null,
+  "rules": [
+    {
+      "id": "agaru-ageru-rise",
+      "reading_kana": ["あがる", "あげる"],
+      "target_kanji": "上",
+      "context_terms": ["二階", "地位", "料金", "成果", "腕前", "お祝いの品物", "歓声", "雨"],
+      "source_page": 8,
+      "source_printed_page": 4
+    },
+    {
+      "id": "agaru-ageru-hoist",
+      "reading_kana": ["あがる", "あげる"],
+      "target_kanji": "揚",
+      "context_terms": ["国旗", "たこ", "船荷", "海外", "天ぷら"],
+      "source_page": 8,
+      "source_printed_page": 4
+    },
+    {
+      "id": "agaru-ageru-cite",
+      "reading_kana": ["あがる", "あげる"],
+      "target_kanji": "挙",
+      "context_terms": ["例を", "手が", "勝ち星", "式", "国を", "全力", "犯人"],
+      "source_page": 8,
+      "source_printed_page": 4
+    }
+  ]
+}

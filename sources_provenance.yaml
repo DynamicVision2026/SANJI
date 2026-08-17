@@ -159,6 +159,28 @@ sources:
     status: PENDING_HUMAN_REVIEW
     verified_by: null
     verified_at: null
+- dataset: agaru_ageru_disambiguation (上がる・上げる / 揚がる・揚げる / 挙がる・挙げる PoC)
+  document_name: 「異字同訓」の漢字の使い分け例（報告）
+  official_landing_page: https://www.bunka.go.jp/seisaku/kokugo_nihongo/kokugo_shisaku/hokoku/index.html
+  actual_pdf_url_used: https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/ijidokun_140221.pdf
+  retrieved_at: '2026-08-17T12:57:51+09:00'
+  file_size_bytes: 924697
+  publish_date_on_document: 平成26年2月21日（文化審議会国語分科会報告）
+  file_hash:
+    algorithm: SHA-256
+    value: 57ad033db96d0d035992c5cc0ffd2703db16ef2e84ccdbdff92d6851c7c0d3fb
+    status: CONFIRMED
+    computed_from: actual downloaded binary file, not text/summary-derived
+  page_mapping:
+  - section: あがる・あげる 003（上がる・上げる / 揚がる・揚げる / 挙がる・挙げる）
+    page_number: PDF 8 / printed 4
+  extraction_method: Direct PDF text-layer extraction and comparison with the visually verified official-document layout
+  verification_notes: The paired readings share one semantic rule across strict intransitive/transitive forms. The report's perspective-dependent 花火 example is intentionally unresolved and returns REVIEW_REQUIRED.
+  content_verification:
+    method: official_pdf_text_extraction; named human review still required
+    status: PENDING_HUMAN_REVIEW
+    verified_by: null
+    verified_at: null
 meta:
   generated_at: '2026-08-17T12:57:51+09:00'
   purpose: 'closes spec §6.1 two-source acquisition rule provenance gap (file hash + page numbers), referenced in GitHub issue #2 (DynamicVision2026/SANJI)'
