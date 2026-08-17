@@ -175,7 +175,7 @@ sources:
   - section: あがる・あげる 003（上がる・上げる / 揚がる・揚げる / 挙がる・挙げる）
     page_number: PDF 8 / printed 4
   extraction_method: Direct PDF text-layer extraction and comparison with the visually verified official-document layout
-  verification_notes: The paired readings share one semantic rule across strict intransitive/transitive forms. The report's perspective-dependent 花火 example is intentionally unresolved and returns REVIEW_REQUIRED.
+  verification_notes: The paired readings share one semantic rule across strict intransitive/transitive forms. 花火 appears in both 上 and 揚 rules and therefore returns REVIEW_REQUIRED; 海外 is restricted to the source phrase 海外から引き揚げる.
   content_verification:
     method: official_pdf_text_extraction; named human review still required
     status: PENDING_HUMAN_REVIEW

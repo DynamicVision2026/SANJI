@@ -10,7 +10,7 @@
       "id": "agaru-ageru-rise",
       "reading_kana": ["あがる", "あげる"],
       "target_kanji": "上",
-      "context_terms": ["二階", "地位", "料金", "成果", "腕前", "お祝いの品物", "歓声", "雨"],
+      "context_terms": ["二階", "地位", "料金", "成果", "腕前", "お祝いの品物", "歓声", "雨", "花火"],
       "source_page": 8,
       "source_printed_page": 4
     },
@@ -18,7 +18,7 @@
       "id": "agaru-ageru-hoist",
       "reading_kana": ["あがる", "あげる"],
       "target_kanji": "揚",
-      "context_terms": ["国旗", "たこ", "船荷", "海外", "天ぷら"],
+      "context_terms": ["国旗", "花火", "たこ", "船荷", "海外から引き", "天ぷら"],
       "source_page": 8,
       "source_printed_page": 4
     },

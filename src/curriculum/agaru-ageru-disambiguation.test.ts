@@ -28,7 +28,14 @@ test("shared rules work for each strict intransitive/transitive reading", () => 
 });
 
 test("officially perspective-dependent 花火 case is REVIEW_REQUIRED", () => {
+  assert.ok(data.rules.find((rule) => rule.target_kanji === "上")!.context_terms.includes("花火"));
+  assert.ok(data.rules.find((rule) => rule.target_kanji === "揚")!.context_terms.includes("花火"));
   assert.equal(disambiguateAgaruAgeru("花火があがる。", "あがる").certainty, "REVIEW_REQUIRED");
+});
+
+test("海外 does not match without the source's full 引き揚げる context", () => {
+  assert.equal(disambiguateAgaruAgeru("海外で評価があがる。", "あがる").certainty, "REVIEW_REQUIRED");
+  assert.equal(disambiguateAgaruAgeru("海外から引きあげる。", "あげる").target_kanji, "揚");
 });
 
 test("invalid reading fails loudly at runtime", () => {
