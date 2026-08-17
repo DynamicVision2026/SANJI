@@ -99,10 +99,40 @@
         "verification_agent": "external_human_agent_manual_binary_download",
         "verified_at": "2026-08-15"
       }
+    },
+    {
+      "dataset": "hakaru_disambiguation (図る / 計る / 測る / 量る PoC)",
+      "document_name": "「異字同訓」の漢字の使い分け例（報告）",
+      "official_landing_page": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/kokugo_shisaku/hokoku/index.html",
+      "actual_pdf_url_used": "https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/ijidokun_140221.pdf",
+      "retrieved_at": "2026-08-17T12:57:51+09:00",
+      "file_size_bytes": 924697,
+      "publish_date_on_document": "平成26年2月21日（文化審議会国語分科会報告）",
+      "file_hash": {
+        "algorithm": "SHA-256",
+        "value": "57ad033db96d0d035992c5cc0ffd2703db16ef2e84ccdbdff92d6851c7c0d3fb",
+        "status": "CONFIRMED",
+        "computed_from": "actual downloaded binary file, not text/summary-derived"
+      },
+      "page_mapping": [
+        {
+          "section": "はかる 104（図る・計る・測る・量る。PoC scope excludes 謀る・諮る）",
+          "page_number": "PDF 26 / printed 22"
+        }
+      ],
+      "extraction_method": "Direct PDF text-layer extraction plus visual verification of PDF page 26",
+      "verification_notes": "The official entry lists six spellings. This PoC intentionally implements only the four named in its work order: 図る, 計る, 測る, and 量る. Candidate context terms reproduce the official descriptions/examples; the 身長と体重 note is represented as the longest-match override for 測る.",
+      "content_verification": {
+        "method": "official_pdf_text_extraction_and_visual_page_check",
+        "status": "PENDING_HUMAN_REVIEW",
+        "verified_by": null,
+        "verification_agent": "Codex implementation session; not a substitute for the required named human reviewer",
+        "verified_at": null
+      }
     }
   ],
   "meta": {
-    "generated_at": "2026-08-15T22:59:08+09:00",
+    "generated_at": "2026-08-17T12:57:51+09:00",
     "purpose": "closes spec §6.1 two-source acquisition rule provenance gap (file hash + page numbers), referenced in GitHub issue #2 (DynamicVision2026/SANJI)",
     "important_distinction": "Hashes computed here are from actual downloaded binary files, not guessed or derived from text summaries. This satisfies the strict requirement that no fabricated provenance be recorded. This material was produced via manual external verification, not the automated GitHub Actions workflow originally proposed in issue #2 — the workflow requirement is downgraded to optional/nice-to-have since the actual goal (real hash + real page numbers) has already been achieved through this manual process.",
     "verifier_note": "verified_by requires the actual human verifier identity per spec v2.3 §6.1.1 (named human verifier + verification date). The verification itself was performed 2026-08-15 by the external human agent described in verification_agent; the individual identity is not known to the implementing session and must be filled in by the coordinator — recorded as PENDING rather than fabricated (issue #6 item 5)."

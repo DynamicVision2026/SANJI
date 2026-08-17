@@ -1,0 +1,41 @@
+{
+  "family": "はかる",
+  "source_document": "「異字同訓」の漢字の使い分け例（報告）",
+  "source_sha256": "57ad033db96d0d035992c5cc0ffd2703db16ef2e84ccdbdff92d6851c7c0d3fb",
+  "verification_status": "PENDING_HUMAN_REVIEW",
+  "verified_by": null,
+  "rules": [
+    {
+      "id": "hakaru-hakaru-plan",
+      "reading_kana": "はかる",
+      "target_kanji": "図",
+      "context_terms": ["合理化", "解決", "身の安全", "再起", "局面の打開", "便宜"],
+      "source_page": 26,
+      "source_printed_page": 22
+    },
+    {
+      "id": "hakaru-hakaru-count",
+      "reading_kana": "はかる",
+      "target_kanji": "計",
+      "context_terms": ["時間", "数", "タイミング", "頃合い"],
+      "source_page": 26,
+      "source_printed_page": 22
+    },
+    {
+      "id": "hakaru-hakaru-measure",
+      "reading_kana": "はかる",
+      "target_kanji": "測",
+      "context_terms": ["身長と体重", "距離", "標高", "身長", "水深", "面積", "血圧", "温度", "運動能力", "測定器", "真意"],
+      "source_page": 26,
+      "source_printed_page": 22
+    },
+    {
+      "id": "hakaru-hakaru-weigh",
+      "reading_kana": "はかる",
+      "target_kanji": "量",
+      "context_terms": ["重さ", "体重", "立体の体積", "容量", "心中"],
+      "source_page": 26,
+      "source_printed_page": 22
+    }
+  ]
+}
