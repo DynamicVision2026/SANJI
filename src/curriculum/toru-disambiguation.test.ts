@@ -32,13 +32,13 @@ test("魚 alone is REVIEW_REQUIRED, never resolved by rule ordering", () => {
   assert.equal(result.source_rule_id, null);
 });
 
-test("とる provenance is complete and independently pending human review", () => {
+test("とる provenance is complete and frozen by its named human reviewer", () => {
   const source = provenance.sources.find((entry) => entry.dataset.startsWith("toru_disambiguation"));
   assert.ok(source);
   assert.equal(source.file_hash.value, data.source_sha256);
-  assert.equal(data.verification_status, "PENDING_HUMAN_REVIEW");
-  assert.equal(data.verified_by, null);
-  assert.equal(data.verified_at, null);
+  assert.equal(data.verification_status, "frozen");
+  assert.equal(data.verified_by, "Brian Fu");
+  assert.equal(data.verified_at, "2026-08-17");
   for (const rule of data.rules) assert.ok(rule.source_page > 0);
 });
 

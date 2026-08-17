@@ -151,10 +151,10 @@
       "extraction_method": "Direct PDF text-layer extraction and comparison with the visually verified official-document layout",
       "verification_notes": "魚 is source-defined as dual-valid between 取る and 捕る depending on viewpoint, so it appears in both rules and resolves to REVIEW_REQUIRED.",
       "content_verification": {
-        "method": "official_pdf_text_extraction; named human review still required",
-        "status": "PENDING_HUMAN_REVIEW",
-        "verified_by": null,
-        "verified_at": null
+        "method": "official_pdf_text_extraction and named human page-by-page review",
+        "status": "frozen",
+        "verified_by": "Brian Fu",
+        "verified_at": "2026-08-17"
       }
     },
     {
@@ -232,10 +232,10 @@
       "extraction_method": "Direct PDF text-layer extraction and comparison with the visually verified official-document layout",
       "verification_notes": "The paired readings share one semantic rule across strict intransitive/transitive forms. 花火 appears in both 上 and 揚 rules and therefore returns REVIEW_REQUIRED; 海外 is restricted to the complete source phrase 海外から引き揚げる.",
       "content_verification": {
-        "method": "official_pdf_text_extraction; named human review still required",
-        "status": "PENDING_HUMAN_REVIEW",
-        "verified_by": null,
-        "verified_at": null
+        "method": "official_pdf_text_extraction and named human page-by-page review",
+        "status": "frozen",
+        "verified_by": "Brian Fu",
+        "verified_at": "2026-08-17"
       }
     }
   ],

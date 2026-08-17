@@ -2,9 +2,9 @@
   "family": "とる",
   "source_document": "「異字同訓」の漢字の使い分け例（報告）",
   "source_sha256": "57ad033db96d0d035992c5cc0ffd2703db16ef2e84ccdbdff92d6851c7c0d3fb",
-  "verification_status": "PENDING_HUMAN_REVIEW",
-  "verified_by": null,
-  "verified_at": null,
+  "verification_status": "frozen",
+  "verified_by": "Brian Fu",
+  "verified_at": "2026-08-17",
   "rules": [
     {
       "id": "toru-take",
