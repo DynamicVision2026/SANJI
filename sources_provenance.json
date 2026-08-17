@@ -156,6 +156,33 @@
         "verified_by": null,
         "verified_at": null
       }
+    },
+    {
+      "dataset": "tsukuru_disambiguation (作る / 創る / 造る PoC)",
+      "document_name": "「異字同訓」の漢字の使い分け例（報告）",
+      "official_landing_page": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/kokugo_shisaku/hokoku/index.html",
+      "actual_pdf_url_used": "https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/ijidokun_140221.pdf",
+      "retrieved_at": "2026-08-17T12:57:51+09:00",
+      "file_size_bytes": 924697,
+      "publish_date_on_document": "平成26年2月21日（文化審議会国語分科会報告）",
+      "file_hash": {
+        "algorithm": "SHA-256",
+        "value": "57ad033db96d0d035992c5cc0ffd2703db16ef2e84ccdbdff92d6851c7c0d3fb",
+        "status": "CONFIRMED",
+        "computed_from": "actual downloaded binary file, not text/summary-derived"
+      },
+      "page_mapping": [{
+        "section": "つくる 084（作る・創る・造る）",
+        "page_number": "PDF 22 / printed 18"
+      }],
+      "extraction_method": "Direct PDF text-layer extraction and comparison with the visually verified official-document layout",
+      "verification_notes": "創る is limited to contexts where originality is explicitly indicated; the official report states 作る is also generally acceptable.",
+      "content_verification": {
+        "method": "official_pdf_text_extraction; named human review still required",
+        "status": "PENDING_HUMAN_REVIEW",
+        "verified_by": null,
+        "verified_at": null
+      }
     }
   ],
   "meta": {

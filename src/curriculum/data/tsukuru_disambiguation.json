@@ -1,0 +1,34 @@
+{
+  "family": "つくる",
+  "source_document": "「異字同訓」の漢字の使い分け例（報告）",
+  "source_sha256": "57ad033db96d0d035992c5cc0ffd2703db16ef2e84ccdbdff92d6851c7c0d3fb",
+  "verification_status": "PENDING_HUMAN_REVIEW",
+  "verified_by": null,
+  "verified_at": null,
+  "rules": [
+    {
+      "id": "tsukuru-make",
+      "reading_kana": "つくる",
+      "target_kanji": "作",
+      "context_terms": ["米", "規則", "新記録", "計画", "詩", "笑顔", "会社", "機会", "組織"],
+      "source_page": 22,
+      "source_printed_page": 18
+    },
+    {
+      "id": "tsukuru-build",
+      "reading_kana": "つくる",
+      "target_kanji": "造",
+      "context_terms": ["船", "庭園", "宅地", "道路", "数寄屋造りの家", "酒"],
+      "source_page": 22,
+      "source_printed_page": 18
+    },
+    {
+      "id": "tsukuru-create",
+      "reading_kana": "つくる",
+      "target_kanji": "創",
+      "context_terms": ["新しい文化", "画期的な商品"],
+      "source_page": 22,
+      "source_printed_page": 18
+    }
+  ]
+}

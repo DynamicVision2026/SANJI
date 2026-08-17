@@ -1,5 +1,6 @@
 import hakaruData from "./data/hakaru_disambiguation.json";
 import toruData from "./data/toru_disambiguation.json";
+import tsukuruData from "./data/tsukuru_disambiguation.json";
 
 export type DisambiguationCertainty = "CONFIDENT" | "REVIEW_REQUIRED";
 
@@ -83,6 +84,33 @@ export function disambiguateToru(context: string): ToruDisambiguationResult {
       }
     : {
         reading_kana: "とる",
+        target_kanji: null,
+        certainty: "REVIEW_REQUIRED",
+        source_rule_id: null,
+        matched_context: null,
+      };
+}
+
+export interface TsukuruDisambiguationResult {
+  reading_kana: "つくる";
+  target_kanji: "作" | "創" | "造" | null;
+  certainty: DisambiguationCertainty;
+  source_rule_id: string | null;
+  matched_context: string | null;
+}
+
+export function disambiguateTsukuru(context: string): TsukuruDisambiguationResult {
+  const match = lookup(context, tsukuruData.rules as LookupRule<"作" | "創" | "造">[]);
+  return match
+    ? {
+        reading_kana: "つくる",
+        target_kanji: match.rule.target_kanji,
+        certainty: "CONFIDENT",
+        source_rule_id: match.rule.id,
+        matched_context: match.term,
+      }
+    : {
+        reading_kana: "つくる",
         target_kanji: null,
         certainty: "REVIEW_REQUIRED",
         source_rule_id: null,
