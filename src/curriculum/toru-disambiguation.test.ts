@@ -25,8 +25,11 @@ test("ambiguous とる context is REVIEW_REQUIRED", () => {
   assert.equal(disambiguateToru("記録をとる。").certainty, "REVIEW_REQUIRED");
 });
 
-test("source-defined 魚 dual-valid case is REVIEW_REQUIRED", () => {
-  assert.equal(disambiguateToru("魚をとる。").certainty, "REVIEW_REQUIRED");
+test("魚 alone is REVIEW_REQUIRED, never resolved by rule ordering", () => {
+  const result = disambiguateToru("魚をとる。");
+  assert.equal(result.certainty, "REVIEW_REQUIRED");
+  assert.equal(result.target_kanji, null);
+  assert.equal(result.source_rule_id, null);
 });
 
 test("とる provenance is complete and independently pending human review", () => {

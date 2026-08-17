@@ -27,15 +27,18 @@ test("shared rules work for each strict intransitive/transitive reading", () => 
   assert.equal(disambiguateAgaruAgeru("国旗をあげる。", "あげる").target_kanji, "揚");
 });
 
-test("officially perspective-dependent 花火 case is REVIEW_REQUIRED", () => {
+test("花火 alone is REVIEW_REQUIRED, never resolved by rule ordering", () => {
   assert.ok(data.rules.find((rule) => rule.target_kanji === "上")!.context_terms.includes("花火"));
   assert.ok(data.rules.find((rule) => rule.target_kanji === "揚")!.context_terms.includes("花火"));
-  assert.equal(disambiguateAgaruAgeru("花火があがる。", "あがる").certainty, "REVIEW_REQUIRED");
+  const result = disambiguateAgaruAgeru("花火があがる。", "あがる");
+  assert.equal(result.certainty, "REVIEW_REQUIRED");
+  assert.equal(result.target_kanji, null);
+  assert.equal(result.source_rule_id, null);
 });
 
 test("海外 does not match without the source's full 引き揚げる context", () => {
   assert.equal(disambiguateAgaruAgeru("海外で評価があがる。", "あがる").certainty, "REVIEW_REQUIRED");
-  assert.equal(disambiguateAgaruAgeru("海外から引きあげる。", "あげる").target_kanji, "揚");
+  assert.equal(disambiguateAgaruAgeru("海外から引き揚げる。", "あげる").target_kanji, "揚");
 });
 
 test("invalid reading fails loudly at runtime", () => {
