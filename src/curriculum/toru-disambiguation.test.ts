@@ -9,10 +9,11 @@ const cases = [
   ["連絡をとる。", "取"],
   ["指紋をとる。", "採"],
   ["指揮をとる。", "執"],
+  ["外野フライをとる。", "捕"],
   ["写真をとる。", "撮"],
 ] as const;
 
-test("all four とる kanji resolve from source-backed context", () => {
+test("all five とる kanji resolve from source-backed context", () => {
   for (const [context, expected] of cases) {
     const result = disambiguateToru(context);
     assert.equal(result.target_kanji, expected);
@@ -22,6 +23,10 @@ test("all four とる kanji resolve from source-backed context", () => {
 
 test("ambiguous とる context is REVIEW_REQUIRED", () => {
   assert.equal(disambiguateToru("記録をとる。").certainty, "REVIEW_REQUIRED");
+});
+
+test("source-defined 魚 dual-valid case is REVIEW_REQUIRED", () => {
+  assert.equal(disambiguateToru("魚をとる。").certainty, "REVIEW_REQUIRED");
 });
 
 test("とる provenance is complete and independently pending human review", () => {

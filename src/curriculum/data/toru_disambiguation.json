@@ -31,6 +31,14 @@
       "source_printed_page": 20
     },
     {
+      "id": "toru-catch",
+      "reading_kana": "とる",
+      "target_kanji": "捕",
+      "context_terms": ["ねずみ", "鯨", "外野フライ", "生け捕る", "捕り物", "魚"],
+      "source_page": 24,
+      "source_printed_page": 20
+    },
+    {
       "id": "toru-film",
       "reading_kana": "とる",
       "target_kanji": "撮",

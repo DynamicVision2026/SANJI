@@ -68,14 +68,14 @@ export function disambiguateHakaru(context: string): DisambiguationResult {
 
 export interface ToruDisambiguationResult {
   reading_kana: "とる";
-  target_kanji: "取" | "採" | "執" | "撮" | null;
+  target_kanji: "取" | "採" | "執" | "捕" | "撮" | null;
   certainty: DisambiguationCertainty;
   source_rule_id: string | null;
   matched_context: string | null;
 }
 
 export function disambiguateToru(context: string): ToruDisambiguationResult {
-  const match = lookup(context, toruData.rules as LookupRule<"取" | "採" | "執" | "撮">[]);
+  const match = lookup(context, toruData.rules as LookupRule<"取" | "採" | "執" | "捕" | "撮">[]);
   return match
     ? {
         reading_kana: "とる",

@@ -131,7 +131,7 @@
       }
     },
     {
-      "dataset": "toru_disambiguation (取る / 採る / 執る / 撮る PoC)",
+      "dataset": "toru_disambiguation (取る / 採る / 執る / 捕る / 撮る PoC)",
       "document_name": "「異字同訓」の漢字の使い分け例（報告）",
       "official_landing_page": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/kokugo_shisaku/hokoku/index.html",
       "actual_pdf_url_used": "https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/ijidokun_140221.pdf",
@@ -145,11 +145,11 @@
         "computed_from": "actual downloaded binary file, not text/summary-derived"
       },
       "page_mapping": [{
-        "section": "とる 092（取る・採る・執る・撮る。PoC scope excludes 捕る）",
+        "section": "とる 092（取る・採る・執る・捕る・撮る）",
         "page_number": "PDF 24 / printed 20"
       }],
       "extraction_method": "Direct PDF text-layer extraction and comparison with the visually verified official-document layout",
-      "verification_notes": "The official entry also lists 捕る. This PoC implements only the four spellings named in its work order.",
+      "verification_notes": "魚 is source-defined as dual-valid between 取る and 捕る depending on viewpoint, so it appears in both rules and resolves to REVIEW_REQUIRED.",
       "content_verification": {
         "method": "official_pdf_text_extraction; named human review still required",
         "status": "PENDING_HUMAN_REVIEW",
