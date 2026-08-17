@@ -1,0 +1,42 @@
+{
+  "family": "とる",
+  "source_document": "「異字同訓」の漢字の使い分け例（報告）",
+  "source_sha256": "57ad033db96d0d035992c5cc0ffd2703db16ef2e84ccdbdff92d6851c7c0d3fb",
+  "verification_status": "PENDING_HUMAN_REVIEW",
+  "verified_by": null,
+  "verified_at": null,
+  "rules": [
+    {
+      "id": "toru-take",
+      "reading_kana": "とる",
+      "target_kanji": "取",
+      "context_terms": ["本", "魚", "資格", "新聞", "政権", "年", "メモ", "連絡", "着物の汚れ", "疲れ", "痛み"],
+      "source_page": 24,
+      "source_printed_page": 20
+    },
+    {
+      "id": "toru-select",
+      "reading_kana": "とる",
+      "target_kanji": "採",
+      "context_terms": ["血", "きのこ", "指紋", "新入社員", "こちらの案", "会議で決"],
+      "source_page": 24,
+      "source_printed_page": 20
+    },
+    {
+      "id": "toru-perform",
+      "reading_kana": "とる",
+      "target_kanji": "執",
+      "context_terms": ["筆", "事務", "指揮", "政務", "式"],
+      "source_page": 24,
+      "source_printed_page": 20
+    },
+    {
+      "id": "toru-film",
+      "reading_kana": "とる",
+      "target_kanji": "撮",
+      "context_terms": ["写真", "映画", "ビデオカメラ"],
+      "source_page": 24,
+      "source_printed_page": 20
+    }
+  ]
+}
