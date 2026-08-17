@@ -38,6 +38,7 @@ test("invalid reading fails loudly at runtime", () => {
 test("あく/あける provenance is complete and frozen by its named human reviewer", () => {
   const source = provenance.sources.find((entry) => entry.dataset.startsWith("aku_akeru_disambiguation"));
   assert.ok(source);
+  assert.equal(data.rules.length, 3);
   assert.equal(source.file_hash.value, data.source_sha256);
   assert.equal(data.verification_status, "frozen");
   assert.equal(data.verified_by, "Brian Fu");

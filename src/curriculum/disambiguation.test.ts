@@ -34,6 +34,10 @@ test("ambiguous context is REVIEW_REQUIRED, not guessed", () => {
   });
 });
 
+test("single-kanji terms do not match inside longer kanji compounds", () => {
+  assert.equal(disambiguateHakaru("数学の宿題をはかる。").certainty, "REVIEW_REQUIRED");
+});
+
 test("longest source term handles the official 身長と体重 note deterministically", () => {
   assert.equal(disambiguateHakaru("身長と体重をはかる。").target_kanji, "測");
 });

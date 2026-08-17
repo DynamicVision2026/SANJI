@@ -31,9 +31,33 @@ interface LookupRule<Target extends string> {
   context_terms: string[];
 }
 
-function lookup<Target extends string>(context: string, rulesToSearch: LookupRule<Target>[]) {
+const singleKanji = /^\p{Script=Han}$/u;
+
+function containsContextTerm(context: string, term: string): boolean {
+  if ([...term].length !== 1 || !singleKanji.test(term)) return context.includes(term);
+
+  let index = context.indexOf(term);
+  while (index !== -1) {
+    const previous = [...context.slice(0, index)].at(-1);
+    const next = [...context.slice(index + term.length)][0];
+    if ((!previous || !singleKanji.test(previous)) && (!next || !singleKanji.test(next))) return true;
+    index = context.indexOf(term, index + term.length);
+  }
+  return false;
+}
+
+function lookup<Target extends string>(
+  context: string,
+  rulesToSearch: LookupRule<Target>[],
+  verificationStatus: string,
+) {
+  if (verificationStatus !== "frozen") return null;
+  const normalizedContext = context.normalize("NFC");
   const matches = rulesToSearch.flatMap((rule) =>
-    rule.context_terms.filter((term) => context.includes(term)).map((term) => ({ rule, term })),
+    rule.context_terms.flatMap((term) => {
+      const normalizedTerm = term.normalize("NFC");
+      return containsContextTerm(normalizedContext, normalizedTerm) ? [{ rule, term: normalizedTerm }] : [];
+    }),
   );
   const longest = Math.max(0, ...matches.map(({ term }) => term.length));
   const finalists = matches.filter(({ term }) => term.length === longest);
@@ -46,7 +70,7 @@ function lookup<Target extends string>(context: string, rulesToSearch: LookupRul
  * absent match or a tie across kanji is review-required, never guessed.
  */
 export function disambiguateHakaru(context: string): DisambiguationResult {
-  const match = lookup(context, rules);
+  const match = lookup(context, rules, hakaruData.verification_status);
   if (!match) {
     return {
       reading_kana: "はかる",
@@ -75,7 +99,11 @@ export interface ToruDisambiguationResult {
 }
 
 export function disambiguateToru(context: string): ToruDisambiguationResult {
-  const match = lookup(context, toruData.rules as LookupRule<"取" | "採" | "執" | "捕" | "撮">[]);
+  const match = lookup(
+    context,
+    toruData.rules as LookupRule<"取" | "採" | "執" | "捕" | "撮">[],
+    toruData.verification_status,
+  );
   return match
     ? {
         reading_kana: "とる",
@@ -102,7 +130,11 @@ export interface TsukuruDisambiguationResult {
 }
 
 export function disambiguateTsukuru(context: string): TsukuruDisambiguationResult {
-  const match = lookup(context, tsukuruData.rules as LookupRule<"作" | "創" | "造">[]);
+  const match = lookup(
+    context,
+    tsukuruData.rules as LookupRule<"作" | "創" | "造">[],
+    tsukuruData.verification_status,
+  );
   return match
     ? {
         reading_kana: "つくる",
@@ -136,7 +168,7 @@ export function disambiguateAkuAkeru(
 ): AkuAkeruDisambiguationResult {
   if (readingKana !== "あく" && readingKana !== "あける") throw new Error(`Unsupported reading: ${readingKana}`);
   const eligible = akuAkeruData.rules.filter((rule) => rule.reading_kana.includes(readingKana));
-  const match = lookup(context, eligible as LookupRule<"明" | "空" | "開">[]);
+  const match = lookup(context, eligible as LookupRule<"明" | "空" | "開">[], akuAkeruData.verification_status);
   return match
     ? {
         reading_kana: readingKana,
@@ -170,7 +202,7 @@ export function disambiguateAgaruAgeru(
 ): AgaruAgeruDisambiguationResult {
   if (readingKana !== "あがる" && readingKana !== "あげる") throw new Error(`Unsupported reading: ${readingKana}`);
   const eligible = agaruAgeruData.rules.filter((rule) => rule.reading_kana.includes(readingKana));
-  const match = lookup(context, eligible as LookupRule<"上" | "揚" | "挙">[]);
+  const match = lookup(context, eligible as LookupRule<"上" | "揚" | "挙">[], agaruAgeruData.verification_status);
   return match
     ? {
         reading_kana: readingKana,

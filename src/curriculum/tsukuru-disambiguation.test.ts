@@ -23,9 +23,15 @@ test("ambiguous つくる context is REVIEW_REQUIRED", () => {
   assert.equal(disambiguateTsukuru("作品をつくる。").certainty, "REVIEW_REQUIRED");
 });
 
+test("single-kanji terms do not match inside longer kanji compounds", () => {
+  assert.equal(disambiguateTsukuru("米国製品をつくる。").certainty, "REVIEW_REQUIRED");
+  assert.equal(disambiguateTsukuru("船橋市の商品をつくる。").certainty, "REVIEW_REQUIRED");
+});
+
 test("つくる provenance is complete and frozen by its named human reviewer", () => {
   const source = provenance.sources.find((entry) => entry.dataset.startsWith("tsukuru_disambiguation"));
   assert.ok(source);
+  assert.equal(data.rules.length, 3);
   assert.equal(source.file_hash.value, data.source_sha256);
   assert.equal(data.verification_status, "frozen");
   assert.equal(data.verified_by, "Brian Fu");
