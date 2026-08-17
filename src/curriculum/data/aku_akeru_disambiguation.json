@@ -1,0 +1,34 @@
+{
+  "family": "あく / あける",
+  "source_document": "「異字同訓」の漢字の使い分け例（報告）",
+  "source_sha256": "57ad033db96d0d035992c5cc0ffd2703db16ef2e84ccdbdff92d6851c7c0d3fb",
+  "verification_status": "PENDING_HUMAN_REVIEW",
+  "verified_by": null,
+  "verified_at": null,
+  "rules": [
+    {
+      "id": "aku-akeru-dawn",
+      "reading_kana": ["あく", "あける"],
+      "target_kanji": "明",
+      "context_terms": ["子犬の目", "夜", "年", "喪", "らち"],
+      "source_page": 8,
+      "source_printed_page": 4
+    },
+    {
+      "id": "aku-akeru-empty",
+      "reading_kana": ["あく", "あける"],
+      "target_kanji": "空",
+      "context_terms": ["席", "空き箱", "家", "時間"],
+      "source_page": 8,
+      "source_printed_page": 4
+    },
+    {
+      "id": "aku-akeru-open",
+      "reading_kana": ["あく", "あける"],
+      "target_kanji": "開",
+      "context_terms": ["幕", "ドア", "店", "窓", "目"],
+      "source_page": 9,
+      "source_printed_page": 5
+    }
+  ]
+}

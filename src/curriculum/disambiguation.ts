@@ -1,3 +1,4 @@
+import akuAkeruData from "./data/aku_akeru_disambiguation.json";
 import hakaruData from "./data/hakaru_disambiguation.json";
 import toruData from "./data/toru_disambiguation.json";
 import tsukuruData from "./data/tsukuru_disambiguation.json";
@@ -111,6 +112,40 @@ export function disambiguateTsukuru(context: string): TsukuruDisambiguationResul
       }
     : {
         reading_kana: "つくる",
+        target_kanji: null,
+        certainty: "REVIEW_REQUIRED",
+        source_rule_id: null,
+        matched_context: null,
+      };
+}
+
+export type AkuAkeruReading = "あく" | "あける";
+
+export interface AkuAkeruDisambiguationResult {
+  reading_kana: AkuAkeruReading;
+  target_kanji: "明" | "空" | "開" | null;
+  certainty: DisambiguationCertainty;
+  source_rule_id: string | null;
+  matched_context: string | null;
+}
+
+export function disambiguateAkuAkeru(
+  context: string,
+  readingKana: AkuAkeruReading,
+): AkuAkeruDisambiguationResult {
+  if (readingKana !== "あく" && readingKana !== "あける") throw new Error(`Unsupported reading: ${readingKana}`);
+  const eligible = akuAkeruData.rules.filter((rule) => rule.reading_kana.includes(readingKana));
+  const match = lookup(context, eligible as LookupRule<"明" | "空" | "開">[]);
+  return match
+    ? {
+        reading_kana: readingKana,
+        target_kanji: match.rule.target_kanji,
+        certainty: "CONFIDENT",
+        source_rule_id: match.rule.id,
+        matched_context: match.term,
+      }
+    : {
+        reading_kana: readingKana,
         target_kanji: null,
         certainty: "REVIEW_REQUIRED",
         source_rule_id: null,
