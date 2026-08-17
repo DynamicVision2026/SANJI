@@ -38,7 +38,7 @@ test("longest source term handles the official 身長と体重 note deterministi
   assert.equal(disambiguateHakaru("身長と体重をはかる。").target_kanji, "測");
 });
 
-test("rule data has complete provenance and stays visibly unfrozen pending human review", () => {
+test("rule data has complete provenance and a named human freeze approval", () => {
   const source = provenance.sources.find((entry) => entry.dataset.startsWith("hakaru_disambiguation"));
   assert.ok(source);
   assert.equal(rules.rules.length, 4);
@@ -48,11 +48,13 @@ test("rule data has complete provenance and stays visibly unfrozen pending human
     assert.match(rules.source_sha256, /^[a-f0-9]{64}$/);
   }
   assert.equal(source.file_hash.value, rules.source_sha256);
-  assert.equal(source.content_verification.status, "PENDING_HUMAN_REVIEW");
-  assert.equal(source.content_verification.verified_by, null);
+  assert.equal(source.content_verification.status, "frozen");
+  assert.equal(source.content_verification.verified_by, "Brian Fu");
+  assert.equal(source.content_verification.verified_at, "2026-08-17");
   assert.deepEqual(getHakaruRuleTableStatus(), {
-    verification_status: "PENDING_HUMAN_REVIEW",
-    verified_by: null,
+    verification_status: "frozen",
+    verified_by: "Brian Fu",
+    verified_at: "2026-08-17",
     source_sha256: rules.source_sha256,
   });
 });

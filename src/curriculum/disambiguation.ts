@@ -57,11 +57,12 @@ export function disambiguateHakaru(context: string): DisambiguationResult {
 
 export function getHakaruRuleTableStatus(): Pick<
   typeof hakaruData,
-  "verification_status" | "verified_by" | "source_sha256"
+  "verification_status" | "verified_by" | "verified_at" | "source_sha256"
 > {
   return {
     verification_status: hakaruData.verification_status,
     verified_by: hakaruData.verified_by,
+    verified_at: hakaruData.verified_at,
     source_sha256: hakaruData.source_sha256,
   };
 }

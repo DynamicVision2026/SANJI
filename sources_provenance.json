@@ -124,10 +124,10 @@
       "verification_notes": "The official entry lists six spellings. This PoC intentionally implements only the four named in its work order: 図る, 計る, 測る, and 量る. Candidate context terms reproduce the official descriptions/examples; the 身長と体重 note is represented as the longest-match override for 測る.",
       "content_verification": {
         "method": "official_pdf_text_extraction_and_visual_page_check",
-        "status": "PENDING_HUMAN_REVIEW",
-        "verified_by": null,
-        "verification_agent": "Codex implementation session; not a substitute for the required named human reviewer",
-        "verified_at": null
+        "status": "frozen",
+        "verified_by": "Brian Fu",
+        "verification_agent": "named human review coordinated by the project coordinator",
+        "verified_at": "2026-08-17"
       }
     }
   ],

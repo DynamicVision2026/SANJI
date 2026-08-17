@@ -15,7 +15,5 @@ The source is the Agency for Cultural Affairs report 「異字同訓」の漢字
 
 ## Freeze status
 
-The candidate table is `PENDING_HUMAN_REVIEW` and is not production-frozen.
-The coordinator must replace `verified_by: null` with the named human reviewer
-and record the verification date after review. Until then this module is PoC
-only and must not be integrated into the live generation pipeline.
+The rule table was reviewed and frozen by Brian Fu on 2026-08-17. This module
+remains a PoC and is not integrated into the live generation pipeline.
