@@ -131,10 +131,10 @@ sources:
   extraction_method: Direct PDF text-layer extraction and comparison with the visually verified official-document layout
   verification_notes: 創る is limited to contexts where originality is explicitly indicated; the official report states 作る is also generally acceptable.
   content_verification:
-    method: official_pdf_text_extraction; named human review still required
-    status: PENDING_HUMAN_REVIEW
-    verified_by: null
-    verified_at: null
+    method: official_pdf_text_extraction and named human page-by-page review
+    status: frozen
+    verified_by: Brian Fu
+    verified_at: '2026-08-17'
 - dataset: aku_akeru_disambiguation (明く・明ける / 空く・空ける / 開く・開ける PoC)
   document_name: 「異字同訓」の漢字の使い分け例（報告）
   official_landing_page: https://www.bunka.go.jp/seisaku/kokugo_nihongo/kokugo_shisaku/hokoku/index.html
@@ -155,10 +155,10 @@ sources:
   extraction_method: Direct PDF text-layer extraction and comparison with the visually verified official-document layout
   verification_notes: The paired readings share one semantic rule across strict intransitive/transitive forms, as approved by the coordinator and recorded in docs/disambiguation-phase2.md.
   content_verification:
-    method: official_pdf_text_extraction; named human review still required
-    status: PENDING_HUMAN_REVIEW
-    verified_by: null
-    verified_at: null
+    method: official_pdf_text_extraction and named human page-by-page review
+    status: frozen
+    verified_by: Brian Fu
+    verified_at: '2026-08-17'
 - dataset: agaru_ageru_disambiguation (上がる・上げる / 揚がる・揚げる / 挙がる・挙げる PoC)
   document_name: 「異字同訓」の漢字の使い分け例（報告）
   official_landing_page: https://www.bunka.go.jp/seisaku/kokugo_nihongo/kokugo_shisaku/hokoku/index.html
