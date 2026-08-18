@@ -74,7 +74,7 @@ export interface KanjiReadingStage {
   extraction_notes: string | null;
 }
 
-export type LexicalRuleKind = "jukujikun" | "rendaku" | "proper_noun" | "furoku";
+export type LexicalRuleKind = "jukujikun" | "rendaku" | "proper_noun" | "furoku" | "okurigana";
 
 /** Raw provenance category from the source spreadsheet's own `reading_type` column for appendix rows (0008). Distinct from ReadingType (on/kun) — application logic uses `rule_kind`, not this. */
 export type SourceReadingType = "special" | "proper_name";

@@ -284,7 +284,7 @@ export function validateReadingStage(
   return { ok: errors.length === 0, errors, total: rows.length };
 }
 
-const LEXICAL_RULE_KINDS = new Set(["jukujikun", "rendaku", "proper_noun", "furoku"]);
+const LEXICAL_RULE_KINDS = new Set(["jukujikun", "rendaku", "proper_noun", "furoku", "okurigana"]);
 
 /** §6.5-style structural checks for `lexical_reading_rule` (§19.2 ingestion, 0008 schema). */
 export function validateLexicalRules(rows: readonly LexicalReadingRule[]): DatasetValidationResult {
