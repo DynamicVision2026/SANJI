@@ -1,0 +1,46 @@
+{
+  "model": "gpt-5.5",
+  "k": 5,
+  "results": [
+    {
+      "pair": "王/玉",
+      "attempt": 3,
+      "target": "王",
+      "substitute": "玉",
+      "sentence": "その王国は長い歴史を持っている。",
+      "counterfactual": "その玉国は長い歴史を持っている。",
+      "counterfactual_acceptable": false,
+      "cloze_sentence": "その□国は長い歴史を持っている。",
+      "cloze_answers": [
+        "王",
+        "王",
+        "王",
+        "王",
+        "王"
+      ],
+      "unanimous_cloze": true,
+      "discriminates": true,
+      "admission_status": "PENDING_HUMAN_PRUNING"
+    },
+    {
+      "pair": "人/入",
+      "attempt": 3,
+      "target": "人",
+      "substitute": "入",
+      "sentence": "警察が犯人を捕まえた。",
+      "counterfactual": "警察が犯入を捕まえた。",
+      "counterfactual_acceptable": false,
+      "cloze_sentence": "警察が犯□を捕まえた。",
+      "cloze_answers": [
+        "人",
+        "人",
+        "人",
+        "人",
+        "人"
+      ],
+      "unanimous_cloze": true,
+      "discriminates": true,
+      "admission_status": "PENDING_HUMAN_PRUNING"
+    }
+  ]
+}
