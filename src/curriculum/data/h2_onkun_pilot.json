@@ -1,0 +1,16 @@
+{
+  "source_document": "音訓の小・中・高等学校段階別割り振り表（平成29年3月）",
+  "source_sha256": "0bc189982a50122f1e35dd6a751bfdff0ec5a0ad67e99eda916d012f859a5ae4",
+  "cases": [
+    { "kanji": "一", "sentence": "一年生が元気に返事をした。", "cloze_target": "一", "target_reading": "イチ", "alternate_reading": "ひとつ", "source_page": 1 },
+    { "kanji": "一", "sentence": "りんごを一つ選んだ。", "cloze_target": "一つ", "target_reading": "ひとつ", "alternate_reading": "イチ", "source_page": 1 },
+    { "kanji": "角", "sentence": "三角形の角度を測った。", "cloze_target": "角", "target_reading": "カク", "alternate_reading": "つの", "source_page": 5 },
+    { "kanji": "角", "sentence": "牛の角は大きく曲がっている。", "cloze_target": "角", "target_reading": "つの", "alternate_reading": "カク", "source_page": 5 },
+    { "kanji": "空", "sentence": "飛行機が空港に着いた。", "cloze_target": "空", "target_reading": "クウ", "alternate_reading": "そら", "source_page": 11 },
+    { "kanji": "空", "sentence": "青い空を見上げた。", "cloze_target": "空", "target_reading": "そら", "alternate_reading": "クウ", "source_page": 11 },
+    { "kanji": "行", "sentence": "銀行でお金を預けた。", "cloze_target": "行", "target_reading": "コウ", "alternate_reading": "いく", "source_page": 14 },
+    { "kanji": "行", "sentence": "毎朝歩いて学校へ行く。", "cloze_target": "行く", "target_reading": "いく", "alternate_reading": "コウ", "source_page": 14 },
+    { "kanji": "生", "sentence": "生徒が教室に集まった。", "cloze_target": "生", "target_reading": "セイ", "alternate_reading": "なま", "source_page": 26 },
+    { "kanji": "生", "sentence": "新鮮な野菜を生で食べた。", "cloze_target": "生", "target_reading": "なま", "alternate_reading": "セイ", "source_page": 26 }
+  ]
+}
