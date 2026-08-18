@@ -141,6 +141,54 @@
         "verification_agent": "claude_code_session_local_file_sha256_and_text_extraction_check",
         "verified_at": "2026-08-18"
       }
+    },
+    {
+      "dataset": "joyokanjihyo (常用漢字表)",
+      "document_name": "常用漢字表（平成22年11月30日）",
+      "official_landing_page": "https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/pdf/joyokanjihyo_20101130.pdf",
+      "actual_pdf_url_used": "https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/pdf/joyokanjihyo_20101130.pdf",
+      "retrieved_at": "2026-08-18",
+      "file_size_bytes": 3551021,
+      "publish_date_on_document": "No explicit 内閣告示 citation string (e.g. '内閣告示' or '平成22年11月30日' as a promulgation reference) appears anywhere in the extracted text of the document's 164 pages — searched exhaustively, not sampled. PDF metadata (/CreationDate D:20101112130817+09'00', /ModDate D:20101125130806+09'00', /Creator 'Adobe InDesign CS2_J (4.0.2)', /Producer 'Adobe PDF Library 7.0') is internally consistent with a production timeline ending shortly before the document's known 2010-11-30 (平成22年11月30日) release date, but this is corroborating circumstantial evidence, not an independently verified citation from an external authority.",
+      "file_hash": {
+        "algorithm": "SHA-256",
+        "value": "d9f28aeb4ce8250dbde07de20ac66cca71805ba09d94e4942c752dffa84d8d42",
+        "status": "CONFIRMED",
+        "computed_from": "actual local binary file, not text/summary-derived; matches the value already reported for this file prior to commit"
+      },
+      "local_path": "sources/raw/joyokanjihyo-h22-11-30.pdf",
+      "local_path_note": "Direct chat-upload of the raw PDF failed repeatedly (unresolved cause, client-side). File was instead delivered inside a zip archive (created on macOS, so it also contained a __MACOSX/._<name> resource-fork artifact alongside the real PDF, which was discarded). The PDF was extracted from the zip and its SHA-256 verified to match the expected value exactly before being copied into the repo and re-verified again after. Committed to the repo verbatim on 2026-08-18.",
+      "page_mapping": [
+        {
+          "section": "前書き（趣旨・適用範囲等の総則的な注記）",
+          "page_number": "1-3"
+        },
+        {
+          "section": "（付）字体についての解説（明朝体のデザインについて／明朝体と筆写の楷書との関係について）",
+          "page_number": "4-10"
+        },
+        {
+          "section": "本表（ア〜ワ、漢字・音訓・例・備考）",
+          "page_number": "11-161"
+        },
+        {
+          "section": "付表（熟字訓・当て字など、単独の音訓によらない語の一覧 — 明日/あす、小豆/あずき 等）",
+          "page_number": "162-163"
+        },
+        {
+          "section": "印刷用データの版元スタンプのみ（実質的な本文なし）",
+          "page_number": "164"
+        }
+      ],
+      "extraction_method": "Local binary file, extracted from a zip archive supplied directly for this task (not fetched by this session over the network). Text layer extracted per-page with pypdf (full text layer present throughout all 164 pages, no OCR needed) to confirm document identity and build the page_mapping above; also searched exhaustively across all 164 pages for an explicit 内閣告示/promulgation-date citation string (see publish_date_on_document — none found).",
+      "verification_notes": "This session did not independently re-download the file, did not locate a formal promulgation-notice citation within the document's own text (see publish_date_on_document), and did not attempt to resolve the discrepancy between the document's internal printed page numbers (which restart within 本表/付表, e.g. 付表's own printed numbering appears to run in a different order than the PDF's page index around pages 162-163) and the PDF's raw page index — the page_mapping above uses PDF page index only. Content identity was sanity-checked (前書き → 字体解説 → 本表 ア〜ワ → 付表 structure, and the 付表 entries visually match known 常用漢字表 付表 words such as 明日/あす, 小豆/あずき, 今日/きょう), and the SHA-256 matches the value already reported for this file exactly.",
+      "content_verification": {
+        "method": "sha256_hash_match_against_previously_reported_value_plus_pdf_text_extraction_identity_check",
+        "status": "hash_confirmed_content_sanity_checked_not_deep_cross_verified",
+        "verified_by": "Computer",
+        "verification_agent": "claude_code_session_local_file_sha256_and_text_extraction_check",
+        "verified_at": "2026-08-18"
+      }
     }
   ],
   "meta": {
