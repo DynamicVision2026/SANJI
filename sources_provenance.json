@@ -68,6 +68,8 @@
         "status": "CONFIRMED",
         "computed_from": "actual downloaded binary file, not text/summary-derived"
       },
+      "local_path": "sources/raw/ontsun-wariwake-h29-03.pdf",
+      "local_path_note": "Raw source PDF committed to the repo verbatim on 2026-08-18; SHA-256 of the committed file re-verified byte-identical to the value above.",
       "page_mapping": [
         {
           "section": "备考／说明文字（含小学校・中学校・高等学校学校段阶割り振り规则说明，及第2条'汉字栏右侧数字对应学年别漢字配当表所配学年'的说明）",
@@ -98,6 +100,94 @@
         "verified_by": "Computer",
         "verification_agent": "external_human_agent_manual_binary_download",
         "verified_at": "2026-08-15"
+      }
+    },
+    {
+      "dataset": "okurigana_no_tsukekata (送り仮名の付け方)",
+      "document_name": "送り仮名の付け方（一括ダウンロード版）",
+      "official_landing_page": "https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/okurikana/pdf/94380801_02.pdf",
+      "actual_pdf_url_used": "https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/okurikana/pdf/94380801_02.pdf",
+      "retrieved_at": "2026-08-18",
+      "file_size_bytes": 1099980,
+      "publish_date_on_document": "Not stated in the extracted document text — this consolidated 一括ダウンロード版 begins directly with 前書き (foreword) and has no promulgation-notice cover page. PDF /Author metadata is 文化庁; /CreationDate is D:20260514133335+09'00' (file-generation timestamp, not a promulgation date — not treated as one here).",
+      "file_hash": {
+        "algorithm": "SHA-256",
+        "value": "3b6b47b18122c707115261cbb7172abbb8b3b4b5f2fb746270acee3639914cde",
+        "status": "CONFIRMED",
+        "computed_from": "actual local binary file, not text/summary-derived; matches the value already reported for this file prior to commit"
+      },
+      "local_path": "sources/raw/okurigana-no-tsukekata-ikkatsu.pdf",
+      "local_path_note": "File was supplied already downloaded (not fetched by this session over the network) and committed to the repo verbatim on 2026-08-18.",
+      "page_mapping": [
+        {
+          "section": "前書き（趣旨・適用範囲） および「本文」の見方及び使い方（用語解説の一部含む）",
+          "page_number": "1"
+        },
+        {
+          "section": "用語の解説（単独の語・複合の語・付表の語・活用のある語／ない語・本則／例外／許容の定義）",
+          "page_number": "2"
+        },
+        {
+          "section": "本文 — 単独の語 通則1〜通則7（活用のある語・活用のない語）および複合の語 通則6〜通則7、付表の語",
+          "page_number": "3-8"
+        }
+      ],
+      "extraction_method": "Local binary file (already downloaded, provided directly for this task — not fetched by this session). Text layer extracted with pypdf per page to confirm document identity (title 「送り仮名の付け方」, 通則1–通則7 structure) and to build the page_mapping above; full text layer present, no OCR needed.",
+      "verification_notes": "This session did not independently re-download the file or independently establish the official promulgation notice number/date — only the SHA-256 (matched exactly against the value already reported) and a text-extraction sanity check that the content is genuinely 「送り仮名の付け方」 with the expected 通則1–7 structure. Per-通則 page boundaries beyond the page_mapping above (e.g. exactly where 通則2 vs 通則3 begins within pages 3-8) were not individually resolved — the coarse page_mapping above is what was directly confirmed from the extracted text, not a guess at finer detail. A separate, distinct HTML landing page (as opposed to the direct PDF URL) was not independently identified or verified in this session; official_landing_page is set equal to actual_pdf_url_used for that reason.",
+      "content_verification": {
+        "method": "sha256_hash_match_against_previously_reported_value_plus_pdf_text_extraction_identity_check",
+        "status": "hash_confirmed_content_sanity_checked_not_deep_cross_verified",
+        "verified_by": "Computer",
+        "verification_agent": "claude_code_session_local_file_sha256_and_text_extraction_check",
+        "verified_at": "2026-08-18"
+      }
+    },
+    {
+      "dataset": "joyokanjihyo (常用漢字表)",
+      "document_name": "常用漢字表（平成22年11月30日）",
+      "official_landing_page": "https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/pdf/joyokanjihyo_20101130.pdf",
+      "actual_pdf_url_used": "https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/pdf/joyokanjihyo_20101130.pdf",
+      "retrieved_at": "2026-08-18",
+      "file_size_bytes": 3551021,
+      "publish_date_on_document": "No explicit 内閣告示 citation string (e.g. '内閣告示' or '平成22年11月30日' as a promulgation reference) appears anywhere in the extracted text of the document's 164 pages — searched exhaustively, not sampled. PDF metadata (/CreationDate D:20101112130817+09'00', /ModDate D:20101125130806+09'00', /Creator 'Adobe InDesign CS2_J (4.0.2)', /Producer 'Adobe PDF Library 7.0') is internally consistent with a production timeline ending shortly before the document's known 2010-11-30 (平成22年11月30日) release date, but this is corroborating circumstantial evidence, not an independently verified citation from an external authority.",
+      "file_hash": {
+        "algorithm": "SHA-256",
+        "value": "d9f28aeb4ce8250dbde07de20ac66cca71805ba09d94e4942c752dffa84d8d42",
+        "status": "CONFIRMED",
+        "computed_from": "actual local binary file, not text/summary-derived; matches the value already reported for this file prior to commit"
+      },
+      "local_path": "sources/raw/joyokanjihyo-h22-11-30.pdf",
+      "local_path_note": "Direct chat-upload of the raw PDF failed repeatedly (unresolved cause, client-side). File was instead delivered inside a zip archive (created on macOS, so it also contained a __MACOSX/._<name> resource-fork artifact alongside the real PDF, which was discarded). The PDF was extracted from the zip and its SHA-256 verified to match the expected value exactly before being copied into the repo and re-verified again after. Committed to the repo verbatim on 2026-08-18.",
+      "page_mapping": [
+        {
+          "section": "前書き（趣旨・適用範囲等の総則的な注記）",
+          "page_number": "1-3"
+        },
+        {
+          "section": "（付）字体についての解説（明朝体のデザインについて／明朝体と筆写の楷書との関係について）",
+          "page_number": "4-10"
+        },
+        {
+          "section": "本表（ア〜ワ、漢字・音訓・例・備考）",
+          "page_number": "11-161"
+        },
+        {
+          "section": "付表（熟字訓・当て字など、単独の音訓によらない語の一覧 — 明日/あす、小豆/あずき 等）",
+          "page_number": "162-163"
+        },
+        {
+          "section": "印刷用データの版元スタンプのみ（実質的な本文なし）",
+          "page_number": "164"
+        }
+      ],
+      "extraction_method": "Local binary file, extracted from a zip archive supplied directly for this task (not fetched by this session over the network). Text layer extracted per-page with pypdf (full text layer present throughout all 164 pages, no OCR needed) to confirm document identity and build the page_mapping above; also searched exhaustively across all 164 pages for an explicit 内閣告示/promulgation-date citation string (see publish_date_on_document — none found).",
+      "verification_notes": "This session did not independently re-download the file, did not locate a formal promulgation-notice citation within the document's own text (see publish_date_on_document), and did not attempt to resolve the discrepancy between the document's internal printed page numbers (which restart within 本表/付表, e.g. 付表's own printed numbering appears to run in a different order than the PDF's page index around pages 162-163) and the PDF's raw page index — the page_mapping above uses PDF page index only. Content identity was sanity-checked (前書き → 字体解説 → 本表 ア〜ワ → 付表 structure, and the 付表 entries visually match known 常用漢字表 付表 words such as 明日/あす, 小豆/あずき, 今日/きょう), and the SHA-256 matches the value already reported for this file exactly.",
+      "content_verification": {
+        "method": "sha256_hash_match_against_previously_reported_value_plus_pdf_text_extraction_identity_check",
+        "status": "hash_confirmed_content_sanity_checked_not_deep_cross_verified",
+        "verified_by": "Computer",
+        "verification_agent": "claude_code_session_local_file_sha256_and_text_extraction_check",
+        "verified_at": "2026-08-18"
       }
     }
   ],
