@@ -69,7 +69,7 @@ export async function recordResult(database: ResultDatabase, input: RecordResult
     ]);
 
     const existing = await client.query<{ id: string }>(
-      "select id from results where worksheet_id = $1 and item_id = $2 and student_id = $3 for update",
+      "select id from results where worksheet_id = $1 and item_id = $2 and student_id = $3",
       [input.worksheetId, input.itemId, input.studentId],
     );
     if (existing.rows[0]) {
@@ -113,4 +113,3 @@ export async function recordResult(database: ResultDatabase, input: RecordResult
     client.release();
   }
 }
-
