@@ -13,6 +13,9 @@ test("defaults resolve when nothing is set", () => {
   assert.deepEqual(config.targetOccurrenceBounds, [1, 1]);
   assert.equal(config.cohortOverlapThreshold, 0.2);
   assert.deepEqual(config.allowedWithRubyExtensions, []);
+  assert.equal(config.h9MinimumObservationsPerSide, 5);
+  assert.equal(config.h9AccuracyGapThreshold, 0.4);
+  assert.equal(config.h9EvaluationWindowDays, 60);
 });
 
 test("readers honour the PASSED env, not process.env (issue #5 finding 4)", () => {
@@ -147,5 +150,25 @@ test("allowed_with_ruby extensions parse as characters; duplicates throw (§7.10
   assert.throws(
     () => getRuntimeConfig({ ...BASE, SANJI_ALLOWED_WITH_RUBY_EXTENSIONS: "簞簞" }),
     /duplicate character/,
+  );
+});
+
+test("H9 aggregate thresholds are runtime-configurable and fail unsafe values", () => {
+  const config = getRuntimeConfig({
+    ...BASE,
+    SANJI_H9_MIN_OBSERVATIONS_PER_SIDE: "7",
+    SANJI_H9_ACCURACY_GAP_THRESHOLD: "0.55",
+    SANJI_H9_EVALUATION_WINDOW_DAYS: "90",
+  });
+  assert.equal(config.h9MinimumObservationsPerSide, 7);
+  assert.equal(config.h9AccuracyGapThreshold, 0.55);
+  assert.equal(config.h9EvaluationWindowDays, 90);
+  assert.throws(
+    () => getRuntimeConfig({ ...BASE, SANJI_H9_MIN_OBSERVATIONS_PER_SIDE: "2" }),
+    /below the minimum of 3/,
+  );
+  assert.throws(
+    () => getRuntimeConfig({ ...BASE, SANJI_H9_ACCURACY_GAP_THRESHOLD: "1.1" }),
+    /fraction/,
   );
 });
