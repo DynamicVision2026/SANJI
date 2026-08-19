@@ -80,6 +80,18 @@ try {
   if (visible.rows[0].count === 1) pass("cross-tenant state reads are filtered by RLS");
   else fail("cross-tenant state reads are filtered by RLS", `visible rows=${visible.rows[0].count}`);
   await rejects("cross-tenant evidence write is rejected by RLS", "insert into hypothesis_evidence(org_id, branch_id, student_id, hypothesis_id, evidence_key, kanji, weight, source_kind, observed_at) values ($1, $2, $3, 'H1', 'h1-b', '字', 1, 'probe_item', now())", [B.org, B.branch, B.student], ["42501"]);
+  await rejects("app role with INSERT cannot forge state audit", "insert into hypothesis_state_audit(org_id, state_id, recommendation_id, student_id, hypothesis_id, from_status, to_status, approved_by_user_id) values ($1, $2, $3, $4, 'H1', 'undetected', 'active', $5)", [A.org, state, recommendation, A.student, A.user], ["42501"]);
+  await rejects("app role with INSERT cannot forge recommendation audit", "insert into state_recommendation_audit(org_id, recommendation_id, action, actor_user_id, basis_snapshot) values ($1, $2, 'approved', $3, '{\"forged\":true}')", [A.org, recommendation, A.user], ["42501"]);
+  await client.query("reset role");
+
+  await client.query("create role sanji_table_owner nologin");
+  await client.query("alter table student_hypothesis_state owner to sanji_table_owner");
+  await client.query("grant usage on schema public to sanji_table_owner");
+  await client.query("set role sanji_table_owner");
+  await client.query("select set_config('app.current_org', $1, false)", [A.org]);
+  const ownerVisible = await client.query("select count(*)::int count from student_hypothesis_state");
+  if (ownerVisible.rows[0].count === 1) pass("FORCE RLS filters cross-tenant reads even for the table owner");
+  else fail("FORCE RLS filters cross-tenant reads even for the table owner", `visible rows=${ownerVisible.rows[0].count}`);
   await client.query("reset role");
 
   await succeeds("explicit assigned-instructor approval succeeds", "select resolve_state_recommendation($1, $2, 'approved')", [recommendation, A.user]);

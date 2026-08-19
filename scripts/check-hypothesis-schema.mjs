@@ -26,6 +26,8 @@ for (const token of [
   "state_recommendation_one_pending_idx",
   "student_hypothesis_state_guard",
   "hypothesis_evidence_immutable",
+  "hypothesis_state_audit_insert_guard",
+  "state_recommendation_audit_insert_guard",
   "resolve_state_recommendation",
   "resolved_by_user_id",
   "approved_by_user_id",
@@ -39,4 +41,3 @@ passGate(
   "v2.5 §7A.1/§7A.8/§11.10/§15.8",
   "tenant-owned evidence, confirmed state, recommendations, and immutable audit records are present; direct state mutation is guarded",
 );
-

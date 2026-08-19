@@ -209,6 +209,23 @@ create trigger state_recommendation_audit_immutable
   before update or delete on state_recommendation_audit
   for each row execute function reject_immutable_hypothesis_record();
 
+create or replace function guard_hypothesis_audit_insert() returns trigger
+  language plpgsql as $$
+begin
+  if current_setting('app.audit_recommendation', true) is distinct from new.recommendation_id::text then
+    raise exception '% records may only be inserted by recommendation resolution', tg_table_name
+      using errcode = '42501';
+  end if;
+  return new;
+end $$;
+
+create trigger hypothesis_state_audit_insert_guard
+  before insert on hypothesis_state_audit
+  for each row execute function guard_hypothesis_audit_insert();
+create trigger state_recommendation_audit_insert_guard
+  before insert on state_recommendation_audit
+  for each row execute function guard_hypothesis_audit_insert();
+
 create or replace function resolve_state_recommendation(
   recommendation uuid,
   actor uuid,
@@ -265,6 +282,7 @@ begin
       set status = rec.to_status, version = version + 1, updated_at = clock_timestamp()
       where id = state_row.id;
     perform set_config('app.approved_recommendation', '', true);
+    perform set_config('app.audit_recommendation', rec.id::text, true);
     insert into hypothesis_state_audit (
       org_id, state_id, recommendation_id, student_id, hypothesis_id,
       from_status, to_status, approved_by_user_id
@@ -283,12 +301,14 @@ begin
   where id = rec.id;
   perform set_config('app.resolved_recommendation', '', true);
 
+  perform set_config('app.audit_recommendation', rec.id::text, true);
   insert into state_recommendation_audit (
     org_id, recommendation_id, action, actor_user_id, basis_snapshot, rejection_note
   ) values (
     rec.org_id, rec.id, decision, actor, rec.basis,
     case when decision = 'rejected' then note else null end
   );
+  perform set_config('app.audit_recommendation', '', true);
 end $$;
 
 -- No ordinary application role receives direct status-update authority.
@@ -299,6 +319,29 @@ alter table student_hypothesis_state enable row level security;
 alter table state_recommendation enable row level security;
 alter table hypothesis_state_audit enable row level security;
 alter table state_recommendation_audit enable row level security;
+
+-- FORCE closes PostgreSQL's table-owner RLS bypass. Superusers retain their
+-- documented administrative bypass; application/table-owner roles do not.
+alter table organizations force row level security;
+alter table branches force row level security;
+alter table users force row level security;
+alter table user_branch_assignments force row level security;
+alter table students force row level security;
+alter table student_instructor_assignments force row level security;
+alter table worksheets force row level security;
+alter table worksheet_items force row level security;
+alter table results force row level security;
+alter table manual_error_entries force row level security;
+alter table error_profile force row level security;
+alter table diagnostics force row level security;
+alter table reports force row level security;
+alter table subscriptions force row level security;
+alter table audit_log force row level security;
+alter table hypothesis_evidence force row level security;
+alter table student_hypothesis_state force row level security;
+alter table state_recommendation force row level security;
+alter table hypothesis_state_audit force row level security;
+alter table state_recommendation_audit force row level security;
 
 create policy hypothesis_evidence_org_isolation on hypothesis_evidence
   using (org_id = current_org_id()) with check (org_id = current_org_id());

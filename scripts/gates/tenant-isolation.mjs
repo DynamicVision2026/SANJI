@@ -65,7 +65,7 @@ const sql = sqlFiles.map((f) => readFileSync(f, "utf8")).join("\n");
 const tables = new Map(); // name -> { columns:Set, rls:boolean, policies:number }
 
 function table(name) {
-  if (!tables.has(name)) tables.set(name, { columns: new Set(), rls: false, policies: 0 });
+  if (!tables.has(name)) tables.set(name, { columns: new Set(), rls: false, forceRls: false, policies: 0 });
   return tables.get(name);
 }
 
@@ -85,6 +85,10 @@ while ((m = alterAddRe.exec(sql)) !== null) {
 const rlsRe = /alter\s+table\s+([a-z_][a-z0-9_]*)\s+enable\s+row\s+level\s+security/gi;
 while ((m = rlsRe.exec(sql)) !== null) {
   table(m[1].toLowerCase()).rls = true;
+}
+const forceRlsRe = /alter\s+table\s+([a-z_][a-z0-9_]*)\s+force\s+row\s+level\s+security/gi;
+while ((m = forceRlsRe.exec(sql)) !== null) {
+  table(m[1].toLowerCase()).forceRls = true;
 }
 // Policies: capture the USING clause body so vacuous policies can be flagged
 // (issue #6 item 3) — bare existence of a CREATE POLICY is not protection.
@@ -165,12 +169,14 @@ for (const name of ORG_KEYED) {
     errors.push(`tenant table '${name}' lacks its tenant key column '${tenantKey}' (v2.3 §5.1/§16.1)`);
   }
   if (!t.rls) errors.push(`tenant table '${name}' does not enable row level security (§16.1)`);
+  if (!t.forceRls) errors.push(`tenant table '${name}' does not FORCE row level security — its table owner could bypass tenant isolation (§16.1)`);
   if (t.policies === 0) errors.push(`tenant table '${name}' has no RLS policy — an explicit org-scoped policy is required (§16.1)`);
 }
 for (const name of JOIN_SCOPED) {
   const t = tables.get(name);
   if (!t) continue;
   if (!t.rls) errors.push(`join-scoped tenant table '${name}' does not enable row level security (§16.1)`);
+  if (!t.forceRls) errors.push(`join-scoped tenant table '${name}' does not FORCE row level security — its table owner could bypass tenant isolation (§16.1)`);
   if (t.policies === 0) errors.push(`join-scoped tenant table '${name}' has no RLS policy (§16.1)`);
 }
 for (const name of GLOBAL) {
@@ -187,7 +193,7 @@ if (errors.length > 0) {
 passGate(
   "Tenant Isolation Gate",
   "§15.4",
-  `${ORG_KEYED.length} org-keyed + ${JOIN_SCOPED.length} join-scoped tables verified (org_id/RLS/non-vacuous policy), ` +
+  `${ORG_KEYED.length} org-keyed + ${JOIN_SCOPED.length} join-scoped tables verified (org_id/RLS/FORCE RLS/non-vacuous policy), ` +
     `${GLOBAL.length} global tables confirmed unscoped by spec design; composite org-integrity FKs present on both assignment tables. ` +
     `Live assignment WRITE isolation and hypothesis-state READ/WRITE isolation are regression-tested in CI against real Postgres.`,
 );
