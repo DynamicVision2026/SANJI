@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import pg from "pg";
 
 import { persistH1Evidence } from "../src/hypotheses/persist-h1-evidence.ts";
+import { persistH2Evidence } from "../src/hypotheses/persist-h2-evidence.ts";
 import { recordResult } from "../src/results/record-result.ts";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -51,14 +52,16 @@ try {
 
   const B = await seedTenant("b");
   await admin.query("insert into kanji_jouyou(kanji, in_kyoiku) values ('宮', true)");
-  await admin.query(
+  const readingRows = (await admin.query(
     `insert into kanji_reading_stage
        (kanji, reading_kana, reading_type, school_stage, elementary_grade, source_page, is_jukujikun, confidence)
      values
        ('宮', 'みや', 'kun', 'elementary', 3, 9, false, 'high'),
        ('宮', 'キュウ', 'on', 'elementary', 3, 9, false, 'high'),
-       ('宮', 'グウ', 'on', 'junior_high', 3, 9, false, 'high')`,
-  );
+       ('宮', 'グウ', 'on', 'junior_high', 3, 9, false, 'high')
+     returning id, reading_kana`,
+  )).rows;
+  const readingIds = Object.fromEntries(readingRows.map(({ id, reading_kana }) => [reading_kana, id]));
 
   await admin.query("create role h1_evidence_writer login password 'h1_evidence_writer'");
   await admin.query("grant usage on schema public to h1_evidence_writer");
@@ -69,8 +72,8 @@ try {
   appUrl.password = "h1_evidence_writer";
   appPool = new pg.Pool({ connectionString: appUrl.toString(), max: 8 });
 
-  const makeResult = async (tenant, { itemType = "yomi", target = "宮", answer = "みや", response = "むぐ", sourceKind = "probe_item" } = {}) => {
-    const item = (await admin.query("insert into items(item_type, target_kanji, answer_text) values ($1, $2, $3) returning id", [itemType, target, answer])).rows[0].id;
+  const makeResult = async (tenant, { itemType = "yomi", target = "宮", answer = "みや", targetReadingId = null, response = "むぐ", sourceKind = "probe_item" } = {}) => {
+    const item = (await admin.query("insert into items(item_type, target_kanji, answer_text, target_reading_id) values ($1, $2, $3, $4) returning id", [itemType, target, answer, targetReadingId])).rows[0].id;
     const worksheet = (await admin.query("insert into worksheets(org_id, branch_id, student_id, created_by_user_id, status) values ($1, $2, $3, $4, 'generated') returning id", [tenant.org, tenant.branch, tenant.student, tenant.user])).rows[0].id;
     await admin.query("insert into worksheet_items(worksheet_id, item_id, position) values ($1, $2, 1)", [worksheet, item]);
     const recorded = await recordResult(appPool, {
@@ -150,13 +153,57 @@ try {
     else fail("unsupported source_kind writes no partial row", `rows=${count}`);
   }
 
+  const h2Id = await makeResult(A, { targetReadingId: readingIds["みや"], response: "キュウ" });
+  const h2Evidence = await persistH2Evidence(appPool, context(A, h2Id));
+  const h2Stored = (await admin.query("select * from hypothesis_evidence where source_record_id = $1 and hypothesis_id = 'H2'", [h2Id])).rows;
+  if (h2Evidence?.inserted && h2Stored.length === 1 && Number(h2Stored[0].weight) === 1 && h2Stored[0].evidence_key === `${h2Id}:H2`) pass("source-backed opposite on/kun result writes one H2 row at source weight 1.0");
+  else fail("H2 positive result writes correct evidence", JSON.stringify({ h2Evidence, h2Stored }));
+
+  const h2Repeated = await persistH2Evidence(appPool, context(A, h2Id));
+  const h2RepeatedCount = (await admin.query("select count(*)::int count from hypothesis_evidence where source_record_id = $1 and hypothesis_id = 'H2'", [h2Id])).rows[0].count;
+  if (h2Repeated && !h2Repeated.inserted && h2Repeated.id === h2Evidence.id && h2RepeatedCount === 1) pass("H2 re-submission is idempotent for (result.id, H2)");
+  else fail("H2 re-submission is idempotent", JSON.stringify({ h2Repeated, h2RepeatedCount }));
+
+  const h2UnknownId = await makeResult(A, { targetReadingId: readingIds["みや"], response: "むぐ" });
+  if (await persistH2Evidence(appPool, context(A, h2UnknownId)) === null) pass("H1-like unknown reading is not misclassified as H2");
+  else fail("H2 negative control", "unknown reading produced evidence");
+
+  const h2NoResponseId = await makeResult(A, { targetReadingId: readingIds["みや"], response: null });
+  const h2NoSourceId = await makeResult(A, { targetReadingId: readingIds["みや"], response: "キュウ", sourceKind: null });
+  if (await persistH2Evidence(appPool, context(A, h2NoResponseId)) === null && await persistH2Evidence(appPool, context(A, h2NoSourceId)) === null) {
+    const skipped = (await admin.query("select count(*)::int count from hypothesis_evidence where hypothesis_id = 'H2' and source_record_id in ($1, $2)", [h2NoResponseId, h2NoSourceId])).rows[0].count;
+    if (skipped === 0) pass("H2 NULL response and source_kind independently skip evidence");
+    else fail("H2 NULL gates write no evidence", `rows=${skipped}`);
+  } else fail("H2 NULL gates return no evidence", "adapter returned evidence");
+
+  const bH2Result = await makeResult(B, { targetReadingId: readingIds["みや"], response: "キュウ" });
+  try {
+    await persistH2Evidence(appPool, { ...context(A, bH2Result), studentId: B.student });
+    fail("cross-tenant H2 result read is rejected", "read unexpectedly succeeded");
+  } catch { pass("cross-tenant H2 result read is rejected by tenant-scoped lookup/RLS"); }
+
+  const h2WriteClient = await appPool.connect();
+  try {
+    await h2WriteClient.query("begin");
+    await h2WriteClient.query("select set_config('app.current_org', $1, true), set_config('app.current_user', $2, true)", [A.org, A.user]);
+    await h2WriteClient.query("insert into hypothesis_evidence(org_id, branch_id, student_id, hypothesis_id, evidence_key, kanji, weight, source_kind, source_record_id, observed_at) values ($1, $2, $3, 'H2', $4, '宮', 1, 'probe_item', $5, now())", [B.org, B.branch, B.student, `${bH2Result}:H2`, bH2Result]);
+    fail("cross-tenant H2 evidence write is rejected", "write unexpectedly succeeded");
+  } catch (error) {
+    if (error.code === "42501") pass("cross-tenant H2 evidence write is rejected by RLS");
+    else fail("cross-tenant H2 evidence write is rejected", `${error.code}: ${error.message}`);
+  } finally {
+    await h2WriteClient.query("rollback");
+    h2WriteClient.release();
+  }
+
   const forbiddenWrites = (await admin.query("select (select count(*) from student_hypothesis_state)::int states, (select count(*) from state_recommendation)::int recommendations")).rows[0];
-  if (forbiddenWrites.states === 0 && forbiddenWrites.recommendations === 0) pass("H1 wiring touches neither student state nor recommendations");
-  else fail("H1 wiring touches no state/recommendation tables", JSON.stringify(forbiddenWrites));
+  const otherHypotheses = (await admin.query("select count(*)::int count from hypothesis_evidence where hypothesis_id not in ('H1', 'H2')")).rows[0].count;
+  if (forbiddenWrites.states === 0 && forbiddenWrites.recommendations === 0 && otherHypotheses === 0) pass("H1/H2 wiring touches neither state, recommendations, nor any other hypothesis");
+  else fail("H1/H2 wiring stays inside its evidence boundary", JSON.stringify({ ...forbiddenWrites, otherHypotheses }));
 } finally {
   if (appPool) await appPool.end();
   await admin.end();
 }
 
 if (failures) process.exit(1);
-console.log("\nH1 result-to-evidence integration: PASS");
+console.log("\nH1/H2 result-to-evidence integration: PASS");
