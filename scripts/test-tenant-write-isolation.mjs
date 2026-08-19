@@ -177,3 +177,10 @@ const hypothesisTest = spawnSync(process.execPath, [join(ROOT, "scripts", "test-
   stdio: "inherit",
 });
 if (hypothesisTest.status !== 0) process.exit(hypothesisTest.status ?? 1);
+
+const resultTest = spawnSync(
+  process.execPath,
+  ["--import", "tsx", join(ROOT, "scripts", "test-record-result.mjs")],
+  { env: process.env, stdio: "inherit" },
+);
+if (resultTest.status !== 0) process.exit(resultTest.status ?? 1);
