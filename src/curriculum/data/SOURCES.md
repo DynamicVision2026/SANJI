@@ -115,6 +115,14 @@ in the delivered extraction for the one `medium`-confidence case (叱, page
 19: the glyph has no Unicode text mapping and was recovered by visual
 verification).
 
+`reading_variants.json` is a separate, versioned §6.7 asset for valid
+whole-surface readings absent from the frozen appendix extraction. It does not
+reshape or silently amend `lexical_reading_rule`. Each entry has a stable
+order-independent `variant_id`, an explicit provenance reference, and named
+verification before `frozen` use. Snapshot 1.0.0 contains only 明日/あした,
+authorized by the architect ruling recorded in Issue #23; `source_page` is
+null so it cannot be mistaken for a reading printed in either official PDF.
+
 Ingestion required one schema addition beyond the original §6.2 design: a new
 `kanji_jouyou` table (the full 2,136-character 常用 superset) that
 `kanji_reading_stage.kanji` now FKs against, because the source covers

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "snapshot_version": "1.0.0",
+  "variants": [
+    {
+      "variant_id": "rv-ashita",
+      "surface": "明日",
+      "reading_kana": "あした",
+      "provenance_kind": "architect_curated",
+      "provenance_ref": "https://github.com/DynamicVision2026/SANJI/issues/23#issuecomment-5342391266",
+      "source_page": null,
+      "verification_status": "frozen",
+      "verified_by": "Brian Fu",
+      "verified_at": "2026-08-19"
+    }
+  ]
+}

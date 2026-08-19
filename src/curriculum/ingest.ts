@@ -28,6 +28,7 @@ import {
   type KanjiReadingStage,
   type KanjiTeachGrade,
   type LexicalReadingRule,
+  type ReadingVariantSnapshot,
 } from "./schema";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -36,6 +37,7 @@ const CHECKSUM_PATH = join(HERE, "data", "kanji_teach_grade.checksum.json");
 const JOUYOU_PATH = join(HERE, "data", "kanji_jouyou.json");
 const READING_STAGE_PATH = join(HERE, "data", "kanji_reading_stage.json");
 const LEXICAL_RULE_PATH = join(HERE, "data", "lexical_reading_rule.json");
+const READING_VARIANT_PATH = join(HERE, "data", "reading_variants.json");
 
 export interface ChecksumManifest {
   algorithm: string;
@@ -205,6 +207,10 @@ export function loadLexicalRules(path: string = LEXICAL_RULE_PATH): LexicalReadi
   return JSON.parse(readFileSync(path, "utf8")) as LexicalReadingRule[];
 }
 
+export function loadReadingVariants(path: string = READING_VARIANT_PATH): ReadingVariantSnapshot {
+  return JSON.parse(readFileSync(path, "utf8")) as ReadingVariantSnapshot;
+}
+
 const CONFIDENCE_VALUES = new Set(["high", "medium", "low"]);
 const SCHOOL_STAGES = new Set(["elementary", "junior_high", "high_school"]);
 
@@ -327,6 +333,49 @@ export function validateLexicalRules(rows: readonly LexicalReadingRule[]): Datas
     seen.add(dupeKey);
   }
   return { ok: errors.length === 0, errors, total: rows.length };
+}
+
+/** Validate the narrow §6.7 multi-reading extension without reshaping frozen lexical rows. */
+export function validateReadingVariants(snapshot: ReadingVariantSnapshot): DatasetValidationResult {
+  const errors: string[] = [];
+  const ids = new Set<string>();
+  const readings = new Set<string>();
+  if (snapshot.schema_version !== 1) errors.push(`reading_variants: unsupported schema_version ${snapshot.schema_version}`);
+  if (!/^\d+\.\d+\.\d+$/.test(snapshot.snapshot_version)) {
+    errors.push(`reading_variants: invalid snapshot_version ${JSON.stringify(snapshot.snapshot_version)}`);
+  }
+  for (const [i, variant] of snapshot.variants.entries()) {
+    const where = `reading_variants[${i}] (${variant.variant_id})`;
+    if (!/^rv-[a-z0-9-]+$/.test(variant.variant_id)) errors.push(`${where}: invalid stable variant_id`);
+    if (ids.has(variant.variant_id)) errors.push(`${where}: duplicate variant_id`);
+    ids.add(variant.variant_id);
+    if (!variant.surface || !variant.reading_kana) errors.push(`${where}: surface and reading_kana are required`);
+    const readingKey = `${variant.surface.normalize("NFC")} ${variant.reading_kana.normalize("NFC")}`;
+    if (readings.has(readingKey)) errors.push(`${where}: duplicate (surface, reading_kana)`);
+    readings.add(readingKey);
+    if (variant.provenance_kind !== "appendix" && variant.provenance_kind !== "architect_curated") {
+      errors.push(`${where}: invalid provenance_kind`);
+    }
+    if (!variant.provenance_ref) errors.push(`${where}: provenance_ref is required`);
+    if (variant.provenance_kind === "appendix" && (!Number.isInteger(variant.source_page) || variant.source_page! < 1)) {
+      errors.push(`${where}: appendix variants require source_page`);
+    }
+    if (variant.provenance_kind === "architect_curated" && variant.source_page !== null) {
+      errors.push(`${where}: curated variants must not claim a source_page`);
+    }
+    if (variant.verification_status === "frozen") {
+      if (!variant.verified_by || !variant.verified_at) errors.push(`${where}: frozen variants require named verification`);
+      if (variant.verified_by && (variant.verified_by.trim().length < 3 || /^(x+|tbd|todo|pending|none|n\/a|-|\?)$/i.test(variant.verified_by.trim()) || /_/.test(variant.verified_by))) {
+        errors.push(`${where}: verified_by does not look like a named human`);
+      }
+      if (variant.verified_at && !/^\d{4}-\d{2}-\d{2}$/.test(variant.verified_at)) {
+        errors.push(`${where}: verified_at must be an ISO date`);
+      }
+    } else if (variant.verification_status !== "PENDING_HUMAN_REVIEW") {
+      errors.push(`${where}: invalid verification_status`);
+    }
+  }
+  return { ok: errors.length === 0, errors, total: snapshot.variants.length };
 }
 
 /**

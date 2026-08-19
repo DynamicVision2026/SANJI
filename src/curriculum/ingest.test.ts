@@ -7,11 +7,13 @@ import {
   loadChecksumManifest,
   loadJouyou,
   loadLexicalRules,
+  loadReadingVariants,
   loadReadingStage,
   loadTeachGrade,
   validateClassifierRegressionSet,
   validateJouyou,
   validateLexicalRules,
+  validateReadingVariants,
   validateReadingStage,
   validateTeachGrade,
 } from "./ingest";
@@ -19,6 +21,7 @@ import { EXPECTED_GRADE_COUNTS, EXPECTED_TOTAL, type LexicalReadingRule } from "
 
 const rows = loadTeachGrade();
 const manifest = loadChecksumManifest();
+const readingVariants = loadReadingVariants();
 
 test("kanji_teach_grade passes all §6.5 assertions", () => {
   const result = validateTeachGrade(rows, manifest);
@@ -114,6 +117,22 @@ test("lexical_reading_rule passes structural checks (§19.2)", () => {
   assert.deepEqual(result.errors, []);
   assert.equal(result.ok, true);
   assert.equal(lexicalRules.length, 135);
+});
+
+test("reading_variants snapshot has stable IDs and attributable provenance (§6.7)", () => {
+  const result = validateReadingVariants(readingVariants);
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.ok, true);
+  assert.equal(result.total, 1);
+  assert.deepEqual(readingVariants.variants.map((variant) => variant.variant_id), ["rv-ashita"]);
+});
+
+test("reading_variants rejects frozen additions without named verification", () => {
+  const invalid = structuredClone(readingVariants);
+  invalid.variants[0]!.verified_by = null;
+  const result = validateReadingVariants(invalid);
+  assert.equal(result.ok, false);
+  assert.ok(result.errors.some((error) => error.includes("frozen variants require named verification")));
 });
 
 test("§15.5 classifier regression set: non-rendaku members are fully resolvable from ingested data", () => {
