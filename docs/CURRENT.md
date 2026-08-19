@@ -9,3 +9,10 @@ Key v2.5 outcomes superseding earlier drafts:
 - Voice input is transcribed on the client device only; audio is never transmitted or persisted.
 - Guardian accounts reverse an earlier exclusion of parent login by named decision; student login remains excluded.
 - Total build gates across the spec: eight.
+
+Implemented persistence foundation (migration 0010):
+- Confirmed hypothesis state is stored once per student and H1–H9 hypothesis, with the five v2.5 enum values.
+- Tenant-owned hypothesis evidence and recommendations carry explicit org, branch, and student ownership with composite foreign keys and Postgres RLS.
+- Evidence insertion cannot mutate confirmed state. Direct status updates and direct recommendation resolution are rejected at the database layer.
+- Explicit assigned-instructor approval is the only implemented transition operation; approvals and rejections create immutable, attributable audit records.
+- Generation, recommendation production/superseding, runtime handlers, report integration, UI, and curriculum admission remain unimplemented.

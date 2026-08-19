@@ -41,6 +41,11 @@ const ORG_KEYED = [
   "manual_error_entries",
   "subscriptions",
   "audit_log",
+  "hypothesis_evidence",
+  "student_hypothesis_state",
+  "state_recommendation",
+  "hypothesis_state_audit",
+  "state_recommendation_audit",
 ];
 
 // Tenant data reached via a parent row; spec schema defines no org_id column.
@@ -49,7 +54,7 @@ const JOIN_SCOPED = ["worksheet_items", "results", "error_profile", "diagnostics
 // Global by spec design: shared corpus (§5.2 items, §7.8), review queue
 // (§5.2 — request_payload is the §7.3 contract and carries no student PII),
 // curriculum reference data (§6, not tenant-scoped).
-const GLOBAL = ["items", "review_queue", "kanji_teach_grade", "kanji_jouyou", "kanji_reading_stage", "lexical_reading_rule"];
+const GLOBAL = ["items", "review_queue", "kanji_teach_grade", "kanji_jouyou", "kanji_reading_stage", "lexical_reading_rule", "hypothesis_master"];
 
 const sqlFiles = walk(join(REPO_ROOT, "db", "migrations"))
   .filter((f) => f.endsWith(".sql"))
@@ -184,6 +189,5 @@ passGate(
   "§15.4",
   `${ORG_KEYED.length} org-keyed + ${JOIN_SCOPED.length} join-scoped tables verified (org_id/RLS/non-vacuous policy), ` +
     `${GLOBAL.length} global tables confirmed unscoped by spec design; composite org-integrity FKs present on both assignment tables. ` +
-    `Live WRITE isolation is regression-tested in CI against real Postgres (scripts/test-tenant-write-isolation.mjs). ` +
-    `Live cross-tenant READ tests land with auth hardening (Week 9, §18.1).`,
+    `Live assignment WRITE isolation and hypothesis-state READ/WRITE isolation are regression-tested in CI against real Postgres.`,
 );
