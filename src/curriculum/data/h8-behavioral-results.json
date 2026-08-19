@@ -1,0 +1,120 @@
+{
+  "model": "gpt-5.5",
+  "k": 5,
+  "results": [
+    {
+      "pair": "王/玉",
+      "target": "王",
+      "substitute": "玉",
+      "sentence": "王さまは城で国を治めています。",
+      "counterfactual": "玉さまは城で国を治めています。",
+      "counterfactual_acceptable": true,
+      "cloze_sentence": "□さまは城で国を治めています。",
+      "cloze_answers": [
+        "王",
+        "王",
+        "王",
+        "王",
+        "王"
+      ],
+      "unanimous_cloze": true,
+      "discriminates": false,
+      "admission_status": "PENDING_HUMAN_PRUNING"
+    },
+    {
+      "pair": "未/末",
+      "target": "未",
+      "substitute": "末",
+      "sentence": "私は未来の夢を作文に書いた。",
+      "counterfactual": "私は末来の夢を作文に書いた。",
+      "counterfactual_acceptable": false,
+      "cloze_sentence": "私は□来の夢を作文に書いた。",
+      "cloze_answers": [
+        "将",
+        "将",
+        "将",
+        "将",
+        "将"
+      ],
+      "unanimous_cloze": false,
+      "discriminates": false,
+      "admission_status": "PENDING_HUMAN_PRUNING"
+    },
+    {
+      "pair": "土/士",
+      "target": "土",
+      "substitute": "士",
+      "sentence": "畑の土をやわらかく耕した。",
+      "counterfactual": "畑の士をやわらかく耕した。",
+      "counterfactual_acceptable": false,
+      "cloze_sentence": "畑の□をやわらかく耕した。",
+      "cloze_answers": [
+        "土",
+        "土",
+        "土",
+        "土",
+        "土"
+      ],
+      "unanimous_cloze": true,
+      "discriminates": true,
+      "admission_status": "PENDING_HUMAN_PRUNING"
+    },
+    {
+      "pair": "人/入",
+      "target": "人",
+      "substitute": "入",
+      "sentence": "あの人は親切な先生です。",
+      "counterfactual": "あの入は親切な先生です。",
+      "counterfactual_acceptable": false,
+      "cloze_sentence": "あの□は親切な先生です。",
+      "cloze_answers": [
+        "方",
+        "方",
+        "方",
+        "方",
+        "方"
+      ],
+      "unanimous_cloze": false,
+      "discriminates": false,
+      "admission_status": "PENDING_HUMAN_PRUNING"
+    },
+    {
+      "pair": "目/日",
+      "target": "目",
+      "substitute": "日",
+      "sentence": "目を閉じて静かに音を聞いた。",
+      "counterfactual": "日を閉じて静かに音を聞いた。",
+      "counterfactual_acceptable": false,
+      "cloze_sentence": "□を閉じて静かに音を聞いた。",
+      "cloze_answers": [
+        "目",
+        "目",
+        "目",
+        "目",
+        "目"
+      ],
+      "unanimous_cloze": true,
+      "discriminates": true,
+      "admission_status": "PENDING_HUMAN_PRUNING"
+    },
+    {
+      "pair": "大/犬",
+      "target": "大",
+      "substitute": "犬",
+      "sentence": "大きな犬が庭を走っている。",
+      "counterfactual": "犬きな犬が庭を走っている。",
+      "counterfactual_acceptable": false,
+      "cloze_sentence": "□きな犬が庭を走っている。",
+      "cloze_answers": [
+        "大",
+        "大",
+        "大",
+        "大",
+        "大"
+      ],
+      "unanimous_cloze": true,
+      "discriminates": true,
+      "admission_status": "PENDING_HUMAN_PRUNING"
+    }
+  ]
+}

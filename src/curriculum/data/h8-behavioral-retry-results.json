@@ -1,0 +1,66 @@
+{
+  "model": "gpt-5.5",
+  "k": 5,
+  "results": [
+    {
+      "pair": "王/玉",
+      "attempt": 2,
+      "target": "王",
+      "substitute": "玉",
+      "sentence": "王子さまが白馬に乗って現れた。",
+      "counterfactual": "玉子さまが白馬に乗って現れた。",
+      "counterfactual_acceptable": true,
+      "cloze_sentence": "□子さまが白馬に乗って現れた。",
+      "cloze_answers": [
+        "王",
+        "王",
+        "王",
+        "王",
+        "王"
+      ],
+      "unanimous_cloze": true,
+      "discriminates": false,
+      "admission_status": "PENDING_HUMAN_PRUNING"
+    },
+    {
+      "pair": "未/末",
+      "attempt": 2,
+      "target": "未",
+      "substitute": "末",
+      "sentence": "映画に未来人が登場した。",
+      "counterfactual": "映画に末来人が登場した。",
+      "counterfactual_acceptable": false,
+      "cloze_sentence": "映画に□来人が登場した。",
+      "cloze_answers": [
+        "未",
+        "未",
+        "未",
+        "未",
+        "未"
+      ],
+      "unanimous_cloze": true,
+      "discriminates": true,
+      "admission_status": "PENDING_HUMAN_PRUNING"
+    },
+    {
+      "pair": "人/入",
+      "attempt": 2,
+      "target": "人",
+      "substitute": "入",
+      "sentence": "三人で公園に行った。",
+      "counterfactual": "三入で公園に行った。",
+      "counterfactual_acceptable": true,
+      "cloze_sentence": "三□で公園に行った。",
+      "cloze_answers": [
+        "人",
+        "人",
+        "人",
+        "人",
+        "人"
+      ],
+      "unanimous_cloze": true,
+      "discriminates": false,
+      "admission_status": "PENDING_HUMAN_PRUNING"
+    }
+  ]
+}

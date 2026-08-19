@@ -1,0 +1,2225 @@
+[
+  {
+    "left": "具",
+    "right": "直",
+    "shared_components": [
+      "一",
+      "且"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "刀",
+    "right": "力",
+    "shared_components": [
+      "丿",
+      "𠃌"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "半",
+    "right": "用",
+    "shared_components": [
+      "丨",
+      "二"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "土",
+    "right": "士",
+    "shared_components": [
+      "一",
+      "十"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "垂",
+    "right": "長",
+    "shared_components": [
+      "一",
+      "丿"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "妻",
+    "right": "直",
+    "shared_components": [
+      "一",
+      "十"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "万",
+    "right": "刀",
+    "shared_components": [
+      "丿",
+      "𠃌"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "万",
+    "right": "力",
+    "shared_components": [
+      "丿",
+      "𠃌"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "万",
+    "right": "方",
+    "shared_components": [
+      "丿",
+      "𠃌"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "修",
+    "right": "候",
+    "shared_components": [
+      "丨",
+      "亻"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "修",
+    "right": "夜",
+    "shared_components": [
+      "亻",
+      "夂"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "労",
+    "right": "学",
+    "shared_components": [
+      "冖",
+      "𭕄"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "半",
+    "right": "羊",
+    "shared_components": [
+      "丨",
+      "二"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "営",
+    "right": "覚",
+    "shared_components": [
+      "冖",
+      "𭕄"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "学",
+    "right": "栄",
+    "shared_components": [
+      "冖",
+      "𭕄"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "席",
+    "right": "度",
+    "shared_components": [
+      "广",
+      "廿"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "旅",
+    "right": "族",
+    "shared_components": [
+      "方",
+      "𠂉"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "栄",
+    "right": "桜",
+    "shared_components": [
+      "木",
+      "𭕄"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "然",
+    "right": "祭",
+    "shared_components": [
+      "冫",
+      "𠂊"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "然",
+    "right": "魚",
+    "shared_components": [
+      "灬",
+      "𠂊"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "用",
+    "right": "羊",
+    "shared_components": [
+      "丨",
+      "二"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "臨",
+    "right": "覧",
+    "shared_components": [
+      "臣",
+      "𠂉"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "術",
+    "right": "街",
+    "shared_components": [
+      "亍",
+      "彳"
+    ],
+    "stroke_difference": 1,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "丁",
+    "right": "二",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "万",
+    "right": "三",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "万",
+    "right": "上",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "万",
+    "right": "下",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "万",
+    "right": "千",
+    "shared_components": [
+      "丿"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "万",
+    "right": "土",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "万",
+    "right": "士",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "万",
+    "right": "大",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "三",
+    "right": "上",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "三",
+    "right": "下",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "三",
+    "right": "土",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "三",
+    "right": "士",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "三",
+    "right": "大",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "上",
+    "right": "下",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "上",
+    "right": "土",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "上",
+    "right": "士",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "上",
+    "right": "大",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "下",
+    "right": "土",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "下",
+    "right": "士",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "下",
+    "right": "大",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "不",
+    "right": "五",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "不",
+    "right": "元",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "不",
+    "right": "天",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "不",
+    "right": "戸",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "不",
+    "right": "王",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "両",
+    "right": "争",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "両",
+    "right": "再",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "両",
+    "right": "向",
+    "shared_components": [
+      "冂"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "両",
+    "right": "百",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "両",
+    "right": "西",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "並",
+    "right": "岡",
+    "shared_components": [
+      "䒑"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "中",
+    "right": "引",
+    "shared_components": [
+      "丨"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "丸",
+    "right": "夕",
+    "shared_components": [
+      "丶"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "主",
+    "right": "去",
+    "shared_components": [
+      "土"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "主",
+    "right": "圧",
+    "shared_components": [
+      "土"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "主",
+    "right": "市",
+    "shared_components": [
+      "亠"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "主",
+    "right": "立",
+    "shared_components": [
+      "亠"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "争",
+    "right": "再",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "争",
+    "right": "百",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "争",
+    "right": "色",
+    "shared_components": [
+      "𠂊"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "争",
+    "right": "西",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "五",
+    "right": "元",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "五",
+    "right": "天",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "五",
+    "right": "戸",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "五",
+    "right": "王",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "交",
+    "right": "衣",
+    "shared_components": [
+      "亠"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "京",
+    "right": "味",
+    "shared_components": [
+      "口"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "京",
+    "right": "呼",
+    "shared_components": [
+      "口"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "京",
+    "right": "和",
+    "shared_components": [
+      "口"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "京",
+    "right": "夜",
+    "shared_components": [
+      "亠"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "京",
+    "right": "沿",
+    "shared_components": [
+      "口"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "京",
+    "right": "知",
+    "shared_components": [
+      "口"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仁",
+    "right": "仏",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仁",
+    "right": "化",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仁",
+    "right": "夫",
+    "shared_components": [
+      "二"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仁",
+    "right": "毛",
+    "shared_components": [
+      "二"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仏",
+    "right": "公",
+    "shared_components": [
+      "厶"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仏",
+    "right": "化",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仕",
+    "right": "他",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仕",
+    "right": "付",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仕",
+    "right": "代",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "他",
+    "right": "付",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "他",
+    "right": "代",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "付",
+    "right": "代",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仮",
+    "right": "仲",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仮",
+    "right": "件",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仮",
+    "right": "任",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仮",
+    "right": "休",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仮",
+    "right": "伝",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仮",
+    "right": "似",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仮",
+    "right": "阪",
+    "shared_components": [
+      "反"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仲",
+    "right": "件",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仲",
+    "right": "任",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仲",
+    "right": "休",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仲",
+    "right": "伝",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "仲",
+    "right": "似",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "件",
+    "right": "任",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "件",
+    "right": "休",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "件",
+    "right": "伝",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "件",
+    "right": "似",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "任",
+    "right": "休",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "任",
+    "right": "伝",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "任",
+    "right": "似",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "休",
+    "right": "伝",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "休",
+    "right": "似",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "休",
+    "right": "机",
+    "shared_components": [
+      "木"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "会",
+    "right": "伝",
+    "shared_components": [
+      "云"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "会",
+    "right": "全",
+    "shared_components": [
+      "人"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "伝",
+    "right": "似",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "位",
+    "right": "低",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "位",
+    "right": "住",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "位",
+    "right": "佐",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "位",
+    "right": "体",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "位",
+    "right": "何",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "位",
+    "right": "作",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "低",
+    "right": "住",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "低",
+    "right": "佐",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "低",
+    "right": "体",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "低",
+    "right": "何",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "低",
+    "right": "作",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "住",
+    "right": "佐",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "住",
+    "right": "体",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "住",
+    "right": "何",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "住",
+    "right": "作",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "佐",
+    "right": "体",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "佐",
+    "right": "何",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "佐",
+    "right": "作",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "体",
+    "right": "何",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "体",
+    "right": "作",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "何",
+    "right": "作",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "余",
+    "right": "条",
+    "shared_components": [
+      "朩"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "使",
+    "right": "例",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "使",
+    "right": "供",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "使",
+    "right": "価",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "使",
+    "right": "夜",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "例",
+    "right": "供",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "例",
+    "right": "価",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "例",
+    "right": "夜",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "供",
+    "right": "価",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "供",
+    "right": "夜",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "価",
+    "right": "夜",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "便",
+    "right": "係",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "便",
+    "right": "保",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "便",
+    "right": "信",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "便",
+    "right": "修",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "係",
+    "right": "保",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "係",
+    "right": "信",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "係",
+    "right": "修",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "保",
+    "right": "信",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "保",
+    "right": "修",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "信",
+    "right": "修",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "信",
+    "right": "計",
+    "shared_components": [
+      "言"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "修",
+    "right": "変",
+    "shared_components": [
+      "夂"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "修",
+    "right": "後",
+    "shared_components": [
+      "夂"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俳",
+    "right": "俵",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俳",
+    "right": "個",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俳",
+    "right": "倍",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俳",
+    "right": "候",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俳",
+    "right": "借",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俳",
+    "right": "値",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俳",
+    "right": "健",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俵",
+    "right": "個",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俵",
+    "right": "倍",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俵",
+    "right": "候",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俵",
+    "right": "借",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俵",
+    "right": "値",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "俵",
+    "right": "健",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "倉",
+    "right": "員",
+    "shared_components": [
+      "口"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "倉",
+    "right": "害",
+    "shared_components": [
+      "口"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "倉",
+    "right": "展",
+    "shared_components": [
+      "尸"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "倉",
+    "right": "書",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "倉",
+    "right": "高",
+    "shared_components": [
+      "口"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "個",
+    "right": "倍",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "個",
+    "right": "候",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "個",
+    "right": "借",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "個",
+    "right": "値",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "個",
+    "right": "健",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "倍",
+    "right": "候",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "倍",
+    "right": "借",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "倍",
+    "right": "値",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "倍",
+    "right": "健",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "倍",
+    "right": "部",
+    "shared_components": [
+      "咅"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "候",
+    "right": "借",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "候",
+    "right": "値",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "候",
+    "right": "健",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "借",
+    "right": "値",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "借",
+    "right": "健",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "値",
+    "right": "健",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "停",
+    "right": "側",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "傷",
+    "right": "働",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "傷",
+    "right": "像",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "働",
+    "right": "像",
+    "shared_components": [
+      "亻"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "元",
+    "right": "天",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "元",
+    "right": "戸",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "元",
+    "right": "王",
+    "shared_components": [
+      "一"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "兄",
+    "right": "加",
+    "shared_components": [
+      "口"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  {
+    "left": "兄",
+    "right": "古",
+    "shared_components": [
+      "口"
+    ],
+    "stroke_difference": 0,
+    "decision": "pending",
+    "reviewer": null,
+    "reviewed_at": null
+  }
+]

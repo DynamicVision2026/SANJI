@@ -1,0 +1,31 @@
+{
+  "snapshot_version": 1,
+  "algorithm_version": "h8-shared-component-stroke-v1",
+  "status": "PENDING_HUMAN_PRUNING",
+  "generated_candidates_file": "h8_candidates.generated.json",
+  "generated_candidates_sha256": "838bb95765cc4302326e1c847b79256957298a51d2a40ad871d6b6ef581006ee",
+  "candidate_limit": 200,
+  "inputs": {
+    "ids": {
+      "project": "CJKVI IDS (based on CHISE IDS)",
+      "commit": "86b4d16159f0079437870408f0ca186e529015db",
+      "url": "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/86b4d16159f0079437870408f0ca186e529015db/ids.txt",
+      "sha256": "bfc70a8c09f9f5616ebf0543bd6681e67314e9f7ae2307e5ae8c6f15bdc5c6a6"
+    },
+    "stroke_counts": {
+      "project": "Unicode Unihan 17.0.0 / Unihan_IRGSources.txt",
+      "url": "https://www.unicode.org/Public/17.0.0/ucd/Unihan.zip",
+      "archive_sha256": "f7a48b2b545acfaa77b2d607ae28747404ce02baefee16396c5d2d7a8ef34b5e",
+      "extracted_sha256": "d1c817dd7db84295dab0643c277d97c2fa742c245f8824e6736c2a0935095325"
+    }
+  },
+  "curated_starting_pairs": [
+    { "left": "王", "right": "玉", "basis": "curated", "decision": "pending", "reviewer": null, "reviewed_at": null },
+    { "left": "未", "right": "末", "basis": "curated", "decision": "pending", "reviewer": null, "reviewed_at": null },
+    { "left": "土", "right": "士", "basis": "shared_component", "decision": "pending", "reviewer": null, "reviewed_at": null },
+    { "left": "人", "right": "入", "basis": "curated", "decision": "pending", "reviewer": null, "reviewed_at": null },
+    { "left": "目", "right": "日", "basis": "curated", "decision": "pending", "reviewer": null, "reviewed_at": null },
+    { "left": "大", "right": "犬", "basis": "curated", "decision": "pending", "reviewer": null, "reviewed_at": null }
+  ]
+}
+
