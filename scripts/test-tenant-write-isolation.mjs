@@ -23,6 +23,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { spawnSync } from "node:child_process";
 import pg from "pg";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -170,3 +171,9 @@ if (failures > 0) {
   process.exit(1);
 }
 console.log("\ntenant write-isolation: PASS — cross-tenant assignment writes are impossible at the database layer");
+
+const hypothesisTest = spawnSync(process.execPath, [join(ROOT, "scripts", "test-hypothesis-persistence.mjs")], {
+  env: process.env,
+  stdio: "inherit",
+});
+if (hypothesisTest.status !== 0) process.exit(hypothesisTest.status ?? 1);

@@ -23,7 +23,9 @@
     "gate:font-integrity": "node scripts/gates/font-integrity.mjs",
     "gate:tenant-isolation": "node scripts/gates/tenant-isolation.mjs",
     "gate:classifier-determinism": "node scripts/gates/classifier-determinism.mjs",
-    "gate:targeting-fidelity": "node scripts/gates/targeting-fidelity.mjs"
+    "gate:targeting-fidelity": "node scripts/gates/targeting-fidelity.mjs",
+    "schema:check": "node scripts/check-hypothesis-schema.mjs",
+    "schema:test": "node scripts/test-hypothesis-persistence.mjs"
   },
   "dependencies": {
     "next": "15.5.23",
