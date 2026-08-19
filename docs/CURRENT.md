@@ -16,3 +16,4 @@ Implemented persistence foundation (migration 0010):
 - Evidence insertion cannot mutate confirmed state. Direct status updates and direct recommendation resolution are rejected at the database layer.
 - Explicit assigned-instructor approval is the only implemented transition operation; approvals and rejections create immutable, attributable audit records.
 - Generation, recommendation production/superseding, runtime handlers, report integration, UI, and curriculum admission remain unimplemented.
+- `src/results/record-result.ts` is the first internal production write path for one caller-graded `results` event. It validates tenant/student/worksheet/item/grader consistency under RLS in an explicit transaction and serializes identical concurrent events. It is not exposed by an API or UI and is not wired to any hypothesis logic.
