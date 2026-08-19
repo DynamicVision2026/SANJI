@@ -184,3 +184,10 @@ const resultTest = spawnSync(
   { env: process.env, stdio: "inherit" },
 );
 if (resultTest.status !== 0) process.exit(resultTest.status ?? 1);
+
+const h1EvidenceTest = spawnSync(
+  process.execPath,
+  ["--import", "tsx", join(ROOT, "scripts", "test-h1-evidence.mjs")],
+  { env: process.env, stdio: "inherit" },
+);
+if (h1EvidenceTest.status !== 0) process.exit(h1EvidenceTest.status ?? 1);

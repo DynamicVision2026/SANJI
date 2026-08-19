@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { REPO_ROOT, failGate, passGate } from "./gates/_common.mjs";
 
 const sql = readFileSync(join(REPO_ROOT, "db/migrations/0010_hypothesis_persistence.sql"), "utf8");
+const resultSourceSql = readFileSync(join(REPO_ROOT, "db/migrations/0011_result_source_kind.sql"), "utf8");
 const errors = [];
 const requiredTables = [
   "hypothesis_master",
@@ -33,6 +34,9 @@ for (const token of [
   "approved_by_user_id",
 ]) {
   if (!sql.includes(token)) errors.push(`missing safety mechanism ${token}`);
+}
+if (!/alter\s+table\s+results\s+add\s+column\s+source_kind\s+text\s+null\s*;/i.test(resultSourceSql)) {
+  errors.push("0011 must add only the nullable results.source_kind provenance field");
 }
 
 if (errors.length) failGate("Hypothesis Persistence Schema", "v2.5 §7A.1/§7A.8/§11.10/§15.8", errors);
