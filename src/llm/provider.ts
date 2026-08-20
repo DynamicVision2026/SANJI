@@ -33,9 +33,12 @@ export interface GenerationRequest {
   /** Broader permitted set — usable only if RenderPlan assigns ruby. */
   allowed_with_ruby: string[];
   target_kanji: string;
-  target_reading_id: number;
+  target_reading_ids: number[];
   item_type: string;
   span_role_profile: SpanRole;
+  diagnostic_objective: "probe" | "treat" | "mixed";
+  target_hypotheses: string[];
+  contrast_kanji: string | null;
   /** Neutral, non-identifying topic hint. MUST NOT encode student identity. */
   topic_hint: string;
   exclude_item_ids: string[];

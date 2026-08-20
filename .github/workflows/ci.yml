@@ -118,6 +118,10 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
         run: npm run schema:target-readings:test
+      - name: Track A generation-to-H1 live-Postgres integration
+        env:
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
+        run: npm run track-a:generation:test
 
   gate-classifier-determinism:
     name: "Gate: Classifier Determinism (§15.5)"

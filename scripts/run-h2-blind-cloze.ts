@@ -30,7 +30,8 @@ const pii = { kind: "tenantless", attestation: "caller-attests-no-tenant-data-in
 
 function request(target: string): GenerationRequest {
   return { grade: 4, kanken_level: 7, allowed_bare: [], allowed_with_ruby: [], target_kanji: target,
-    target_reading_id: 0, item_type: "diagnostic", span_role_profile: "diagnostic_probe",
+    target_reading_ids: [0], item_type: "diagnostic", span_role_profile: "diagnostic_probe",
+    diagnostic_objective: "probe", target_hypotheses: ["H2"], contrast_kanji: null,
     topic_hint: "日常生活", exclude_item_ids: [], cohort_exclude_item_ids: [] };
 }
 

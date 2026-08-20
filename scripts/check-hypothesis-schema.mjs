@@ -8,6 +8,7 @@ const resultSourceSql = readFileSync(join(REPO_ROOT, "db/migrations/0011_result_
 const aggregateSql = readFileSync(join(REPO_ROOT, "db/migrations/0012_hypothesis_aggregate_observation.sql"), "utf8");
 const itemInputsSql = readFileSync(join(REPO_ROOT, "db/migrations/0013_item_hypothesis_inputs.sql"), "utf8");
 const pluralReadingSql = readFileSync(join(REPO_ROOT, "db/migrations/0014_item_target_reading_ids.sql"), "utf8");
+const itemTagsSql = readFileSync(join(REPO_ROOT, "db/migrations/0015_item_diagnostic_tags.sql"), "utf8");
 const errors = [];
 const requiredTables = [
   "hypothesis_master",
@@ -69,6 +70,14 @@ if (!/set\s+target_reading_ids\s*=\s*array\[target_reading_id\]/i.test(pluralRea
 }
 if (/drop\s+column\s+target_reading_id\b/i.test(pluralReadingSql)) {
   errors.push("0014 must retain the singular items.target_reading_id compatibility column");
+}
+for (const [column, type] of [["distractors", "jsonb"], ["discriminates", "text\\[\\]"]]) {
+  if (!new RegExp(`add\\s+column\\s+${column}\\s+${type}\\s+null`, "i").test(itemTagsSql)) {
+    errors.push(`0015 must add nullable items.${column}`);
+  }
+}
+if ((itemTagsSql.match(/add\s+column/giu) ?? []).length !== 2) {
+  errors.push("0015 must add exactly distractors and discriminates");
 }
 
 if (errors.length) failGate("Hypothesis Persistence Schema", "v2.5 §7A.1/§7A.8/§11.10/§15.8", errors);
