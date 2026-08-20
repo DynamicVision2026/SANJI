@@ -110,6 +110,10 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
         run: node scripts/test-tenant-write-isolation.mjs
+      - name: Live H9 results-to-aggregate regression
+        env:
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
+        run: npm run h9:aggregate:test
       - name: H1/H2 live-Postgres evidence test (PR #22)
         env:
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
