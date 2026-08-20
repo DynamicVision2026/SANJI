@@ -87,6 +87,7 @@ if (checksum !== manifest.checksum) {
 const jouyou = JSON.parse(readFileSync(join(DATA_DIR, "kanji_jouyou.json"), "utf8"));
 const readingStage = JSON.parse(readFileSync(join(DATA_DIR, "kanji_reading_stage.json"), "utf8"));
 const lexicalRules = JSON.parse(readFileSync(join(DATA_DIR, "lexical_reading_rule.json"), "utf8"));
+const readingVariants = JSON.parse(readFileSync(join(DATA_DIR, "reading_variants.json"), "utf8"));
 
 const CONFIDENCE_VALUES = new Set(["high", "medium", "low"]);
 const SCHOOL_STAGES = new Set(["elementary", "junior_high", "high_school"]);
@@ -111,6 +112,34 @@ const LEXICAL_RULE_KINDS = new Set(["jukujikun", "rendaku", "proper_noun", "furo
     fail(`kanji_jouyou: ${inKyoikuCount} rows flagged in_kyoiku, expected ${kyoikuSet.size}`);
   }
   if (jouyou.length !== 2136) fail(`kanji_jouyou: total is ${jouyou.length}, expected 2136 (常用漢字)`);
+}
+
+// reading_variants: separate §6.7 snapshot; stable IDs and explicit provenance
+// keep curated additions out of the frozen §6.1 lexical extraction.
+{
+  const ids = new Set();
+  const readings = new Set();
+  if (readingVariants.schema_version !== 1) fail(`reading_variants: unsupported schema_version ${readingVariants.schema_version}`);
+  if (!/^\d+\.\d+\.\d+$/.test(readingVariants.snapshot_version)) fail("reading_variants: invalid snapshot_version");
+  for (const [i, variant] of readingVariants.variants.entries()) {
+    const where = `reading_variants[${i}] (${variant.variant_id})`;
+    if (!/^rv-[a-z0-9-]+$/.test(variant.variant_id)) fail(`${where}: invalid stable variant_id`);
+    if (ids.has(variant.variant_id)) fail(`${where}: duplicate variant_id`);
+    ids.add(variant.variant_id);
+    if (!variant.surface || !variant.reading_kana) fail(`${where}: surface and reading_kana are required`);
+    const readingKey = `${variant.surface.normalize("NFC")} ${variant.reading_kana.normalize("NFC")}`;
+    if (readings.has(readingKey)) fail(`${where}: duplicate (surface, reading_kana)`);
+    readings.add(readingKey);
+    if (variant.provenance_kind !== "appendix" && variant.provenance_kind !== "architect_curated") fail(`${where}: invalid provenance_kind`);
+    if (!variant.provenance_ref) fail(`${where}: provenance_ref is required`);
+    if (variant.provenance_kind === "appendix" && (!Number.isInteger(variant.source_page) || variant.source_page < 1)) fail(`${where}: appendix variants require source_page`);
+    if (variant.provenance_kind === "architect_curated" && variant.source_page !== null) fail(`${where}: curated variants must not claim a source_page`);
+    if (variant.verification_status === "frozen") {
+      if (!variant.verified_by || !variant.verified_at) fail(`${where}: frozen variants require named verification`);
+      if (variant.verified_by && (variant.verified_by.trim().length < 3 || /^(x+|tbd|todo|pending|none|n\/a|-|\?)$/i.test(variant.verified_by.trim()) || /_/.test(variant.verified_by))) fail(`${where}: verified_by does not look like a named human`);
+      if (variant.verified_at && !/^\d{4}-\d{2}-\d{2}$/.test(variant.verified_at)) fail(`${where}: verified_at must be an ISO date`);
+    } else if (variant.verification_status !== "PENDING_HUMAN_REVIEW") fail(`${where}: invalid verification_status`);
+  }
 }
 
 // kanji_reading_stage: structural + FK integrity against kanji_jouyou, plus

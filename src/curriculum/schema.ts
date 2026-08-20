@@ -94,6 +94,25 @@ export interface LexicalReadingRule {
   source_reading_type: SourceReadingType | null;
 }
 
+export interface ReadingVariant {
+  /** Stable semantic identifier; MUST NOT depend on file order. */
+  variant_id: string;
+  surface: string;
+  reading_kana: string;
+  provenance_kind: "appendix" | "architect_curated";
+  provenance_ref: string;
+  source_page: number | null;
+  verification_status: "PENDING_HUMAN_REVIEW" | "frozen";
+  verified_by: string | null;
+  verified_at: string | null;
+}
+
+export interface ReadingVariantSnapshot {
+  schema_version: 1;
+  snapshot_version: string;
+  variants: ReadingVariant[];
+}
+
 export const GRADE_MIN = 1;
 export const GRADE_MAX = 6;
 
