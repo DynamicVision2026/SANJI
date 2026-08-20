@@ -6,6 +6,7 @@ import { REPO_ROOT, failGate, passGate } from "./gates/_common.mjs";
 const sql = readFileSync(join(REPO_ROOT, "db/migrations/0010_hypothesis_persistence.sql"), "utf8");
 const resultSourceSql = readFileSync(join(REPO_ROOT, "db/migrations/0011_result_source_kind.sql"), "utf8");
 const aggregateSql = readFileSync(join(REPO_ROOT, "db/migrations/0012_hypothesis_aggregate_observation.sql"), "utf8");
+const itemInputsSql = readFileSync(join(REPO_ROOT, "db/migrations/0013_item_hypothesis_inputs.sql"), "utf8");
 const errors = [];
 const requiredTables = [
   "hypothesis_master",
@@ -50,6 +51,14 @@ for (const token of [
   "hypothesis_aggregate_observation_immutable",
 ]) {
   if (!aggregateSql.toLowerCase().includes(token.toLowerCase())) errors.push(`missing H9 aggregate schema mechanism ${token}`);
+}
+for (const column of ["okurigana_rule_id", "lexical_surface"]) {
+  if (!new RegExp(`add\\s+column\\s+${column}\\s+text\\s+null`, "i").test(itemInputsSql)) {
+    errors.push(`0013 must add nullable items.${column}`);
+  }
+}
+if ((itemInputsSql.match(/add\s+column/giu) ?? []).length !== 2) {
+  errors.push("0013 must add exactly the two authorized item input columns");
 }
 
 if (errors.length) failGate("Hypothesis Persistence Schema", "v2.5 §7A.1/§7A.8/§11.10/§15.8", errors);
