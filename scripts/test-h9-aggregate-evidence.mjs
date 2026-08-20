@@ -4,6 +4,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import pg from "pg";
 
+import { accumulateAndPersistH9Evidence } from "../src/hypotheses/accumulate-h9-evidence.ts";
 import { persistH9AggregateEvidence } from "../src/hypotheses/persist-h9-aggregate-evidence.ts";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -51,7 +52,7 @@ try {
 
   await admin.query("create role h9_aggregate_writer login password 'h9_aggregate_writer'");
   await admin.query("grant usage on schema public to h9_aggregate_writer");
-  await admin.query("grant select on students, users, hypothesis_aggregate_observation, hypothesis_evidence to h9_aggregate_writer");
+  await admin.query("grant select on students, users, items, results, hypothesis_aggregate_observation, hypothesis_evidence to h9_aggregate_writer");
   await admin.query("grant insert on hypothesis_aggregate_observation, hypothesis_evidence to h9_aggregate_writer");
   const appUrl = new URL(DB_URL);
   appUrl.username = "h9_aggregate_writer";
@@ -140,6 +141,82 @@ try {
     if (count === 1) pass("malformed aggregate rolls back without a partial row");
     else fail("malformed aggregate leaves no partial row", `rows=${count}`);
   }
+
+  const yomiItem = (await admin.query(
+    "insert into items(item_type, target_kanji, answer_text) values ('yomi', '海', 'うみ') returning id",
+  )).rows[0].id;
+  const kakitoriItem = (await admin.query(
+    "insert into items(item_type, target_kanji, answer_text) values ('kakitori', '海', '海') returning id",
+  )).rows[0].id;
+  const worksheet = (await admin.query(
+    "insert into worksheets(org_id, branch_id, student_id, created_by_user_id, status) values ($1, $2, $3, $4, 'graded') returning id",
+    [A.org, A.branch, A.student, A.user],
+  )).rows[0].id;
+  await admin.query(
+    "insert into worksheet_items(worksheet_id, item_id, position) values ($1, $2, 1), ($1, $3, 2)",
+    [worksheet, yomiItem, kakitoriItem],
+  );
+  const events = [
+    [yomiItem, true, "2026-06-21T00:00:00.000Z", "probe_item"],
+    [yomiItem, true, "2026-07-01T00:00:00.000Z", "targeted_practice"],
+    [yomiItem, true, "2026-07-10T00:00:00.000Z", "probe_item"],
+    [yomiItem, true, "2026-08-01T00:00:00.000Z", "incidental_item"],
+    [yomiItem, true, "2026-08-19T23:59:59.000Z", "probe_item"],
+    [kakitoriItem, true, "2026-06-25T00:00:00.000Z", "probe_item"],
+    [kakitoriItem, true, "2026-07-05T00:00:00.000Z", "targeted_practice"],
+    [kakitoriItem, false, "2026-07-15T00:00:00.000Z", "home_unsupervised"],
+    [kakitoriItem, false, "2026-08-05T00:00:00.000Z", "probe_item"],
+    [kakitoriItem, false, "2026-08-19T12:00:00.000Z", "targeted_practice"],
+    // Boundary and provenance controls: neither contributes.
+    [yomiItem, false, "2026-06-20T23:59:59.000Z", "manual_without_response"],
+    [yomiItem, false, "2026-07-20T00:00:00.000Z", null],
+  ];
+  for (const [itemId, correct, gradedAt, sourceKind] of events) {
+    await admin.query(
+      `insert into results
+         (worksheet_id, item_id, student_id, is_correct, wrong_answer_text,
+          graded_at, graded_by_user_id, source_kind)
+       values ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      [worksheet, itemId, A.student, correct, correct ? null : "誤", gradedAt, A.user, sourceKind],
+    );
+  }
+
+  const accumulated = await accumulateAndPersistH9Evidence(appPool, {
+    orgId: A.org,
+    branchId: A.branch,
+    studentId: A.student,
+    actorUserId: A.user,
+    kanji: "海",
+    readingId: null,
+    windowEnd: "2026-08-19",
+  }, env);
+  const accumulatedRow = (await admin.query(
+    `select o.*, e.weight, e.source_record_id
+     from hypothesis_aggregate_observation o
+     left join hypothesis_evidence e on e.aggregate_observation_id = o.id
+     where o.id = $1`,
+    [accumulated?.observationId],
+  )).rows[0];
+  if (accumulated?.evidence?.inserted
+      && accumulatedRow.recognition_attempts === 5 && accumulatedRow.recognition_correct === 5
+      && accumulatedRow.production_attempts === 5 && accumulatedRow.production_correct === 2
+      && Number(accumulatedRow.min_source_factor) === 0.4
+      && Number(accumulatedRow.weight) === 0.4 && accumulatedRow.source_record_id === null) {
+    pass("real results accumulate by modality/window/source factor and persist one H9 evidence row");
+  } else fail("results-to-H9 aggregate trace", JSON.stringify({ accumulated, accumulatedRow }));
+
+  try {
+    await accumulateAndPersistH9Evidence(appPool, {
+      orgId: A.org,
+      branchId: A.branch,
+      studentId: B.student,
+      actorUserId: A.user,
+      kanji: "海",
+      readingId: null,
+      windowEnd: "2026-08-19",
+    }, env);
+    fail("cross-tenant result accumulation is rejected", "unexpected success");
+  } catch { pass("cross-tenant result accumulation is rejected under tenant GUC/RLS"); }
 
   const forbidden = (await admin.query(
     `select

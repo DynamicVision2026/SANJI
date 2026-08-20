@@ -13,7 +13,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "test": "node --import tsx --test src/domain/spanRoles.test.ts src/curriculum/ingest.test.ts src/llm/provider.test.ts src/config/runtime.test.ts src/rendering/ruby.test.ts src/rendering/fontCanary.test.ts src/hypotheses/h1.test.ts src/hypotheses/h2.test.ts src/hypotheses/h6.test.ts src/hypotheses/h7.test.ts src/curriculum/h8-candidates.test.ts src/hypotheses/h9.test.ts src/results/record-result.test.ts src/items/generation-pipeline.test.ts src/hypotheses/persist-h1-evidence.test.ts src/hypotheses/persist-h2-evidence.test.ts src/hypotheses/persist-h9-aggregate-evidence.test.ts",
+    "test": "node --import tsx --test src/domain/spanRoles.test.ts src/curriculum/ingest.test.ts src/llm/provider.test.ts src/config/runtime.test.ts src/rendering/ruby.test.ts src/rendering/fontCanary.test.ts src/hypotheses/h1.test.ts src/hypotheses/h2.test.ts src/hypotheses/h6.test.ts src/hypotheses/h7.test.ts src/curriculum/h8-candidates.test.ts src/hypotheses/h9.test.ts src/results/record-result.test.ts src/items/generation-pipeline.test.ts src/hypotheses/persist-h1-evidence.test.ts src/hypotheses/persist-h2-evidence.test.ts src/hypotheses/persist-h9-aggregate-evidence.test.ts src/hypotheses/accumulate-h9-evidence.test.ts",
     "pilot:h2:cloze": "node --import tsx scripts/run-h2-blind-cloze.ts",
     "pilot:h8-candidates": "node --import tsx scripts/generate-h8-candidates.ts",
     "pilot:h8-behavioral": "node --import tsx scripts/run-h8-behavioral-pilot.ts",
