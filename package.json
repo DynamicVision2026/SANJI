@@ -26,6 +26,7 @@
     "gate:targeting-fidelity": "node scripts/gates/targeting-fidelity.mjs",
     "schema:check": "node scripts/check-hypothesis-schema.mjs",
     "schema:test": "node scripts/test-hypothesis-persistence.mjs",
+    "schema:target-readings:test": "node scripts/test-item-target-reading-ids.mjs",
     "results:test": "node --import tsx scripts/test-record-result.mjs",
     "h1:evidence:test": "node --import tsx scripts/test-h1-evidence.mjs",
     "h9:aggregate:test": "node --import tsx scripts/test-h9-aggregate-evidence.mjs"
