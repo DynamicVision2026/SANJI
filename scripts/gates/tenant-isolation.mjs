@@ -42,6 +42,7 @@ const ORG_KEYED = [
   "subscriptions",
   "audit_log",
   "hypothesis_evidence",
+  "hypothesis_aggregate_observation",
   "student_hypothesis_state",
   "state_recommendation",
   "hypothesis_state_audit",

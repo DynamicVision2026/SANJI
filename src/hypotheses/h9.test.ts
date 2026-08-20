@@ -1,55 +1,49 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { h9Evidence, pairH9Items } from "./h9";
+import { evaluateH9Aggregate } from "./h9";
 
-const items = [
-  { id: "r-hashi", target_kanji: "橋", target_reading_id: 101, item_type: "yomi" },
-  { id: "w-hashi", target_kanji: "橋", target_reading_id: 101, item_type: "kakitori" },
-  { id: "w-hashi-other-reading", target_kanji: "橋", target_reading_id: 102, item_type: "kakitori" },
-  { id: "r-kawa", target_kanji: "川", target_reading_id: 201, item_type: "yomi" },
-  { id: "r-kawa-2", target_kanji: "川", target_reading_id: 201, item_type: "yomi" },
-  { id: "diagnostic-kawa", target_kanji: "川", target_reading_id: 201, item_type: "diagnostic" },
-] as const;
+const thresholds = { minimumObservationsPerSide: 5, accuracyGapThreshold: 0.4 };
 
-test("pairs one recognition and one production item only for the same kanji and reading", () => {
-  assert.deepEqual(pairH9Items(items), [
-    {
-      recognition_item_id: "r-hashi",
-      production_item_id: "w-hashi",
-      target_kanji: "橋",
-      target_reading_id: 101,
-    },
-  ]);
-});
-
-test("recognition-correct/production-wrong divergence records H9 evidence", () => {
-  const pair = pairH9Items(items)[0]!;
+test("aggregate recognition-production gap emits H9 only at the configured floor and threshold", () => {
   assert.deepEqual(
-    h9Evidence(pair, [
-      { item_id: "r-hashi", is_correct: true },
-      { item_id: "w-hashi", is_correct: false },
-    ]),
-    {
-      hypothesis: "H9",
-      target_kanji: "橋",
-      target_reading_id: 101,
-      recognition_correct: true,
-      production_correct: false,
-      item_ids: ["r-hashi", "w-hashi"],
-    },
+    evaluateH9Aggregate(
+      { recognitionAttempts: 5, recognitionCorrect: 5, productionAttempts: 5, productionCorrect: 3 },
+      thresholds,
+    ),
+    { hypothesis: "H9", recognitionAccuracy: 1, productionAccuracy: 0.6, gap: 0.4 },
   );
 });
 
-test("matching correctness or an incomplete pair produces no H9 evidence", () => {
-  const pair = pairH9Items(items)[0]!;
-  assert.equal(
-    h9Evidence(pair, [
-      { item_id: "r-hashi", is_correct: true },
-      { item_id: "w-hashi", is_correct: true },
-    ]),
-    null,
-  );
-  assert.equal(h9Evidence(pair, [{ item_id: "r-hashi", is_correct: true }]), null);
+test("minimum observation floor is a hard gate on each side", () => {
+  assert.equal(evaluateH9Aggregate(
+    { recognitionAttempts: 5, recognitionCorrect: 5, productionAttempts: 4, productionCorrect: 0 },
+    thresholds,
+  ), null);
+  assert.equal(evaluateH9Aggregate(
+    { recognitionAttempts: 4, recognitionCorrect: 4, productionAttempts: 5, productionCorrect: 0 },
+    thresholds,
+  ), null);
 });
 
+test("similar high or low accuracies produce no H9 evidence", () => {
+  assert.equal(evaluateH9Aggregate(
+    { recognitionAttempts: 5, recognitionCorrect: 5, productionAttempts: 5, productionCorrect: 5 },
+    thresholds,
+  ), null);
+  assert.equal(evaluateH9Aggregate(
+    { recognitionAttempts: 5, recognitionCorrect: 1, productionAttempts: 5, productionCorrect: 0 },
+    thresholds,
+  ), null);
+});
+
+test("invalid aggregates and unsafe sample-floor configuration fail loudly", () => {
+  assert.throws(() => evaluateH9Aggregate(
+    { recognitionAttempts: 4, recognitionCorrect: 5, productionAttempts: 5, productionCorrect: 0 },
+    thresholds,
+  ), /cannot exceed/);
+  assert.throws(() => evaluateH9Aggregate(
+    { recognitionAttempts: 5, recognitionCorrect: 5, productionAttempts: 5, productionCorrect: 0 },
+    { ...thresholds, minimumObservationsPerSide: 2 },
+  ), /at least 3/);
+});

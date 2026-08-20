@@ -102,6 +102,16 @@ export interface RuntimeConfig {
    * (§19.5). Runtime configuration per §7.10 — not a constant.
    */
   readonly rubyGradeBoundary: number;
+
+  /**
+   * Issue #25 H9 aggregate evaluation. Both thresholds are provisional Week 4
+   * pilot-calibration values, not validated learner-behaviour constants.
+   */
+  readonly h9MinimumObservationsPerSide: number;
+  readonly h9AccuracyGapThreshold: number;
+
+  /** Trailing evaluation window in days; provisional alignment with §7A.3 recency. */
+  readonly h9EvaluationWindowDays: number;
 }
 
 type Env = Readonly<Record<string, string | undefined>>;
@@ -241,5 +251,8 @@ export function getRuntimeConfig(env: Env = process.env): RuntimeConfig {
       }
       return boundary;
     })(),
+    h9MinimumObservationsPerSide: readInt(env, "SANJI_H9_MIN_OBSERVATIONS_PER_SIDE", 5, 3),
+    h9AccuracyGapThreshold: readFraction(env, "SANJI_H9_ACCURACY_GAP_THRESHOLD", 0.4),
+    h9EvaluationWindowDays: readInt(env, "SANJI_H9_EVALUATION_WINDOW_DAYS", 60, 1),
   };
 }

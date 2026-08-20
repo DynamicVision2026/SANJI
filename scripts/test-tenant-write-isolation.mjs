@@ -191,3 +191,10 @@ const h1EvidenceTest = spawnSync(
   { env: process.env, stdio: "inherit" },
 );
 if (h1EvidenceTest.status !== 0) process.exit(h1EvidenceTest.status ?? 1);
+
+const h9AggregateTest = spawnSync(
+  process.execPath,
+  ["--import", "tsx", join(ROOT, "scripts", "test-h9-aggregate-evidence.mjs")],
+  { env: process.env, stdio: "inherit" },
+);
+if (h9AggregateTest.status !== 0) process.exit(h9AggregateTest.status ?? 1);
