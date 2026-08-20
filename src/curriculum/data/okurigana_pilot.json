@@ -4,15 +4,15 @@
   "source_sha256": "3b6b47b18122c707115261cbb7172abbb8b3b4b5f2fb746270acee3639914cde",
   "verification_status": "PENDING_HUMAN_REVIEW",
   "rules": [
-    { "id": "h6-akiramu", "accepted_forms": ["明らむ"], "rejected_forms": ["明るむ"], "source_page": 3, "basis": "通則1 例外(3)" },
-    { "id": "h6-ajiwau", "accepted_forms": ["味わう"], "rejected_forms": ["味う"], "source_page": 3, "basis": "通則1 例外(3)" },
-    { "id": "h6-itsukushimu", "accepted_forms": ["慈しむ"], "rejected_forms": ["慈む"], "source_page": 3, "basis": "通則1 例外(3)" },
-    { "id": "h6-kakawaru", "accepted_forms": ["関わる"], "rejected_forms": ["関る"], "source_page": 3, "basis": "通則1 例外(3)" },
-    { "id": "h6-ugokasu", "accepted_forms": ["動かす"], "rejected_forms": ["動す"], "source_page": 3, "basis": "通則2 本則" },
-    { "id": "h6-terasu", "accepted_forms": ["照らす"], "rejected_forms": ["照す"], "source_page": 3, "basis": "通則2 本則" },
-    { "id": "h6-hakarau", "accepted_forms": ["計らう"], "rejected_forms": ["計う"], "source_page": 3, "basis": "通則2 本則" },
-    { "id": "h6-okonau", "accepted_forms": ["行う", "行なう"], "rejected_forms": ["行る"], "source_page": 3, "basis": "通則1 許容" },
-    { "id": "h6-arawasu", "accepted_forms": ["表す", "表わす"], "rejected_forms": ["表る"], "source_page": 3, "basis": "通則1 許容" },
-    { "id": "h6-kotowaru", "accepted_forms": ["断る", "断わる"], "rejected_forms": ["断のる"], "source_page": 3, "basis": "通則1 許容" }
+    { "id": "h6-akiramu", "clause_id": "tsusoku1.reigai.3", "accepted_forms": ["明らむ"], "rejected_forms": ["明ららむ"], "source_page": 3, "basis": "通則1 例外(3)" },
+    { "id": "h6-ajiwau", "clause_id": "tsusoku1.reigai.3", "accepted_forms": ["味わう"], "rejected_forms": ["味う"], "source_page": 3, "basis": "通則1 例外(3)" },
+    { "id": "h6-itsukushimu", "clause_id": "tsusoku1.reigai.3", "accepted_forms": ["慈しむ"], "rejected_forms": ["慈む"], "source_page": 3, "basis": "通則1 例外(3)" },
+    { "id": "h6-kakawaru", "clause_id": "tsusoku1.reigai.3", "accepted_forms": ["関わる"], "rejected_forms": ["関わわる"], "source_page": 3, "basis": "通則1 例外(3)" },
+    { "id": "h6-ugokasu", "clause_id": "tsusoku2.honsoku.1", "accepted_forms": ["動かす"], "rejected_forms": ["動す"], "source_page": 3, "basis": "通則2 本則" },
+    { "id": "h6-terasu", "clause_id": "tsusoku2.honsoku.1", "accepted_forms": ["照らす"], "rejected_forms": ["照す"], "source_page": 3, "basis": "通則2 本則" },
+    { "id": "h6-hakarau", "clause_id": "tsusoku2.honsoku.1", "accepted_forms": ["計らう"], "rejected_forms": ["計う"], "source_page": 3, "basis": "通則2 本則" },
+    { "id": "h6-okonau", "clause_id": "tsusoku1.kyoyo", "accepted_forms": ["行う", "行なう"], "rejected_forms": ["行ななう"], "source_page": 3, "basis": "通則1 許容" },
+    { "id": "h6-arawasu", "clause_id": "tsusoku1.kyoyo", "accepted_forms": ["表す", "表わす"], "rejected_forms": ["表る"], "source_page": 3, "basis": "通則1 許容" },
+    { "id": "h6-kotowaru", "clause_id": "tsusoku1.kyoyo", "accepted_forms": ["断る", "断わる"], "rejected_forms": ["断のる"], "source_page": 3, "basis": "通則1 許容" }
   ]
 }
