@@ -118,6 +118,10 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
         run: npm run h1:evidence:test
+      - name: H7 live-Postgres evidence test (Issue #32)
+        env:
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
+        run: npm run h7:evidence:test
       - name: Plural target-reading migration and backfill test (0014)
         env:
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
