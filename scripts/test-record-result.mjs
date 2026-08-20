@@ -63,14 +63,36 @@ try {
     ...overrides,
   });
 
-  const recorded = await recordResult(appPool, event(A));
+  const recorded = await recordResult(appPool, event(A, { sourceKind: "targeted_practice" }));
   const stored = await admin.query(
     "select r.*, s.org_id, s.branch_id from results r join students s on s.id = r.student_id where r.id = $1",
     [recorded.id],
   );
-  if (recorded.inserted && stored.rowCount === 1 && stored.rows[0].org_id === A.org && stored.rows[0].branch_id === A.branch && stored.rows[0].wrong_answer_text === "学") {
-    pass("valid call inserts exactly one correctly tenant-scoped result");
-  } else fail("valid call inserts exactly one correctly tenant-scoped result", JSON.stringify({ recorded, stored: stored.rows }));
+  if (recorded.inserted && stored.rowCount === 1 && stored.rows[0].org_id === A.org && stored.rows[0].branch_id === A.branch && stored.rows[0].wrong_answer_text === "学" && stored.rows[0].source_kind === "targeted_practice") {
+    pass("valid sourceKind is persisted in the tenant-scoped result transaction");
+  } else fail("valid sourceKind is persisted in the tenant-scoped result transaction", JSON.stringify({ recorded, stored: stored.rows }));
+
+  const nullSourceItem = (await admin.query("insert into items(item_type, target_kanji, answer_text) values ('kakitori', '話', '話') returning id")).rows[0].id;
+  const nullSourceWorksheet = (await admin.query("insert into worksheets(org_id, branch_id, student_id, created_by_user_id, status) values ($1, $2, $3, $4, 'generated') returning id", [A.org, A.branch, A.student, A.user])).rows[0].id;
+  await admin.query("insert into worksheet_items(worksheet_id, item_id, position) values ($1, $2, 1)", [nullSourceWorksheet, nullSourceItem]);
+  const nullSource = await recordResult(appPool, event(A, { worksheetId: nullSourceWorksheet, itemId: nullSourceItem }));
+  const nullSourceStored = await admin.query("select source_kind from results where id = $1", [nullSource.id]);
+  if (nullSourceStored.rows[0]?.source_kind === null) pass("absent sourceKind persists as valid NULL provenance");
+  else fail("absent sourceKind persists as valid NULL provenance", JSON.stringify(nullSourceStored.rows));
+
+  const beforeInvalid = (await admin.query("select count(*)::int count from results")).rows[0].count;
+  try {
+    await recordResult(appPool, event(A, {
+      worksheetId: nullSourceWorksheet,
+      itemId: nullSourceItem,
+      sourceKind: "invented_source",
+    }));
+    fail("invalid sourceKind is rejected", "write unexpectedly succeeded");
+  } catch (error) {
+    const afterInvalid = (await admin.query("select count(*)::int count from results")).rows[0].count;
+    if (/sourceKind is unsupported/.test(error.message) && afterInvalid === beforeInvalid) pass("invalid sourceKind is rejected before any row is written");
+    else fail("invalid sourceKind is rejected before any row is written", `${error.message}; before=${beforeInvalid}, after=${afterInvalid}`);
+  }
 
   try {
     await recordResult(appPool, event(B, { orgId: A.org, branchId: A.branch, gradedByUserId: A.user }));
@@ -86,7 +108,7 @@ try {
     fail("incomplete worksheet-item input is rejected", "write unexpectedly succeeded");
   } catch {
     const count = await admin.query("select count(*)::int count from results where student_id = $1", [A.student]);
-    if (count.rows[0].count === 1) pass("incomplete input rolls back without a partial row");
+    if (count.rows[0].count === 2) pass("incomplete input rolls back without a partial row");
     else fail("incomplete input rolls back without a partial row", `rows=${count.rows[0].count}`);
   }
 
@@ -110,4 +132,3 @@ try {
 
 if (failures) process.exit(1);
 console.log("\nresult recording: PASS");
-
