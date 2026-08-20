@@ -7,6 +7,7 @@ const sql = readFileSync(join(REPO_ROOT, "db/migrations/0010_hypothesis_persiste
 const resultSourceSql = readFileSync(join(REPO_ROOT, "db/migrations/0011_result_source_kind.sql"), "utf8");
 const aggregateSql = readFileSync(join(REPO_ROOT, "db/migrations/0012_hypothesis_aggregate_observation.sql"), "utf8");
 const itemInputsSql = readFileSync(join(REPO_ROOT, "db/migrations/0013_item_hypothesis_inputs.sql"), "utf8");
+const pluralReadingSql = readFileSync(join(REPO_ROOT, "db/migrations/0014_item_target_reading_ids.sql"), "utf8");
 const errors = [];
 const requiredTables = [
   "hypothesis_master",
@@ -59,6 +60,15 @@ for (const column of ["okurigana_rule_id", "lexical_surface"]) {
 }
 if ((itemInputsSql.match(/add\s+column/giu) ?? []).length !== 2) {
   errors.push("0013 must add exactly the two authorized item input columns");
+}
+if (!/add\s+column\s+target_reading_ids\s+bigint\[\]\s+null/i.test(pluralReadingSql)) {
+  errors.push("0014 must add nullable items.target_reading_ids as bigint[]");
+}
+if (!/set\s+target_reading_ids\s*=\s*array\[target_reading_id\]/i.test(pluralReadingSql)) {
+  errors.push("0014 must preserve singular target_reading_id values in one-element arrays");
+}
+if (/drop\s+column\s+target_reading_id\b/i.test(pluralReadingSql)) {
+  errors.push("0014 must retain the singular items.target_reading_id compatibility column");
 }
 
 if (errors.length) failGate("Hypothesis Persistence Schema", "v2.5 §7A.1/§7A.8/§11.10/§15.8", errors);
