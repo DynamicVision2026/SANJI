@@ -20,6 +20,12 @@ export interface RecordResultInput {
   isCorrect: boolean;
   wrongAnswerText: string | null;
   gradedAt: Date;
+  /**
+   * Optional by design: NULL means provenance is unknown, so downstream
+   * evidence adapters skip rather than invent a source weight. Existing rows
+   * from before migration 0011 are also legitimately NULL.
+   */
+  sourceKind?: ResultSourceKind;
 }
 
 export interface RecordedResult {
@@ -28,6 +34,16 @@ export interface RecordedResult {
 }
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu;
+const RESULT_SOURCE_KINDS = [
+  "probe_item",
+  "targeted_practice",
+  "manual_with_response",
+  "incidental_item",
+  "home_unsupervised",
+  "manual_without_response",
+  "aggregate",
+] as const;
+export type ResultSourceKind = (typeof RESULT_SOURCE_KINDS)[number];
 
 function validate(input: RecordResultInput): void {
   for (const [name, value] of Object.entries({
@@ -46,6 +62,9 @@ function validate(input: RecordResultInput): void {
   }
   if (!(input.gradedAt instanceof Date) || !Number.isFinite(input.gradedAt.getTime())) {
     throw new Error("gradedAt must be a valid Date");
+  }
+  if (input.sourceKind !== undefined && !(RESULT_SOURCE_KINDS as readonly unknown[]).includes(input.sourceKind)) {
+    throw new Error("sourceKind is unsupported");
   }
 }
 
@@ -80,9 +99,9 @@ export async function recordResult(database: ResultDatabase, input: RecordResult
     const inserted = await client.query<{ id: string }>(
       `insert into results (
          worksheet_id, item_id, student_id, is_correct,
-         wrong_answer_text, graded_at, graded_by_user_id
+         wrong_answer_text, graded_at, graded_by_user_id, source_kind
        )
-       select $4, $5, s.id, $6, $7, $8, $9
+       select $4, $5, s.id, $6, $7, $8, $9, $10
        from students s
        join worksheets w
          on w.id = $4 and w.student_id = s.id
@@ -101,6 +120,7 @@ export async function recordResult(database: ResultDatabase, input: RecordResult
         input.wrongAnswerText,
         input.gradedAt,
         input.gradedByUserId,
+        input.sourceKind ?? null,
       ],
     );
     if (!inserted.rows[0]) throw new Error("result context does not identify one tenant-scoped worksheet item");
