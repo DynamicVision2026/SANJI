@@ -1,262 +1,257 @@
-# Hypothesis evidence input contracts (H1–H9)
+# Hypothesis required-input audit (H1–H9)
 
-This document is the implementation boundary between the §7A hypothesis
-definitions and `hypothesis_evidence`. It records where each classifier obtains
-its inputs, whether one source event or an aggregate produces evidence, and the
-stable identity used for idempotency. It does not authorize a missing schema,
-asset, or classifier contract.
+This is the implementation boundary between `docs/spec-v2.5.md` §7A and
+`hypothesis_evidence`. It audits the schema on `main` after PR #41. A
+defined input shape is not treated as implemented unless a `src/` producer
+actually populates it. This document authorizes no schema, asset, classifier,
+or persistence change.
 
-The repository still lacks the original full §7A.1–§7A.4 base text. The
-entries below therefore combine the binding v2.4/v2.5 amendments with explicit
-architect/coordinator rulings already recorded in Issues #18, #21, #23, #24,
-and #25. Where those authorities do not identify a persisted input, this
-document marks a gap instead of treating the semantic description as a data
-contract.
+Status terms:
 
-## Shared rules
+- **contract-complete**: every derivation term has an exact stable location,
+  identity, and cardinality;
+- **producer-complete**: real application code populates every required input;
+- **blocked**: a required location, admitted asset, or producer is absent.
 
-- Tenant-derived inputs are read under the `app.current_org` and
-  `app.current_user` RLS context. Curriculum tables and committed assets are
-  global reference data and contain no student PII.
-- A row-derived classifier emits at most one evidence row for one result and
-  hypothesis. Its stable `evidence_key` is `<results.id>:<hypothesis_id>` (for
-  example, `550e8400-e29b-41d4-a716-446655440000:H2`). A mutable answer,
-  classifier output, curriculum row number, or array order must never be part
-  of that identity.
-- An aggregate classifier uses the aggregate observation's database-enforced
-  natural key. It must not manufacture a representative `results.id`.
-- `results.source_kind` supplies the §11.4.1 source factor for row-derived
-  evidence. `NULL` response text or `NULL` source kind produces no evidence;
-  it does not produce a zero-weight row.
-- Evidence insertion never changes `student_hypothesis_state` or creates or
-  resolves a `state_recommendation`.
+## Shared physical contract
+
+- Row-derived H1–H8 evidence is zero or one row per result/hypothesis. Its
+  immutable key is `<results.id>:<hypothesis_id>`. Mutable answer text,
+  asset row order, JSON array index, and classifier output are never identity.
+- H9 is aggregate. Its observation identity is
+  `(student_id, kanji, reading_id, window_start, hypothesis_id)`, with the
+  migration's partial unique key when `reading_id IS NULL`.
+- A captured wrong response is `results.wrong_answer_text`; correctness is
+  `results.is_correct`; time is `results.graded_at`; provenance category is
+  nullable `results.source_kind`. `recordResult` writes the first three but
+  has no `sourceKind` input, so leaves `source_kind` null. PR #38 proposes
+  that producer change but is not on `main` at this audit.
+- Current `items` has `item_type`, `target_kanji`,
+  `target_reading_id`, `answer_text`, `body_text`,
+  `validation_status`, and `validation_report`. It does not have the spec
+  sketch's `distractors`, `discriminates`, or `verification`, nor H6/H7's
+  authorized `okurigana_rule_id` and `lexical_surface`. PR #39 proposes
+  the latter columns but is not on `main`.
+- Student stage is derived from `students.grade`; ownership is
+  `students.org_id` and `students.branch_id`. Tenant reads/writes use the
+  existing transaction-local `app.current_org` and `app.current_user` GUCs.
+- `manual_error_entries` has no response text, item, modality, or source
+  factor, and no `src/` producer. It cannot substitute for a result event.
+- Null response or null source kind emits no row, not zero-weight evidence.
+  Evidence writers never mutate `student_hypothesis_state` or
+  `state_recommendation`.
+- No production item-generation/`items` insertion path exists in `src/`.
+  Pilot fixtures prove classifiers, not production producers.
+
+## Summary
+
+| Hypothesis | Cardinality | Derivation contract | Producer on `main` | Blocking condition |
+|---|---|---|---|---|
+| H1 | Row | Bounded/incomplete | Partial | source kind, confirmed blank, H8 exclusion |
+| H2 | Row | **Complete** | Partial | no item producer/caller; source kind unwritten |
+| H3 | Row | Incomplete | Missing | admitted set and item attribution |
+| H4 | Row | Incomplete | Missing | reviewed curation and item attribution |
+| H5 | Row | Incomplete | Missing | alternation asset and rule attribution |
+| H6 | Row | Approved follow-up not landed | Missing | asset pending; item field/producer/adapter |
+| H7 | Row | Approved follow-up not landed | Missing | item field/producer/adapter |
+| H8 | Row | Incomplete | Missing | admitted pair snapshot and attribution |
+| H9 | Aggregate | Complete at adapter boundary | Missing upstream | no accumulator or caller |
+
+H2 is the only hypothesis whose classifier derivation has an exact location
+and identity for every term today. It is not end-to-end ready: item generation,
+the result-to-H2 caller, and a merged source-kind producer remain absent. Thus
+the architect's “H2 likely passes” statement is confirmed for input-contract
+completeness, not runtime integration. No hypothesis is producer-complete.
 
 ## H1 — non-recognition
 
-**Status:** implemented for result-derived evidence.
+| Term | Exact source | Producer status |
+|---|---|---|
+| event identity | `results.id`, `item_id`, `student_id` | `recordResult` exists |
+| wrong/nonblank response | `results.is_correct`, `wrong_answer_text` | writer exists; null cannot distinguish confirmed blank from uncaptured |
+| time/source factor | `results.graded_at`, `source_kind` | time written; source kind not written |
+| target/expected form | `items.item_type`, `target_kanji`, `answer_text` | fields exist; no item writer |
+| stage/tenant | `students.grade`, `org_id`, `branch_id` | student persistence exists |
+| H2 exclusion | `kanji_reading_stage.kanji`, `reading_kana`, `school_stage` | admitted curriculum |
+| H8 exclusion | admitted confusable pair containing target/response | no admitted asset/table |
 
-- **Source fields:** `results.id`, `student_id`, `item_id`, `is_correct`,
-  `wrong_answer_text`, `graded_at`, and `source_kind`; `students.org_id`,
-  `branch_id`, and `grade`; `items.item_type`, `target_kanji`, and
-  `answer_text`; and stage-eligible `kanji_reading_stage.kanji`,
-  `reading_kana`, and `school_stage` rows for the target.
-- **Cardinality:** row-derived; zero or one H1 evidence row per result.
-- **Stable evidence key:** `<results.id>:H1`.
-- **Known missing inputs:** a confirmed blank cannot yet be distinguished from
-  a response that was not captured because `results` has no response-status
-  field. H8 exclusion is unavailable until a human-admitted §6.7
-  confusable-pairs asset exists. Elementary grade-specific reading availability
-  is represented only by the coarse `elementary` stage in the current adapter
-  (Issue #19).
+The merged `persistH1Evidence` reads these fields and uses the coarse
+elementary/junior-high/high-school mapping approved in Issue #19, but no
+production event path calls it.
 
-## H2 — on/kun selection
+- **Cardinality/key:** row-derived; `<results.id>:H1`.
+- **Item fields:** `item_type`, `target_kanji`, and `answer_text` exist.
+- **Asset gate:** reading-stage data is admitted; H8 exclusion remains bounded
+  until a human-admitted §6.7 pair asset exists.
+- **Gaps:** source-kind producer, confirmed-blank representation, H8 exclusion,
+  item producer, and result-event caller.
 
-**Status:** contract resolved; result-derived persistence is reviewed
-separately from this document.
+## H2 — on/kun substitution
 
-- **Source fields:** the same tenant/result/item fields as H1, including
-  `items.target_reading_id`; the referenced target row and student-stage-
-  eligible alternatives from `kanji_reading_stage.id`, `kanji`,
-  `reading_kana`, `reading_type`, `school_stage`, and `source_page`.
-- **Cardinality:** row-derived; zero or one H2 evidence row per result. Evidence
-  exists only when the captured wrong reading is an eligible, source-backed
-  reading of the same kanji with the opposite `reading_type`.
-- **Stable evidence key:** `<results.id>:H2`.
-- **Known missing inputs:** no H2-specific input is currently missing. The
-  coarse elementary-stage limitation described for H1 also bounds H2 stage
-  filtering until Issue #19 is resolved.
+| Term | Exact source | Producer status |
+|---|---|---|
+| target character/reading | `items.target_kanji`, `target_reading_id` → `kanji_reading_stage.id`, `reading_kana`, `reading_type` | fields exist; no item writer |
+| observed reading | `results.wrong_answer_text` | `recordResult` exists |
+| eligible opposite readings | `kanji_reading_stage.kanji`, `reading_kana`, `reading_type`, `school_stage`, `source_page` | admitted curriculum |
+| stage/tenant | `students.grade`, `org_id`, `branch_id` | exists |
+| source factor | `results.source_kind` | column exists; merged writer omits it |
+
+The classifier accepts only a source-backed reading of the same kanji with the
+opposite `reading_type`; arbitrary wrong text is unclassified.
+
+- **Cardinality/key:** row-derived; `<results.id>:H2`.
+- **Item fields:** all classifier item fields exist.
+- **Asset gate:** `kanji_reading_stage` is admitted; no curated set required.
+- **Audit result:** **contract-complete**, uniquely among H1–H9. The committed
+  pilot verifier is not a production item writer or persistence caller.
 
 ## H3 — homophone selection
 
-**Status:** blocked input contract.
+H3 is a kakitori response selecting another member of a taught on-reading
+homophone set.
 
-- **Required source fields:** tenant/result provenance as above; an item-level
-  stable identifier for the intended homophone member; the captured response;
-  a grade/stage-keyed 同音異義語 set derived from
-  `kanji_reading_stage.reading_kana` and curated for taught membership; and the
-  committed blind-cloze/counterfactual verification outcome required by
-  §7A.7.
-- **Cardinality:** intended to be row-derived; zero or one H3 evidence row per
-  result.
-- **Stable evidence key:** `<results.id>:H3` once the required item attribution
-  exists.
-- **Known missing inputs:** the repository has no admitted, queryable
-  grade-keyed homophone-set asset and `items` has neither the specified
-  `distractors`/`discriminates` fields nor a stable homophone-member identifier.
-  Do not infer membership from mutable sentence text.
-- **Resolution options:** (1) commit a provenance-bearing homophone-set asset
-  with stable member IDs and add the selected member ID to the item contract;
-  (2) add normalized `items.distractors` plus an immutable validation record
-  that names the admitted set/version; or (3) leave H3 evidence disabled until
-  both the curated set and item attribution land.
+| Term | Exact source | Producer status |
+|---|---|---|
+| result/response | standard row fields: `results.id`, `item_id`, `student_id`, `is_correct`, `wrong_answer_text`, `graded_at`, `source_kind` | partial; source kind absent |
+| target seed | `items.target_kanji`, `target_reading_id` → reading-stage row | fields exist; no item writer |
+| candidates | group `kanji_reading_stage` by normalized `reading_kana`, retain `reading_type='on'`, filter by stage | mechanically derivable; no admitted set/materializer |
+| item set/member | **UNRESOLVED** exact item column/relation | missing |
+| verification | §7A.7 blind-cloze/counterfactual result; spec sketches `items.verification` | column/producer absent |
 
-## H4 — same-reading, different-kanji selection
+- **Cardinality/key:** row-derived; `<results.id>:H3`.
+- **Stable asset identity:** member `(set_id, kanji, reading_kana)`, never row
+  order or array index.
+- **Asset gate:** versioned taught-membership set admitted after mechanical
+  grouping/pruning.
+- **Contract options:** immutable item set/member columns; a normalized
+  item-to-member relation; or typed discriminator JSON storing the stable tuple
+  and admitted snapshot. This audit does not choose.
 
-**Status:** blocked input contract.
+## H4 — same-kun-reading kanji selection
 
-- **Required source fields:** tenant/result provenance; captured response;
-  item-level intended member and set identity; the grade-keyed 同訓異字 set;
-  and its blind-cloze/counterfactual verification result. The set is distinct
-  from free sentence context and from an LLM's declared intent.
-- **Cardinality:** intended to be row-derived; zero or one H4 evidence row per
-  result.
-- **Stable evidence key:** `<results.id>:H4` once stable set/member attribution
-  exists.
-- **Known missing inputs:** no admitted grade-keyed 同訓異字 set, stable set or
-  member identifier, item attribution, or H4 golden-set validation record is
-  committed. The frozen disambiguation word-family files are not a substitute
-  for this production contract.
-- **Resolution options:** (1) commit a reviewed, versioned 同訓異字 asset with
-  stable set/member IDs and persist those IDs on items; (2) authorize a
-  normalized item-discriminator relation referencing that asset; or (3) keep
-  H4 evidence disabled until the asset and behavioural verifier are both
-  available.
+H4 cannot be safely generated by reading grouping alone: its distinctions are
+semantic and require original §6.7 curation.
+
+| Term | Exact source | Producer status |
+|---|---|---|
+| result/response | same row fields as H3 | partial |
+| target | `items.target_kanji`, `target_reading_id` | fields exist; no writer |
+| semantic set | proposed §6.2 `dokun_set(set_id, kanji, reading_kana, semantic_note_ja, min_grade)` | no asset/table/curator path |
+| item set/member | **UNRESOLVED** exact item column/relation | missing |
+| verification | §7A.7 blind-cloze/counterfactual result | no `items.verification` producer |
+
+- **Cardinality/key:** row-derived; `<results.id>:H4`.
+- **Stable identity:** generated `set_id`, immutable once assigned and never
+  derived from editable `semantic_note_ja`; members use stable set/kanji/reading.
+- **Asset gate:** named-human-reviewed §6.7 original curation.
+- **Contract options:** item `dokun_set_id` plus member; normalized relation;
+  or typed discriminator JSON referencing an admitted snapshot.
+- **Sequencing:** H4 must follow H3 and H5, not be batched with them, because
+  its source is original curation rather than mechanical derivation.
 
 ## H5 — rendaku / sound alternation
 
-**Status:** blocked source asset and input contract.
+Lyman's Law can reject impossible candidates and assist generation from
+component readings, but cannot prove that a lexical surface undergoes rendaku
+or another alternation.
 
-- **Required source fields:** tenant/result provenance; captured response and
-  item target reading; source-backed base and alternated phonological forms;
-  and the carrier's §7A.7 blind-cloze result. `lexical_reading_rule` is the
-  specified curriculum-level source once the relevant rules exist.
-- **Cardinality:** intended to be row-derived; zero or one H5 evidence row per
-  result.
-- **Stable evidence key:** `<results.id>:H5` once a stable rule reference exists.
-- **Known missing inputs:** §19.2 remains open because curated rendaku rules
-  were not delivered; no 音便 exemplar asset or stable H5 rule identifier is
-  attached to an item. A base reading in `kanji_reading_stage` does not prove a
-  voiced compound reading.
-- **Resolution options:** (1) ingest a provenance-bearing rendaku/音便 rule
-  asset into `lexical_reading_rule` with stable rule identifiers and reference
-  one from each H5 item; (2) authorize a separate versioned phonological-rule
-  asset and item relation; or (3) keep H5 evidence disabled until the source
-  asset is delivered and reviewed.
+| Term | Exact source | Producer status |
+|---|---|---|
+| result/observed reading | standard row fields | partial |
+| target surface/answer | `items.answer_text`, `target_reading_id`; no dedicated current surface field | no item writer; surface unresolved |
+| components | `kanji_reading_stage.kanji`, `reading_kana`, `reading_type` | admitted |
+| alternation | proposed §6.2 `phono_alternation(surface, component_readings, surface_reading, alternation, min_grade)` | no admitted asset/materializer |
+| item rule | **UNRESOLVED** exact item field/relation | missing |
+| carrier verification | §7A.7 blind-cloze result | no `items.verification` producer |
+
+- **Cardinality/key:** row-derived; `<results.id>:H5`.
+- **Stable identity:** `(alternation_type, exemplar_surface)`, never position.
+- **Asset gate:** generated candidates require source or human review. Lyman's
+  Law is a partial generator, not admission. Rendaku delivery in §19.2 remains
+  incomplete.
+- **Contract options:** immutable H5 rule key on items; normalized item/rule
+  relation; or typed discriminator JSON with stable tuple and snapshot.
 
 ## H6 — okurigana
 
-**Status:** classifier asset correction is under separate review; persistence
-remains blocked on item attribution.
+| Term | Exact source | Producer status |
+|---|---|---|
+| result/response | standard row-derived result fields | partial |
+| attributed rule | authorized `items.okurigana_rule_id`, keyed to official clause plus inflection family | PR #39 open; no producer |
+| decision | `okurigana_pilot.json.rules[].id`, `clause_id`, `accepted_forms`, `rejected_forms` | classifier exists |
+| admission | asset `source_sha256`, `source_url`, `verification_status`; rule `source_page`, `basis` | `PENDING_HUMAN_REVIEW` |
 
-- **Source fields:** tenant/result provenance; captured response;
-  `items.target_kanji` and answer; and a reviewed okurigana rule containing a
-  stable word-derived `id`, official-clause `clause_id`, accepted forms,
-  rejected forms, and page/hash provenance.
-- **Cardinality:** row-derived; zero or one H6 evidence row per result, only for
-  an explicit rejected form of the attributed rule.
-- **Stable evidence key:** `<results.id>:H6`.
-- **Known missing inputs:** the current `items` schema does not name an H6 rule
-  or official clause. The pilot asset must complete human review before it can
-  become production authority. Inferring a rule from `answer_text` would make
-  identity depend on mutable content.
-- **Resolution options:** (1) after the asset is admitted, add a stable H6 rule
-  reference to the item contract (recommended); (2) create a normalized
-  item-to-okurigana-rule relation; or (3) defer H6 evidence persistence rather
-  than infer a rule from answer text.
+- **Cardinality/key:** row-derived; `<results.id>:H6`.
+- **Item fields:** `target_kanji` and `answer_text` exist but cannot replace
+  immutable rule attribution; inference from sentence/answer text is forbidden.
+- **Asset gate:** separate named-human §19.10 sign-off is mandatory.
+- **Gaps:** authorized column not merged, no item producer, no adapter/caller,
+  and asset pending.
 
-## H7 — jukujikun / compositional-reading confusion
+## H7 — jukujikun / compositional confusion
 
-**Status:** the H7 polarity inversion and reviewed `reading_variants` asset are
-landed, including `rv-ashita` for 明日/あした.
+| Term | Exact source | Producer status |
+|---|---|---|
+| result/reading | standard row-derived result fields | partial |
+| lexical surface | authorized `items.lexical_surface` | PR #39 open; no producer |
+| source readings | `lexical_reading_rule.surface`, `reading_kana`, `rule_kind`, `source_page` | admitted |
+| valid variants | `reading_variants.variants[].variant_id`, `surface`, `reading_kana`, provenance/frozen verification | `rv-ashita` landed |
+| compositional set | per-character `kanji_reading_stage.kanji`, `reading_kana` concatenations | classifier computes at query time |
 
-- **Source fields:** tenant/result provenance; item surface and captured
-  reading; valid whole-surface readings from `lexical_reading_rule.surface`,
-  `reading_kana`, `rule_kind`, and `source_page`; a narrow, provenance-bearing
-  `reading_variants` asset (`schema_version`, `snapshot_version`, and per-entry
-  `variant_id`, `surface`, `reading_kana`, provenance, and verification fields)
-  for valid readings not represented by that source;
-  and the compositional concatenation set computed from each surface
-  character's `kanji_reading_stage.kanji` and `reading_kana` rows.
-- **Cardinality:** row-derived; zero or one H7 evidence row per result. H7 fires
-  only on a positive match in the computed compositional set after valid
-  whole-surface readings are accepted. An arbitrary non-matching response is
-  not H7 evidence.
-- **Stable evidence key:** `<results.id>:H7`. Curriculum database serial IDs,
-  JSON array positions, and computed-reading order are not evidence identity.
-- **Known missing inputs:** Issue #23 must land the polarity inversion and the
-  reviewed `reading_variants` asset. Its initial stable semantic identifier is
-  `rv-ashita` for 明日/あした; this ID, not its array position, is the variant's
-  identity. Curated variants require reviewer/date;
-  source-backed variants require page provenance. Ordinary component readings
-  belong in `kanji_reading_stage`, not in the variant asset.
+H7 fires only on a positive compositional match after valid whole-surface
+readings and variants are accepted. 明日/あした must not emit H7 evidence.
+
+- **Cardinality/key:** row-derived; `<results.id>:H7`; variants use
+  `variant_id`, never array position.
+- **Asset gate:** lexical rules and reading variants are admitted.
+- **Gaps:** item surface column not merged and no producer, adapter, or caller.
 
 ## H8 — visual confusion
 
-**Status:** blocked on human admission and item attribution.
-
-- **Required source fields:** tenant/result provenance; captured production
-  response; item target and stable contrast-kanji pair identity; and an
-  admitted, versioned §6.7 confusable-pairs snapshot containing pair members,
-  decision, reviewer, review date, basis, generator/input versions, and the
-  counterfactual/blind-cloze validation outcome.
-- **Cardinality:** intended to be row-derived; zero or one H8 evidence row per
-  result.
-- **Stable evidence key:** `<results.id>:H8` once pair attribution exists.
-- **Known missing inputs:** the repository snapshot is candidate-only and all
-  pairs remain pending; it is not a production, queryable admitted-pair table.
-  `items` also lacks the v2.5 `contrast_kanji`/snapshot reference. H8 cannot be
-  inferred merely because a response happens to contain a visually similar
-  character.
-- **Resolution options:** (1) human-prune and commit a numbered admitted
-  snapshot, then persist pair and snapshot IDs on items; (2) create a global
-  admitted-pair table plus a normalized item reference; or (3) keep H8
-  evidence disabled while candidate decisions remain pending.
-
-## H9 — production–recognition asymmetry
-
-**Status:** the aggregate-evidence persistence path is landed, but the upstream
-`error_profile` accumulator for real modality/window/source-factor data is not
-implemented, so the adapter is currently unfed.
-
-- **Source fields:** student/tenant ownership and per-`(kanji, reading_id)`
-  recognition and production attempts/correct counts from `error_profile`,
-  constrained to a trailing evaluation window; the lowest §11.4.1 source
-  factor among contributing observations; and
-  `hypothesis_aggregate_observation.id`, `student_id`, `org_id`,
-  `hypothesis_id`, `kanji`, nullable `reading_id`, `window_start`, `window_end`,
-  `recognition_attempts`, `recognition_correct`, `production_attempts`,
-  `production_correct`, `gap`, and `min_source_factor`.
-- **Cardinality:** aggregate; at most one evidence event per
-  `(student_id, kanji, reading_id, evaluation_window)`. Evaluate on report
-  generation and on demand, not per grading event.
-- **Stable evidence key:** the observation identity
-  `(student_id, kanji, reading_id, window_start, hypothesis_id)`, enforced by
-  the aggregate table's unique constraint (and the corresponding partial
-  unique key without `reading_id` when it is `NULL`). The evidence-key string
-  is `H9:<student_id>:<NFC-kanji>:<reading_id-or-none>:<window_start>`. It never
-  contains a contributing result ID, window-end date, mutable count, accuracy,
-  or threshold.
-- **Current provisional policy:** trailing 60 days, at least five recognition
-  and five production observations, accuracy gap at least 0.40, and
-  `min_source_factor` equal to the lowest source factor among contributors.
-  These values are placeholders pending Week 4 pilot calibration. H9 is
-  expected to fire rarely in a student's first month and cannot fire for
-  home-practice-only students because home practice supplies no production
-  evidence.
-- **Known missing inputs:** the authorized aggregate migration and evaluator
-  must land before H9 evidence exists. In addition, the current
-  `error_profile` placeholder has only undifferentiated `attempts`, `correct`,
-  `last_seen_at`, and free-form `provenance`; it cannot yet supply modality-
-  separated observations, trailing-window membership, or the minimum source
-  factor. The aggregate evaluator may consume those totals once an accumulator
-  has produced them, but must not pretend the current row already contains
-  them. `hypothesis_evidence.source_type`
-  distinguishes `result` from `aggregate`; aggregate evidence has
-  `source_record_id = NULL` and references
-  `aggregate_observation_id -> hypothesis_aggregate_observation` through the
-  tenant/hypothesis-bound composite foreign key. A unique aggregate-observation
-  index permits at most one evidence row for an aggregate.
-
-## Implementation readiness summary
-
-| Hypothesis | Cardinality | Input contract status |
+| Term | Exact source | Producer status |
 |---|---|---|
-| H1 | Row-derived | Implemented; bounded exclusions documented |
-| H2 | Row-derived | Resolved |
-| H3 | Row-derived | Blocked: curated set and item attribution missing |
-| H4 | Row-derived | Blocked: reviewed set, attribution, and verifier missing |
-| H5 | Row-derived | Blocked: rendaku/音便 source asset and rule attribution missing |
-| H6 | Row-derived | Blocked: admitted rule asset and item rule reference missing |
-| H7 | Row-derived | Issue #23 polarity/variant work must land first |
-| H8 | Row-derived | Blocked: no admitted pair snapshot or item pair reference |
-| H9 | Aggregate | Issue #25 aggregate schema/evaluator must land first |
+| production response | standard result fields; only production item types qualify | partial |
+| target | `items.target_kanji` | exists; no writer |
+| pair/snapshot | §6.7 canonical `(kanji_a, kanji_b)` plus `snapshot_version`; item location is **UNRESOLVED** | candidate pilots only |
+| admission | decision, reviewer/date, basis, generator/input versions, and behavioral result | all candidates pending |
+
+- **Cardinality/key:** row-derived; `<results.id>:H8`.
+- **Stable asset identity:** `(snapshot_version, canonical kanji_a,
+  canonical kanji_b)`; score and order are not identity.
+- **Asset gate:** named-human-admitted, queryable §6.7 snapshot.
+- **Contract options:** pair/snapshot columns on items; normalized item-to-pair
+  relation; or typed discriminator record with the stable tuple. No admission
+  producer, attribution producer, adapter, or runtime path exists.
+
+## H9 — production/recognition asymmetry
+
+| Term | Exact source | Producer status |
+|---|---|---|
+| modality | `items.item_type` via `results.item_id` (`yomi` recognition, `kakitori` production) | rows exist; no accumulator |
+| correctness/time/factor | `results.is_correct`, `graded_at`, `source_kind` | source kind unwritten |
+| target | `items.target_kanji`, `target_reading_id` | fields exist; no item writer |
+| tenant/student | `students.id`, `org_id`, `branch_id` | exists |
+| aggregate | `hypothesis_aggregate_observation` ownership, hypothesis, kanji/reading, window, modality counts, gap, `min_source_factor` | table/adapter landed; no accumulator |
+
+- **Cardinality/key:** aggregate; one event per
+  `(student_id, kanji, reading_id, window_start, hypothesis_id)`. Evidence
+  has `source_type='aggregate'`, null `source_record_id`, and the observation
+  FK. String key:
+  `H9:<student_id>:<NFC-kanji>:<reading_id-or-none>:<window_start>`.
+- **Policy:** provisional trailing 60 days, at least five observations per
+  modality, gap ≥0.40, and lowest contributing §11.4.1 factor. Evaluate on
+  report generation or demand, never per grading event.
+- **Asset gate:** none beyond admitted curriculum reading identity.
+- **Gaps:** `error_profile` has only combined attempts/correct and lacks
+  modality, window, and minimum factor; no accumulator reads results; no
+  report/on-demand caller exists; source kind is unwritten. The adapter is
+  therefore unfed.
+
+## Decisions required before implementation resumes
+
+Architecture must select item attribution for H3, H4, H5, and H8 before their
+classifiers or adapters are built. Production work must also add item writers
+and source-kind capture; otherwise even contract-complete H2 has no live input
+path. H3 and H5 may proceed after their attribution/asset contracts are
+decided. H4 remains last because its reviewed original curation is not
+mechanically derivable.
