@@ -23,15 +23,15 @@ Status terms:
   migration's partial unique key when `reading_id IS NULL`.
 - A captured wrong response is `results.wrong_answer_text`; correctness is
   `results.is_correct`; time is `results.graded_at`; provenance category is
-  nullable `results.source_kind`. `recordResult` writes the first three but
-  has no `sourceKind` input, so leaves `source_kind` null. PR #38 proposes
-  that producer change but is not on `main` at this audit.
+  nullable `results.source_kind`. `recordResult` accepts an optional,
+  enum-validated `sourceKind` and persists it; omission deliberately stores
+  null, preserving the downstream skip-on-unknown contract (PR #38).
 - Current `items` has `item_type`, `target_kanji`,
   `target_reading_id`, `answer_text`, `body_text`,
-  `validation_status`, and `validation_report`. It does not have the spec
-  sketch's `distractors`, `discriminates`, or `verification`, nor H6/H7's
-  authorized `okurigana_rule_id` and `lexical_surface`. PR #39 proposes
-  the latter columns but is not on `main`.
+  `validation_status`, `validation_report`, nullable `okurigana_rule_id`, and
+  nullable `lexical_surface`. PR #39 landed the latter two intrinsic,
+  generation-time fields. It still does not have the spec sketch's
+  `distractors`, `discriminates`, or `verification`.
 - Student stage is derived from `students.grade`; ownership is
   `students.org_id` and `students.branch_id`. Tenant reads/writes use the
   existing transaction-local `app.current_org` and `app.current_user` GUCs.
@@ -47,19 +47,21 @@ Status terms:
 
 | Hypothesis | Cardinality | Derivation contract | Producer on `main` | Blocking condition |
 |---|---|---|---|---|
-| H1 | Row | Bounded/incomplete | Partial | source kind, confirmed blank, H8 exclusion |
-| H2 | Row | **Complete** | Partial | no item producer/caller; source kind unwritten |
+| H1 | Row | Bounded/incomplete | Partial | confirmed blank, H8 exclusion, no caller |
+| H2 | Row | **Complete** | Partial | no item producer or evidence caller |
 | H3 | Row | Incomplete | Missing | admitted set and item attribution |
 | H4 | Row | Incomplete | Missing | reviewed curation and item attribution |
 | H5 | Row | Incomplete | Missing | alternation asset and rule attribution |
-| H6 | Row | Approved follow-up not landed | Missing | asset pending; item field/producer/adapter |
-| H7 | Row | Approved follow-up not landed | Missing | item field/producer/adapter |
+| H6 | Row | Item location resolved | Missing | asset pending; item producer/adapter absent |
+| H7 | Row | Item location resolved | Missing | item producer/adapter absent |
 | H8 | Row | Incomplete | Missing | admitted pair snapshot and attribution |
 | H9 | Aggregate | Complete at adapter boundary | Missing upstream | no accumulator or caller |
 
 H2 is the only hypothesis whose classifier derivation has an exact location
-and identity for every term today. It is not end-to-end ready: item generation,
-the result-to-H2 caller, and a merged source-kind producer remain absent. Thus
+and identity for every term today. It is not end-to-end ready: item generation
+and the result-to-H2 caller remain absent. Although `recordResult` can now persist
+an explicitly supplied source kind, no production caller supplies a complete
+item/result event chain. Thus
 the architect's “H2 likely passes” statement is confirmed for input-contract
 completeness, not runtime integration. No hypothesis is producer-complete.
 
@@ -69,7 +71,7 @@ completeness, not runtime integration. No hypothesis is producer-complete.
 |---|---|---|
 | event identity | `results.id`, `item_id`, `student_id` | `recordResult` exists |
 | wrong/nonblank response | `results.is_correct`, `wrong_answer_text` | writer exists; null cannot distinguish confirmed blank from uncaptured |
-| time/source factor | `results.graded_at`, `source_kind` | time written; source kind not written |
+| time/source factor | `results.graded_at`, `source_kind` | `recordResult` writes time and validates/persists optional `sourceKind` |
 | target/expected form | `items.item_type`, `target_kanji`, `answer_text` | fields exist; no item writer |
 | stage/tenant | `students.grade`, `org_id`, `branch_id` | student persistence exists |
 | H2 exclusion | `kanji_reading_stage.kanji`, `reading_kana`, `school_stage` | admitted curriculum |
@@ -83,8 +85,9 @@ production event path calls it.
 - **Item fields:** `item_type`, `target_kanji`, and `answer_text` exist.
 - **Asset gate:** reading-stage data is admitted; H8 exclusion remains bounded
   until a human-admitted §6.7 pair asset exists.
-- **Gaps:** source-kind producer, confirmed-blank representation, H8 exclusion,
-  item producer, and result-event caller.
+- **Gaps:** confirmed-blank representation, H8 exclusion, item producer, and
+  result-event/evidence caller. Source kind is supported when the caller
+  supplies it; omission remains a deliberate null/skip.
 
 ## H2 — on/kun substitution
 
@@ -94,7 +97,7 @@ production event path calls it.
 | observed reading | `results.wrong_answer_text` | `recordResult` exists |
 | eligible opposite readings | `kanji_reading_stage.kanji`, `reading_kana`, `reading_type`, `school_stage`, `source_page` | admitted curriculum |
 | stage/tenant | `students.grade`, `org_id`, `branch_id` | exists |
-| source factor | `results.source_kind` | column exists; merged writer omits it |
+| source factor | `results.source_kind` | optional validated input is persisted by `recordResult` |
 
 The classifier accepts only a source-backed reading of the same kanji with the
 opposite `reading_type`; arbitrary wrong text is unclassified.
@@ -112,7 +115,7 @@ homophone set.
 
 | Term | Exact source | Producer status |
 |---|---|---|
-| result/response | standard row fields: `results.id`, `item_id`, `student_id`, `is_correct`, `wrong_answer_text`, `graded_at`, `source_kind` | partial; source kind absent |
+| result/response | standard row fields: `results.id`, `item_id`, `student_id`, `is_correct`, `wrong_answer_text`, `graded_at`, `source_kind` | writer supports all fields when optional source kind is supplied |
 | target seed | `items.target_kanji`, `target_reading_id` → reading-stage row | fields exist; no item writer |
 | candidates | group `kanji_reading_stage` by normalized `reading_kana`, retain `reading_type='on'`, filter by stage | mechanically derivable; no admitted set/materializer |
 | item set/member | **UNRESOLVED** exact item column/relation | missing |
@@ -177,7 +180,7 @@ or another alternation.
 | Term | Exact source | Producer status |
 |---|---|---|
 | result/response | standard row-derived result fields | partial |
-| attributed rule | authorized `items.okurigana_rule_id`, keyed to official clause plus inflection family | PR #39 open; no producer |
+| attributed rule | nullable `items.okurigana_rule_id`, keyed to official clause plus inflection family | column landed in PR #39; no item producer |
 | decision | `okurigana_pilot.json.rules[].id`, `clause_id`, `accepted_forms`, `rejected_forms` | classifier exists |
 | admission | asset `source_sha256`, `source_url`, `verification_status`; rule `source_page`, `basis` | `PENDING_HUMAN_REVIEW` |
 
@@ -185,15 +188,15 @@ or another alternation.
 - **Item fields:** `target_kanji` and `answer_text` exist but cannot replace
   immutable rule attribution; inference from sentence/answer text is forbidden.
 - **Asset gate:** separate named-human §19.10 sign-off is mandatory.
-- **Gaps:** authorized column not merged, no item producer, no adapter/caller,
-  and asset pending.
+- **Gaps:** no generation path populates the landed column, no adapter/caller,
+  and the asset remains pending.
 
 ## H7 — jukujikun / compositional confusion
 
 | Term | Exact source | Producer status |
 |---|---|---|
 | result/reading | standard row-derived result fields | partial |
-| lexical surface | authorized `items.lexical_surface` | PR #39 open; no producer |
+| lexical surface | nullable `items.lexical_surface` | column landed in PR #39; no item producer |
 | source readings | `lexical_reading_rule.surface`, `reading_kana`, `rule_kind`, `source_page` | admitted |
 | valid variants | `reading_variants.variants[].variant_id`, `surface`, `reading_kana`, provenance/frozen verification | `rv-ashita` landed |
 | compositional set | per-character `kanji_reading_stage.kanji`, `reading_kana` concatenations | classifier computes at query time |
@@ -204,7 +207,8 @@ readings and variants are accepted. 明日/あした must not emit H7 evidence.
 - **Cardinality/key:** row-derived; `<results.id>:H7`; variants use
   `variant_id`, never array position.
 - **Asset gate:** lexical rules and reading variants are admitted.
-- **Gaps:** item surface column not merged and no producer, adapter, or caller.
+- **Gaps:** no generation path populates the landed surface column, and no
+  adapter or caller exists.
 
 ## H8 — visual confusion
 
@@ -228,7 +232,7 @@ readings and variants are accepted. 明日/あした must not emit H7 evidence.
 | Term | Exact source | Producer status |
 |---|---|---|
 | modality | `items.item_type` via `results.item_id` (`yomi` recognition, `kakitori` production) | rows exist; no accumulator |
-| correctness/time/factor | `results.is_correct`, `graded_at`, `source_kind` | source kind unwritten |
+| correctness/time/factor | `results.is_correct`, `graded_at`, `source_kind` | `recordResult` persists all when optional source kind is supplied |
 | target | `items.target_kanji`, `target_reading_id` | fields exist; no item writer |
 | tenant/student | `students.id`, `org_id`, `branch_id` | exists |
 | aggregate | `hypothesis_aggregate_observation` ownership, hypothesis, kanji/reading, window, modality counts, gap, `min_source_factor` | table/adapter landed; no accumulator |
@@ -244,14 +248,15 @@ readings and variants are accepted. 明日/あした must not emit H7 evidence.
 - **Asset gate:** none beyond admitted curriculum reading identity.
 - **Gaps:** `error_profile` has only combined attempts/correct and lacks
   modality, window, and minimum factor; no accumulator reads results; no
-  report/on-demand caller exists; source kind is unwritten. The adapter is
+  report/on-demand caller exists. Source-kind storage is available, but real
+  contributing events still depend on callers supplying it. The adapter is
   therefore unfed.
 
 ## Decisions required before implementation resumes
 
 Architecture must select item attribution for H3, H4, H5, and H8 before their
 classifiers or adapters are built. Production work must also add item writers
-and source-kind capture; otherwise even contract-complete H2 has no live input
-path. H3 and H5 may proceed after their attribution/asset contracts are
+and callers that actually supply source kind; otherwise even contract-complete
+H2 has no live input path. H3 and H5 may proceed after their attribution/asset contracts are
 decided. H4 remains last because its reviewed original curation is not
 mechanically derivable.
