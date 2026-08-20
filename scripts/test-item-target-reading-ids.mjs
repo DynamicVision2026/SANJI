@@ -19,6 +19,7 @@ try {
     await client.query(readFileSync(join(ROOT, "db/migrations", file), "utf8"));
   }
 
+  await client.query("insert into kanji_jouyou(kanji, in_kyoiku) values ('一', true)");
   const readingId = (
     await client.query(
       `insert into kanji_reading_stage
