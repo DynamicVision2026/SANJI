@@ -794,13 +794,15 @@ This is not stylistic. A parent report reading as a learning-disability assessme
 - **V2 Prospective probe.** Items matching `discriminating_probe` are deployed; the candidate predicts failure; the student either fails or does not
 - **V3 Cross-student recurrence.** Independently proposed for ≥3 students across ≥2 organisations, validating under V1 and V2 each time → human review → **promotion into the deterministic taxonomy**, with tables and rules written and the LLM removed from that path permanently
 
-| Stage | Requirement |
-|---|---|
-| Proposed | Emitted; content constraint passes |
-| Admitted | V1 held-out fit ≥ threshold |
-| Recommendable for active prescription | V2 confirms |
-| **Recommendable** | V1 and V2 passed, **and** weighted evidence exceeds the deterministic threshold by a configured margin |
-| Promoted | V3 recurrence; human review |
+| Stage | `candidate_hypothesis.status` | Requirement |
+|---|---|---|
+| Proposed | `proposed` | Emitted; content constraint passes |
+| Admitted | `admitted` | V1 held-out fit ≥ threshold |
+| Active for prescription | `active` | V2 prospective probe confirms |
+| **Recommendable to a parent** | `recommendable` | V1 and V2 passed, **and** weighted evidence exceeds the deterministic threshold by a configured margin |
+| Promoted | `promoted` | V3 recurrence; human review |
+
+`rejected` is a terminal state reachable from any stage, not a forward-progression ladder rung. The ladder therefore has five rows while the enum has six values: the ladder shows the five forward stages, and the enum represents every reachable state including terminal rejection.
 
 **Candidates face a strictly higher bar than H1–H9 before reaching a parent.** A deterministic hypothesis rests on frozen tables; a candidate rests on a model's proposal. Candidate mechanism prose never appears in the report — `parent_text` is generated under §10.2's containment assertion like every other report sentence.
 
