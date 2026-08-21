@@ -130,6 +130,12 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
         run: npm run track-a:generation:test
+      - name: Diagnostic-run authorization and audit integration (P1)
+        env:
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
+        run: |
+          node --import tsx --test src/diagnostics/create-diagnostic-run.test.ts
+          node --import tsx scripts/test-diagnostic-runs.mjs
 
   gate-classifier-determinism:
     name: "Gate: Classifier Determinism (§15.5)"
