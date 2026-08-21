@@ -60,7 +60,7 @@ export interface PersistedH7Evidence {
 /** Map only a closed-set compositional reading error to H7 evidence. */
 export function computeH7Evidence(input: H7EvidenceInput): WeightedEvidenceRow | null {
   if (input.isCorrect === true || input.responseText === null || input.sourceKind === null) return null;
-  if (!Object.hasOwn(SOURCE_FACTORS, input.sourceKind)) return null;
+  if (!Object.hasOwn(SOURCE_FACTORS, input.sourceKind)) throw new Error("result source_kind is unsupported");
   if (input.isCorrect !== false) throw new Error("result correctness must be recorded");
   if (input.itemType !== "yomi") return null;
   if (!input.targetKanji || !input.lexicalSurface) throw new Error("result item is incomplete for H7 evaluation");

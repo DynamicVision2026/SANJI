@@ -64,9 +64,8 @@ try {
       orgId: tenant.org, branchId: tenant.branch, studentId: tenant.student,
       worksheetId: worksheet, itemId: item, gradedByUserId: tenant.user,
       isCorrect: false, wrongAnswerText: response, gradedAt: new Date("2026-08-20T00:00:00.000Z"),
-      ...(sourceKind === null || sourceKind === "invented_source" ? {} : { sourceKind }),
+      ...(sourceKind === null ? {} : { sourceKind }),
     });
-    if (sourceKind === "invented_source") await admin.query("update results set source_kind = $1 where id = $2", [sourceKind, recorded.id]);
     return recorded.id;
   };
   const context = (tenant, resultId) => ({
@@ -99,15 +98,23 @@ try {
 
   const noResponseId = await makeResult(A, { response: null });
   const noSourceId = await makeResult(A, { sourceKind: null });
-  const unsupportedSourceId = await makeResult(A, { sourceKind: "invented_source" });
   const skipped = [
     await persistH7Evidence(appPool, context(A, noResponseId)),
     await persistH7Evidence(appPool, context(A, noSourceId)),
-    await persistH7Evidence(appPool, context(A, unsupportedSourceId)),
   ];
-  const skippedCount = (await admin.query("select count(*)::int count from hypothesis_evidence where source_record_id in ($1, $2, $3)", [noResponseId, noSourceId, unsupportedSourceId])).rows[0].count;
-  if (skipped.every((value) => value === null) && skippedCount === 0) pass("NULL response and NULL/unsupported source_kind independently skip H7 evidence");
+  const skippedCount = (await admin.query("select count(*)::int count from hypothesis_evidence where source_record_id in ($1, $2)", [noResponseId, noSourceId])).rows[0].count;
+  if (skipped.every((value) => value === null) && skippedCount === 0) pass("NULL response and NULL source_kind independently skip H7 evidence");
   else fail("H7 skip gates", JSON.stringify({ skipped, skippedCount }));
+
+  const unsupportedSourceId = await makeResult(A, { sourceKind: "aggregate" });
+  try {
+    await persistH7Evidence(appPool, context(A, unsupportedSourceId));
+    fail("unsupported non-null source_kind fails loudly", "evaluation unexpectedly succeeded");
+  } catch (error) {
+    const count = (await admin.query("select count(*)::int count from hypothesis_evidence where source_record_id = $1", [unsupportedSourceId])).rows[0].count;
+    if (error.message === "result source_kind is unsupported" && count === 0) pass("unsupported non-null source_kind rolls back without H7 evidence");
+    else fail("unsupported source_kind error and rollback", JSON.stringify({ message: error.message, count }));
+  }
 
   const malformedId = await makeResult(A, { surface: null });
   try {

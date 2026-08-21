@@ -25,10 +25,16 @@ test("unknown response and valid reading variant do not become H7 evidence", () 
   assert.equal(computeH7Evidence(base({ targetKanji: "明", lexicalSurface: "明日", responseText: "あした" })), null);
 });
 
-test("NULL response and NULL or unsupported source independently skip H7 evidence", () => {
+test("NULL response and NULL source independently skip H7 evidence", () => {
   assert.equal(computeH7Evidence(base({ responseText: null })), null);
   assert.equal(computeH7Evidence(base({ sourceKind: null })), null);
-  assert.equal(computeH7Evidence(base({ sourceKind: "invented_source" })), null);
+});
+
+test("unsupported non-null source fails loudly", () => {
+  assert.throws(
+    () => computeH7Evidence(base({ sourceKind: "aggregate" })),
+    /result source_kind is unsupported/,
+  );
 });
 
 test("non-yomi results do not become H7 evidence", () => {
