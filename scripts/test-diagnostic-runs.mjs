@@ -42,6 +42,7 @@ try {
 
   await admin.query("create role diagnostic_run_writer login password 'diagnostic_run_writer'");
   await admin.query("grant usage on schema public to diagnostic_run_writer");
+  await admin.query("grant select on users, students, user_branch_assignments, student_instructor_assignments to diagnostic_run_writer");
   await admin.query("grant select, insert on diagnostic_runs to diagnostic_run_writer");
   await admin.query("grant select, insert, update, delete on diagnostic_run_audit to diagnostic_run_writer");
   await admin.query("grant execute on function create_diagnostic_run(uuid, uuid, uuid, uuid) to diagnostic_run_writer");
@@ -99,6 +100,30 @@ try {
   if (JSON.stringify(beforeDenied) === JSON.stringify(afterDenied)) pass("authorization failures roll back both run and audit rows");
   else fail("authorization rollback boundary", JSON.stringify({ beforeDenied, afterDenied }));
 
+  const directInsertRejected = async (name, contextActor, rowActor) => {
+    const direct = await appPool.connect();
+    try {
+      await direct.query("begin");
+      await direct.query("select set_config('app.current_org', $1, true), set_config('app.current_user', $2, true)", [A.org, contextActor]);
+      try {
+        await direct.query(
+          "insert into diagnostic_runs(org_id, branch_id, student_id, initiated_by_user_id) values ($1, $2, $3, $4)",
+          [A.org, A.branch, A.student, rowActor],
+        );
+        fail(name, "direct insert unexpectedly succeeded");
+      } catch (error) {
+        if (error.code === "42501") pass(name);
+        else fail(name, `${error.code}: ${error.message}`);
+      }
+      await direct.query("rollback");
+    } finally { direct.release(); }
+  };
+  await directInsertRejected("same-tenant unassigned instructor cannot bypass run authorization by direct INSERT", A.unassigned, A.unassigned);
+  await directInsertRejected("same-tenant caller cannot forge another actor on a direct run INSERT", A.instructor, A.unassigned);
+  const afterDirectDenials = (await admin.query("select (select count(*) from diagnostic_runs)::int runs, (select count(*) from diagnostic_run_audit)::int audits")).rows[0];
+  if (JSON.stringify(afterDirectDenials) === JSON.stringify(afterDenied)) pass("direct INSERT authorization failures create neither run nor audit rows");
+  else fail("direct INSERT authorization rollback", JSON.stringify({ afterDenied, afterDirectDenials }));
+
   const malformedBefore = afterDenied;
   try {
     await createDiagnosticRun(appPool, request(A, { studentId: "bad" }));
@@ -145,6 +170,38 @@ try {
     }
     await auditClient.query("rollback");
   } finally { auditClient.release(); }
+
+  const bRun = await createDiagnosticRun(appPool, request(B));
+  const auditReadClient = await appPool.connect();
+  try {
+    await auditReadClient.query("begin");
+    await auditReadClient.query("select set_config('app.current_org', $1, true), set_config('app.current_user', $2, true)", [A.org, A.instructor]);
+    const invisibleAudit = await auditReadClient.query("select id from diagnostic_run_audit where run_id = $1", [bRun.id]);
+    if (invisibleAudit.rowCount === 0) pass("direct cross-tenant audit reads are filtered by RLS");
+    else fail("direct cross-tenant audit reads are filtered by RLS", `rows=${invisibleAudit.rowCount}`);
+    await auditReadClient.query("rollback");
+  } finally { auditReadClient.release(); }
+
+  await admin.query("alter table diagnostic_run_audit disable trigger diagnostic_run_audit_guard");
+  const auditWriteClient = await appPool.connect();
+  try {
+    await auditWriteClient.query("begin");
+    await auditWriteClient.query("select set_config('app.current_org', $1, true), set_config('app.current_user', $2, true)", [A.org, A.instructor]);
+    try {
+      await auditWriteClient.query(
+        "insert into diagnostic_run_audit(org_id, run_id, actor_user_id, action) values ($1, $2, $3, 'created')",
+        [B.org, bRun.id, B.instructor],
+      );
+      fail("direct cross-tenant audit write is rejected by RLS", "write unexpectedly succeeded");
+    } catch (error) {
+      if (error.code === "42501") pass("direct cross-tenant audit writes are rejected by RLS");
+      else fail("direct cross-tenant audit writes are rejected by RLS", `${error.code}: ${error.message}`);
+    }
+    await auditWriteClient.query("rollback");
+  } finally {
+    auditWriteClient.release();
+    await admin.query("alter table diagnostic_run_audit enable trigger diagnostic_run_audit_guard");
+  }
 
   const forbidden = (await admin.query(`select
     (select count(*) from items)::int items,

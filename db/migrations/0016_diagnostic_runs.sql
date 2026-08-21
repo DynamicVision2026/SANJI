@@ -21,6 +21,45 @@ create table diagnostic_runs (
 create index diagnostic_runs_student_created_idx
   on diagnostic_runs(student_id, created_at desc);
 
+create or replace function authorize_diagnostic_run_insert() returns trigger
+  language plpgsql as $$
+begin
+  if current_org_id() is distinct from new.org_id
+     or current_app_user_id() is distinct from new.initiated_by_user_id then
+    raise exception 'diagnostic run actor does not match authenticated tenant context'
+      using errcode = '42501';
+  end if;
+  if not exists (
+    select 1
+    from students s
+    join users actor
+      on actor.id = new.initiated_by_user_id
+     and actor.org_id = s.org_id
+     and actor.role = 'instructor'
+     and actor.status = 'active'
+    join user_branch_assignments uba
+      on uba.user_id = actor.id
+     and uba.branch_id = s.branch_id
+     and uba.org_id = s.org_id
+    join student_instructor_assignments sia
+      on sia.student_id = s.id
+     and sia.user_id = actor.id
+     and sia.org_id = s.org_id
+     and sia.active
+    where s.id = new.student_id
+      and s.org_id = new.org_id
+      and s.branch_id = new.branch_id
+  ) then
+    raise exception 'actor is not an active instructor assigned to this student'
+      using errcode = '42501';
+  end if;
+  return new;
+end $$;
+
+create trigger diagnostic_runs_insert_authorization
+  before insert on diagnostic_runs
+  for each row execute function authorize_diagnostic_run_insert();
+
 create or replace function reject_diagnostic_run_mutation() returns trigger
   language plpgsql as $$
 begin
