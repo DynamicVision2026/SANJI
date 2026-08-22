@@ -47,6 +47,8 @@ const ORG_KEYED = [
   "state_recommendation",
   "hypothesis_state_audit",
   "state_recommendation_audit",
+  "diagnostic_runs",
+  "diagnostic_run_audit",
 ];
 
 // Tenant data reached via a parent row; spec schema defines no org_id column.
