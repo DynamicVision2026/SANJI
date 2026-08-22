@@ -49,7 +49,7 @@ try {
 
   const makeResult = async (tenant, {
     target = "今", surface = "今日", answer = "きょう", response = "いまひ",
-    sourceKind = "probe_item", itemType = "yomi",
+    sourceKind = "probe_item", itemType = "yomi", responseText,
   } = {}) => {
     const item = (await admin.query(
       "insert into items(item_type, target_kanji, answer_text, lexical_surface) values ($1, $2, $3, $4) returning id",
@@ -64,6 +64,7 @@ try {
       orgId: tenant.org, branchId: tenant.branch, studentId: tenant.student,
       worksheetId: worksheet, itemId: item, gradedByUserId: tenant.user,
       isCorrect: false, wrongAnswerText: response, gradedAt: new Date("2026-08-20T00:00:00.000Z"),
+      ...(responseText === undefined ? {} : { responseText }),
       ...(sourceKind === null ? {} : { sourceKind }),
     });
     return recorded.id;
@@ -96,14 +97,16 @@ try {
     else fail("negative controls write no rows", `rows=${count}`);
   } else fail("negative H7 controls", "adapter returned evidence");
 
-  const noResponseId = await makeResult(A, { response: null });
+  const noResponseId = await makeResult(A, { response: null, responseText: null });
+  const blankId = await makeResult(A, { response: null, responseText: "  " });
   const noSourceId = await makeResult(A, { sourceKind: null });
   const skipped = [
     await persistH7Evidence(appPool, context(A, noResponseId)),
+    await persistH7Evidence(appPool, context(A, blankId)),
     await persistH7Evidence(appPool, context(A, noSourceId)),
   ];
-  const skippedCount = (await admin.query("select count(*)::int count from hypothesis_evidence where source_record_id in ($1, $2)", [noResponseId, noSourceId])).rows[0].count;
-  if (skipped.every((value) => value === null) && skippedCount === 0) pass("NULL response and NULL source_kind independently skip H7 evidence");
+  const skippedCount = (await admin.query("select count(*)::int count from hypothesis_evidence where source_record_id in ($1, $2, $3)", [noResponseId, blankId, noSourceId])).rows[0].count;
+  if (skipped.every((value) => value === null) && skippedCount === 0) pass("H7 confirmed blank, not-captured response, and NULL source independently write no evidence");
   else fail("H7 skip gates", JSON.stringify({ skipped, skippedCount }));
 
   const unsupportedSourceId = await makeResult(A, { sourceKind: "aggregate" });

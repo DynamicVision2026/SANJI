@@ -2,6 +2,32 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import { recordResult, type ResultDatabase } from "./record-result";
+import { resolveResponseText } from "./response-text";
+
+test("response contract normalizes NFC, trims, and preserves blank versus not captured", () => {
+  assert.deepEqual(resolveResponseText({ isCorrect: true, responseText: " か\u3099く ", wrongAnswerText: null }), {
+    responseText: "がく", wrongAnswerText: null,
+  });
+  assert.deepEqual(resolveResponseText({ isCorrect: false, responseText: "  学  ", wrongAnswerText: null }), {
+    responseText: "学", wrongAnswerText: "学",
+  });
+  assert.deepEqual(resolveResponseText({ isCorrect: false, responseText: " \t ", wrongAnswerText: null }), {
+    responseText: "", wrongAnswerText: null,
+  });
+  assert.deepEqual(resolveResponseText({ isCorrect: false, responseText: null, wrongAnswerText: null }), {
+    responseText: null, wrongAnswerText: null,
+  });
+});
+
+test("legacy input is derived, while conflicting dual input fails loudly", () => {
+  assert.deepEqual(resolveResponseText({ isCorrect: false, wrongAnswerText: " か\u3099く " }), {
+    responseText: "がく", wrongAnswerText: "がく",
+  });
+  assert.throws(
+    () => resolveResponseText({ isCorrect: false, responseText: "がく", wrongAnswerText: "まなぶ" }),
+    /responseText conflicts with wrongAnswerText/,
+  );
+});
 
 test("malformed result input fails before acquiring a database connection", async () => {
   let connected = false;
