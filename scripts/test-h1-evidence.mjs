@@ -44,10 +44,14 @@ try {
   const oldResult = (await admin.query("insert into results(worksheet_id, item_id, student_id, is_correct, wrong_answer_text, graded_at, graded_by_user_id) values ($1, $2, $3, false, 'むぐ', now(), $4) returning id", [oldWorksheet, oldItem, A.student, A.user])).rows[0].id;
 
   await applyMigration("0011_result_source_kind.sql");
+  await applyMigration("0017_result_response_text.sql");
   const column = (await admin.query("select is_nullable, column_default from information_schema.columns where table_schema = 'public' and table_name = 'results' and column_name = 'source_kind'")).rows[0];
-  const oldStored = (await admin.query("select source_kind from results where id = $1", [oldResult])).rows[0];
-  if (column?.is_nullable === "YES" && column.column_default === null && oldStored?.source_kind === null) {
-    pass("0011 adds nullable source_kind with no default or backfill and preserves existing rows");
+  const responseColumn = (await admin.query("select is_nullable, column_default from information_schema.columns where table_schema = 'public' and table_name = 'results' and column_name = 'response_text'")).rows[0];
+  const oldStored = (await admin.query("select source_kind, response_text, wrong_answer_text from results where id = $1", [oldResult])).rows[0];
+  if (column?.is_nullable === "YES" && column.column_default === null && oldStored?.source_kind === null
+      && responseColumn?.is_nullable === "YES" && responseColumn.column_default === null
+      && oldStored.response_text === null && oldStored.wrong_answer_text === "むぐ") {
+    pass("0011/0017 add nullable columns without defaults/backfill and preserve legacy rows");
   } else fail("0011 migration is additive and safe", JSON.stringify({ column, oldStored }));
 
   const B = await seedTenant("b");
@@ -71,8 +75,9 @@ try {
   appUrl.username = "h1_evidence_writer";
   appUrl.password = "h1_evidence_writer";
   appPool = new pg.Pool({ connectionString: appUrl.toString(), max: 8 });
+  await admin.query("update results set source_kind = 'probe_item' where id = $1", [oldResult]);
 
-  const makeResult = async (tenant, { itemType = "yomi", target = "宮", answer = "みや", targetReadingId = null, response = "むぐ", sourceKind = "probe_item" } = {}) => {
+  const makeResult = async (tenant, { itemType = "yomi", target = "宮", answer = "みや", targetReadingId = null, response = "むぐ", responseText, sourceKind = "probe_item" } = {}) => {
     const item = (await admin.query("insert into items(item_type, target_kanji, answer_text, target_reading_id) values ($1, $2, $3, $4) returning id", [itemType, target, answer, targetReadingId])).rows[0].id;
     const worksheet = (await admin.query("insert into worksheets(org_id, branch_id, student_id, created_by_user_id, status) values ($1, $2, $3, $4, 'generated') returning id", [tenant.org, tenant.branch, tenant.student, tenant.user])).rows[0].id;
     await admin.query("insert into worksheet_items(worksheet_id, item_id, position) values ($1, $2, 1)", [worksheet, item]);
@@ -80,11 +85,16 @@ try {
       orgId: tenant.org, branchId: tenant.branch, studentId: tenant.student,
       worksheetId: worksheet, itemId: item, gradedByUserId: tenant.user,
       isCorrect: false, wrongAnswerText: response, gradedAt: new Date("2026-08-19T00:00:00.000Z"),
+      ...(responseText === undefined ? {} : { responseText }),
     });
     if (sourceKind !== null) await admin.query("update results set source_kind = $1 where id = $2", [sourceKind, recorded.id]);
     return recorded.id;
   };
   const context = (tenant, resultId) => ({ orgId: tenant.org, branchId: tenant.branch, studentId: tenant.student, resultId, actorUserId: tenant.user });
+
+  const legacyEvidence = await persistH1Evidence(appPool, context(A, oldResult));
+  if (legacyEvidence?.inserted) pass("legacy row falls back to wrong_answer_text for H1 evaluation");
+  else fail("legacy row remains interpretable by H1", JSON.stringify(legacyEvidence));
 
   const yomiId = await makeResult(A);
   const yomiEvidence = await persistH1Evidence(appPool, context(A, yomiId));
@@ -115,11 +125,14 @@ try {
   if (threeCases[0] === null && threeCases[1]?.inserted && threeCases[2]?.inserted) pass("H2 coarse-stage exclusion covers elementary / junior-high / non-reading controls");
   else fail("H2 coarse-stage three-case control", JSON.stringify(threeCases));
 
-  const noResponseId = await makeResult(A, { response: null });
+  const noResponseId = await makeResult(A, { response: null, responseText: null });
+  const blankId = await makeResult(A, { response: null, responseText: "  " });
   const noSourceId = await makeResult(A, { sourceKind: null });
-  if (await persistH1Evidence(appPool, context(A, noResponseId)) === null && await persistH1Evidence(appPool, context(A, noSourceId)) === null) {
-    const skipped = (await admin.query("select count(*)::int count from hypothesis_evidence where source_record_id in ($1, $2)", [noResponseId, noSourceId])).rows[0].count;
-    if (skipped === 0) pass("NULL response and NULL source_kind independently skip rather than write zero-weight rows");
+  if (await persistH1Evidence(appPool, context(A, noResponseId)) === null
+      && await persistH1Evidence(appPool, context(A, blankId)) === null
+      && await persistH1Evidence(appPool, context(A, noSourceId)) === null) {
+    const skipped = (await admin.query("select count(*)::int count from hypothesis_evidence where source_record_id in ($1, $2, $3)", [noResponseId, blankId, noSourceId])).rows[0].count;
+    if (skipped === 0) pass("H1 confirmed blank, not-captured response, and NULL source independently write no evidence");
     else fail("NULL gates write no evidence", `rows=${skipped}`);
   } else fail("NULL gates return no evidence", "adapter returned evidence");
 
@@ -168,11 +181,14 @@ try {
   if (await persistH2Evidence(appPool, context(A, h2UnknownId)) === null) pass("H1-like unknown reading is not misclassified as H2");
   else fail("H2 negative control", "unknown reading produced evidence");
 
-  const h2NoResponseId = await makeResult(A, { targetReadingId: readingIds["みや"], response: null });
+  const h2NoResponseId = await makeResult(A, { targetReadingId: readingIds["みや"], response: null, responseText: null });
+  const h2BlankId = await makeResult(A, { targetReadingId: readingIds["みや"], response: null, responseText: "  " });
   const h2NoSourceId = await makeResult(A, { targetReadingId: readingIds["みや"], response: "キュウ", sourceKind: null });
-  if (await persistH2Evidence(appPool, context(A, h2NoResponseId)) === null && await persistH2Evidence(appPool, context(A, h2NoSourceId)) === null) {
-    const skipped = (await admin.query("select count(*)::int count from hypothesis_evidence where hypothesis_id = 'H2' and source_record_id in ($1, $2)", [h2NoResponseId, h2NoSourceId])).rows[0].count;
-    if (skipped === 0) pass("H2 NULL response and source_kind independently skip evidence");
+  if (await persistH2Evidence(appPool, context(A, h2NoResponseId)) === null
+      && await persistH2Evidence(appPool, context(A, h2BlankId)) === null
+      && await persistH2Evidence(appPool, context(A, h2NoSourceId)) === null) {
+    const skipped = (await admin.query("select count(*)::int count from hypothesis_evidence where hypothesis_id = 'H2' and source_record_id in ($1, $2, $3)", [h2NoResponseId, h2BlankId, h2NoSourceId])).rows[0].count;
+    if (skipped === 0) pass("H2 confirmed blank, not-captured response, and NULL source independently write no evidence");
     else fail("H2 NULL gates write no evidence", `rows=${skipped}`);
   } else fail("H2 NULL gates return no evidence", "adapter returned evidence");
 

@@ -9,6 +9,7 @@ const aggregateSql = readFileSync(join(REPO_ROOT, "db/migrations/0012_hypothesis
 const itemInputsSql = readFileSync(join(REPO_ROOT, "db/migrations/0013_item_hypothesis_inputs.sql"), "utf8");
 const pluralReadingSql = readFileSync(join(REPO_ROOT, "db/migrations/0014_item_target_reading_ids.sql"), "utf8");
 const itemTagsSql = readFileSync(join(REPO_ROOT, "db/migrations/0015_item_diagnostic_tags.sql"), "utf8");
+const responseTextSql = readFileSync(join(REPO_ROOT, "db/migrations/0017_result_response_text.sql"), "utf8");
 const errors = [];
 const requiredTables = [
   "hypothesis_master",
@@ -78,6 +79,10 @@ for (const [column, type] of [["distractors", "jsonb"], ["discriminates", "text\
 }
 if ((itemTagsSql.match(/add\s+column/giu) ?? []).length !== 2) {
   errors.push("0015 must add exactly distractors and discriminates");
+}
+if (!/alter\s+table\s+results\s+add\s+column\s+response_text\s+text\s+null\s*;/i.test(responseTextSql)
+    || (responseTextSql.match(/add\s+column/giu) ?? []).length !== 1) {
+  errors.push("0017 must add only nullable results.response_text");
 }
 
 if (errors.length) failGate("Hypothesis Persistence Schema", "v2.5 §7A.1/§7A.8/§11.10/§15.8", errors);

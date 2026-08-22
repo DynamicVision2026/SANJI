@@ -96,7 +96,7 @@ export async function persistH7Evidence(
     );
     const result = await client.query<H7ResultRow>(
       `select r.id, s.org_id, s.branch_id, r.student_id,
-              r.is_correct, r.wrong_answer_text as response_text,
+              r.is_correct, coalesce(r.response_text, r.wrong_answer_text) as response_text,
               r.graded_at as observed_at, r.source_kind,
               i.item_type, i.target_kanji, i.lexical_surface
        from results r

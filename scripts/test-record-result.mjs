@@ -62,6 +62,12 @@ try {
     gradedAt: new Date("2026-08-19T00:00:00.000Z"),
     ...overrides,
   });
+  const newTarget = async (kanji) => {
+    const item = (await admin.query("insert into items(item_type, target_kanji, answer_text) values ('kakitori', $1, $1) returning id", [kanji])).rows[0].id;
+    const worksheet = (await admin.query("insert into worksheets(org_id, branch_id, student_id, created_by_user_id, status) values ($1, $2, $3, $4, 'generated') returning id", [A.org, A.branch, A.student, A.user])).rows[0].id;
+    await admin.query("insert into worksheet_items(worksheet_id, item_id, position) values ($1, $2, 1)", [worksheet, item]);
+    return { worksheetId: worksheet, itemId: item };
+  };
 
   const recorded = await recordResult(appPool, event(A, { sourceKind: "targeted_practice" }));
   const stored = await admin.query(
@@ -71,6 +77,45 @@ try {
   if (recorded.inserted && stored.rowCount === 1 && stored.rows[0].org_id === A.org && stored.rows[0].branch_id === A.branch && stored.rows[0].wrong_answer_text === "学" && stored.rows[0].source_kind === "targeted_practice") {
     pass("valid sourceKind is persisted in the tenant-scoped result transaction");
   } else fail("valid sourceKind is persisted in the tenant-scoped result transaction", JSON.stringify({ recorded, stored: stored.rows }));
+
+  const correctTarget = await newTarget("正");
+  const correct = await recordResult(appPool, event(A, {
+    ...correctTarget, isCorrect: true, wrongAnswerText: null, responseText: " か\u3099く ",
+  }));
+  const incorrectTarget = await newTarget("誤");
+  const incorrect = await recordResult(appPool, event(A, {
+    ...incorrectTarget, wrongAnswerText: "がく", responseText: " か\u3099く ",
+  }));
+  const blankTarget = await newTarget("空");
+  const blank = await recordResult(appPool, event(A, {
+    ...blankTarget, wrongAnswerText: null, responseText: " \t ",
+  }));
+  const uncapturedTarget = await newTarget("無");
+  const uncaptured = await recordResult(appPool, event(A, {
+    ...uncapturedTarget, wrongAnswerText: null, responseText: null,
+  }));
+  const responseRows = (await admin.query(
+    "select id, is_correct, response_text, wrong_answer_text from results where id = any($1::uuid[])",
+    [[correct.id, incorrect.id, blank.id, uncaptured.id]],
+  )).rows;
+  const byId = Object.fromEntries(responseRows.map((row) => [row.id, row]));
+  if (byId[correct.id]?.is_correct && byId[correct.id].response_text === "がく" && byId[correct.id].wrong_answer_text === null
+      && !byId[incorrect.id]?.is_correct && byId[incorrect.id].response_text === "がく" && byId[incorrect.id].wrong_answer_text === "がく"
+      && byId[blank.id]?.response_text === "" && byId[blank.id].wrong_answer_text === null
+      && byId[uncaptured.id]?.response_text === null && byId[uncaptured.id].wrong_answer_text === null) {
+    pass("response_text distinguishes normalized correct, incorrect, confirmed blank, and not-captured responses");
+  } else fail("response_text capture contract", JSON.stringify(responseRows));
+
+  const conflictTarget = await newTarget("争");
+  const beforeConflict = (await admin.query("select count(*)::int count from results")).rows[0].count;
+  try {
+    await recordResult(appPool, event(A, { ...conflictTarget, wrongAnswerText: "がく", responseText: "まなぶ" }));
+    fail("conflicting response fields fail loudly", "write unexpectedly succeeded");
+  } catch (error) {
+    const afterConflict = (await admin.query("select count(*)::int count from results")).rows[0].count;
+    if (/responseText conflicts/.test(error.message) && afterConflict === beforeConflict) pass("conflicting response fields fail before any partial result row");
+    else fail("conflicting response fields rollback", `${error.message}; before=${beforeConflict}, after=${afterConflict}`);
+  }
 
   const nullSourceItem = (await admin.query("insert into items(item_type, target_kanji, answer_text) values ('kakitori', '話', '話') returning id")).rows[0].id;
   const nullSourceWorksheet = (await admin.query("insert into worksheets(org_id, branch_id, student_id, created_by_user_id, status) values ($1, $2, $3, $4, 'generated') returning id", [A.org, A.branch, A.student, A.user])).rows[0].id;
@@ -107,9 +152,9 @@ try {
     await recordResult(appPool, event(A, { itemId: "00000000-0000-4000-8000-000000000000" }));
     fail("incomplete worksheet-item input is rejected", "write unexpectedly succeeded");
   } catch {
-    const count = await admin.query("select count(*)::int count from results where student_id = $1", [A.student]);
-    if (count.rows[0].count === 2) pass("incomplete input rolls back without a partial row");
-    else fail("incomplete input rolls back without a partial row", `rows=${count.rows[0].count}`);
+    const after = (await admin.query("select count(*)::int count from results where student_id = $1", [A.student])).rows[0].count;
+    if (after === beforeInvalid) pass("incomplete input rolls back without a partial row");
+    else fail("incomplete input rolls back without a partial row", `before=${beforeInvalid}, after=${after}`);
   }
 
   const concurrentItem = (await admin.query("insert into items(item_type, target_kanji, answer_text) values ('kakitori', '語', '語') returning id")).rows[0].id;

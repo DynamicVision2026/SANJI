@@ -1,3 +1,5 @@
+import { resolveResponseText } from "./response-text";
+
 export interface ResultDatabaseClient {
   query<Row extends Record<string, unknown> = Record<string, unknown>>(
     text: string,
@@ -19,6 +21,8 @@ export interface RecordResultInput {
   gradedByUserId: string;
   isCorrect: boolean;
   wrongAnswerText: string | null;
+  /** Undefined preserves the legacy wrongAnswerText-derived behavior. */
+  responseText?: string | null;
   gradedAt: Date;
   /**
    * Optional by design: NULL means provenance is unknown, so downstream
@@ -57,7 +61,7 @@ function validate(input: RecordResultInput): void {
     if (typeof value !== "string" || !UUID.test(value)) throw new Error(`${name} must be a UUID`);
   }
   if (typeof input.isCorrect !== "boolean") throw new Error("isCorrect must be boolean");
-  if (input.wrongAnswerText !== null && (typeof input.wrongAnswerText !== "string" || input.wrongAnswerText.length === 0)) {
+  if (input.wrongAnswerText !== null && typeof input.wrongAnswerText !== "string") {
     throw new Error("wrongAnswerText must be null or a non-empty string");
   }
   if (!(input.gradedAt instanceof Date) || !Number.isFinite(input.gradedAt.getTime())) {
@@ -76,6 +80,7 @@ function validate(input: RecordResultInput): void {
  */
 export async function recordResult(database: ResultDatabase, input: RecordResultInput): Promise<RecordedResult> {
   validate(input);
+  const response = resolveResponseText(input);
   const client = await database.connect();
   try {
     await client.query("begin");
@@ -99,15 +104,15 @@ export async function recordResult(database: ResultDatabase, input: RecordResult
     const inserted = await client.query<{ id: string }>(
       `insert into results (
          worksheet_id, item_id, student_id, is_correct,
-         wrong_answer_text, graded_at, graded_by_user_id, source_kind
+         wrong_answer_text, response_text, graded_at, graded_by_user_id, source_kind
        )
-       select $4, $5, s.id, $6, $7, $8, $9, $10
+       select $4, $5, s.id, $6, $7, $8, $9, $10, $11
        from students s
        join worksheets w
          on w.id = $4 and w.student_id = s.id
         and w.org_id = s.org_id and w.branch_id = s.branch_id
        join worksheet_items wi on wi.worksheet_id = w.id and wi.item_id = $5
-       join users grader on grader.id = $9 and grader.org_id = s.org_id and grader.status = 'active'
+       join users grader on grader.id = $10 and grader.org_id = s.org_id and grader.status = 'active'
        where s.org_id = $1 and s.branch_id = $2 and s.id = $3
        returning id`,
       [
@@ -117,7 +122,8 @@ export async function recordResult(database: ResultDatabase, input: RecordResult
         input.worksheetId,
         input.itemId,
         input.isCorrect,
-        input.wrongAnswerText,
+        response.wrongAnswerText,
+        response.responseText,
         input.gradedAt,
         input.gradedByUserId,
         input.sourceKind ?? null,
